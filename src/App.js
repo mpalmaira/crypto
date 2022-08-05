@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import {CoinList, CoinPage, Portfolio} from 'pages'
 
 export default function App() {
   return (
