@@ -5,9 +5,12 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import {HomePage, CoinPage, Portfolio} from 'pages'
+import { HomePage, CoinPage, Portfolio } from 'pages'
 
 export default function App() {
+  this.state = {
+    on: true
+  }
   return (
     <Router>
       <div>
@@ -17,7 +20,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage}/>
           <Route exact path="/portfolio" component={Portfolio}/>
-          <Route exact path='/coins/:coinId' component={CoinPage}/>
+          <Route exact path='/coinpage/:coinId' component={CoinPage}/>
 git
         </Switch>
       </div>
