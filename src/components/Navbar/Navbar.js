@@ -1,9 +1,12 @@
 import React from "react";
-import { LeftContainer, NavContainer, RightContainer, SearchInput, SearchDiv, StyledLink, DollarSignDiv, DropDownDiv, ColoredCurrency } from "./Navbar.styles";
+import { LeftContainer, NavContainer, RightContainer, SearchInput, SearchDiv, StyledLink, DollarSignDiv, DropDownDiv, ColoredCurrency, ToggleThemeLeftDiv, ToggleThemeRigtDiv, ToggleThemeLogo } from "./Navbar.styles";
 import { ReactComponent as SearchIcon } from '../SVG/Search.svg';
 import { ReactComponent as DollarSign } from '../SVG/DollarSign.svg';
-import { ReactComponent as ToggleTheme } from '../SVG/ToggleTheme.svg';
 import { ReactComponent as ArrowDown } from '../SVG/ArrowDown.svg';
+import { ReactComponent as ToggleThemeRight } from '../SVG/ToggleThemeRight.svg';
+import { ReactComponent as ToggleThemeLeft } from '../SVG/ToggleThemeLeft.svg';
+
+
 
 
 class Navbar extends React.Component {
@@ -26,9 +29,14 @@ class Navbar extends React.Component {
                     <ColoredCurrency>USD</ColoredCurrency>
                     <ArrowDown/>
                 </DropDownDiv>
-                <div>
-                    <ToggleTheme/>
-                </div>
+                <ToggleThemeLogo>
+                    <ToggleThemeLeftDiv>
+                        <ToggleThemeLeft/>
+                    </ToggleThemeLeftDiv>
+                    <ToggleThemeRigtDiv>
+                        <ToggleThemeRight/>
+                    </ToggleThemeRigtDiv>
+                </ToggleThemeLogo>
                </RightContainer>
                
                 

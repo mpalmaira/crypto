@@ -77,3 +77,21 @@ export const ColoredCurrency = styled.p `
     color: ${props=>props.theme.fontColor};
     font-weight: 500
 `
+
+export const ToggleThemeLeftDiv = styled.div `
+    transform: rotate(90deg);
+    margin-right: -13px;
+  
+`
+export const ToggleThemeRigtDiv = styled.div `
+    transform: rotate(90deg);
+`
+export const ToggleThemeLogo = styled.div `
+    display: flex;
+    algin-items: center;
+    justify-content: center; 
+    background-color: ${props=>props.theme.navBarBG};
+    padding: 15px 10px;
+    border-radius: 10px;
+    margin-right: 25px;
+`
