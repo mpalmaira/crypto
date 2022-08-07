@@ -1,4 +1,1 @@
-export {
-    default
-}
-from './HomePage'
+export { default }from './HomePage'
