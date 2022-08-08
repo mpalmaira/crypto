@@ -48,7 +48,7 @@ export const SearchDiv = styled.div `
     align-items: center;
     padding: 6px;
     margin-right: 25px;
-
+    color: black;
 `
 
 export const DollarSignDiv = styled.div `
@@ -85,6 +85,7 @@ export const ToggleThemeLeftDiv = styled.div `
 `
 export const ToggleThemeRigtDiv = styled.div `
     transform: rotate(90deg);
+    opacity: 50%;
 `
 export const ToggleThemeLogo = styled.div `
     display: flex;
@@ -94,4 +95,5 @@ export const ToggleThemeLogo = styled.div `
     padding: 15px 10px;
     border-radius: 10px;
     margin-right: 25px;
+    cursor:pointer;
 `

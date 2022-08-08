@@ -9,13 +9,17 @@ export default class App extends React.Component {
   state = {
     dark: true,
   };
+  toggleTheme = () => {
+    this.setState({
+      dark: !this.state.dark
+    });
+  };
   render() {
-    const theme = this.state.dark === true ? darkTheme : lightTheme;
-
+    const theme = this.state.dark ? darkTheme : lightTheme;
     return (
       <ThemeProvider theme={theme}>
         <Router>
-            <Navbar />
+            <Navbar toggleTheme={this.toggleTheme} />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/portfolio" component={Portfolio} />

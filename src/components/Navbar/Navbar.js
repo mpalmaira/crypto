@@ -5,11 +5,13 @@ import { ReactComponent as DollarSign } from '../SVG/DollarSign.svg';
 import { ReactComponent as ArrowDown } from '../SVG/ArrowDown.svg';
 import { ReactComponent as ToggleThemeRight } from '../SVG/ToggleThemeRight.svg';
 import { ReactComponent as ToggleThemeLeft } from '../SVG/ToggleThemeLeft.svg';
+import SVG from '../SVG/SVG.js'
 
 
 
-
-class Navbar extends React.Component {
+export default class Navbar extends React.Component {
+   
+    
     render(){
         return(
             <NavContainer>
@@ -19,7 +21,7 @@ class Navbar extends React.Component {
                 </LeftContainer>
                <RightContainer>
                 <SearchDiv>
-                    <SearchIcon/>
+                    <SearchIcon />
                     <SearchInput placeholder="Search..."/>
                 </SearchDiv>
                 <DropDownDiv>
@@ -29,7 +31,7 @@ class Navbar extends React.Component {
                     <ColoredCurrency>USD</ColoredCurrency>
                     <ArrowDown/>
                 </DropDownDiv>
-                <ToggleThemeLogo>
+                <ToggleThemeLogo onClick={this.props.toggleTheme}>
                     <ToggleThemeLeftDiv>
                         <ToggleThemeLeft/>
                     </ToggleThemeLeftDiv>
@@ -38,12 +40,8 @@ class Navbar extends React.Component {
                     </ToggleThemeRigtDiv>
                 </ToggleThemeLogo>
                </RightContainer>
-               
-                
             </NavContainer>
                
         )
     }
 }
-
-export default Navbar; 
