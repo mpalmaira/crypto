@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
-
+import Coins from "../Coins/Coins";
 class CoinChart extends React.Component {
     state = {
         isLoading: false,
-        coin: null,
+        coins: null,
         hasError: false
     }
     
@@ -12,7 +12,7 @@ class CoinChart extends React.Component {
         try{
             this.setState({isLoading: true});
             const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d')
-            this.setState({ coin: data, isLoading: false });
+            this.setState({ coins: data, isLoading: false });
             console.log(data)
         }catch(err){
             this.setState({ hasError: true, isLoading: false });
@@ -24,14 +24,7 @@ class CoinChart extends React.Component {
     render(){
         return(
             <div>
-                <p>#</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Price</p>
-                <p>1h%</p>
-                <p>24h%</p>
-                <p>7d%</p>
-
+                <Coins coins = {this.state.coins}/>
             </div>
         )
     }
