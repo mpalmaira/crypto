@@ -58,8 +58,6 @@ class CoinChart extends React.Component{
                 {
                     label: this.props.coins.id,
                     data: this.props.coins.sparkline_in_7d.price,
-                    label: this.props.coins.id,
-                    data: this.props.coins.sparkline_in_7d.price,
                     borderColor: this.props.coins.price_change_percentage_7d_in_currency > 0 ? 'rgb(0,255,0)' : 'rgb(255,0,0)',
                     backgroundColor: "rgba(255, 99, 132, 0.5)",
                     pointRadius: 0,
