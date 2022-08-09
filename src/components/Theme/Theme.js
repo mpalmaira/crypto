@@ -3,16 +3,15 @@ import styled from 'styled-components'
 
 
 export const darkTheme = {
-    bodyColor: "#1F2128",
-    cardColor: '#191B1F',
-    fontColor: '#FFFFFF',
-    navBarBG: '#2C2F36'
+    main: "#1F2128",
+    secondary: '#191B1F',
+    mainFont: '#FFFFFF',
+    tertiary: '#2C2F36'
 }
 
 export const lightTheme = {
-    bodyColor: "#FCFCFC",
-    cardColor: '#FFFFFF',
-    fontColor: '#2C2F36',
-    navBarBG:'#FCFCFC'
-
+    main: "#FCFCFC",
+    secondary: '#FFFFFF',
+    mainFont: '#2C2F36',
+    tertiary: '#FCFCFC'
 }

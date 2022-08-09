@@ -1,15 +1,11 @@
 import React from "react";
-import { LeftContainer, NavContainer, RightContainer, SearchInput, SearchDiv, StyledLink, DollarSignDiv, DropDownDiv, ColoredCurrency, ToggleThemeLeftDiv, ToggleThemeRigtDiv, ToggleThemeLogo } from "./Navbar.styles";
-import { ReactComponent as SearchIcon } from '../SVG/Search.svg';
+import { LeftContainer, NavContainer, RightContainer, SearchInput, SearchDiv, StyledLink, DollarSignDiv, DropDownDiv, ColoredCurrency, ToggleThemeLeftDiv, ToggleThemeRigtDiv, ToggleThemeLogo, StyledSearchIcon, StyledToggleThemeLeft,StyledToggleThemeRight } from "./Navbar.styles";
 import { ReactComponent as DollarSign } from '../SVG/DollarSign.svg';
 import { ReactComponent as ArrowDown } from '../SVG/ArrowDown.svg';
-import { ReactComponent as ToggleThemeRight } from '../SVG/ToggleThemeRight.svg';
-import { ReactComponent as ToggleThemeLeft } from '../SVG/ToggleThemeLeft.svg';
 
-
-
-
-class Navbar extends React.Component {
+export default class Navbar extends React.Component {
+   
+    
     render(){
         return(
             <NavContainer>
@@ -19,7 +15,7 @@ class Navbar extends React.Component {
                 </LeftContainer>
                <RightContainer>
                 <SearchDiv>
-                    <SearchIcon/>
+                    <StyledSearchIcon />
                     <SearchInput placeholder="Search..."/>
                 </SearchDiv>
                 <DropDownDiv>
@@ -29,21 +25,17 @@ class Navbar extends React.Component {
                     <ColoredCurrency>USD</ColoredCurrency>
                     <ArrowDown/>
                 </DropDownDiv>
-                <ToggleThemeLogo>
+                <ToggleThemeLogo onClick={this.props.toggleTheme}>
                     <ToggleThemeLeftDiv>
-                        <ToggleThemeLeft/>
+                        <StyledToggleThemeLeft/>
                     </ToggleThemeLeftDiv>
                     <ToggleThemeRigtDiv>
-                        <ToggleThemeRight/>
+                        <StyledToggleThemeRight/>
                     </ToggleThemeRigtDiv>
                 </ToggleThemeLogo>
                </RightContainer>
-               
-                
             </NavContainer>
                
         )
     }
 }
-
-export default Navbar; 
