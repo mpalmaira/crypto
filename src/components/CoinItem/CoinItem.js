@@ -1,4 +1,5 @@
 import React from 'react'
+import CoinChart from '../CoinChart/CoinChart';
 
 const CoinItem = (props) => {
   return (
@@ -17,7 +18,9 @@ const CoinItem = (props) => {
             <p>${props.coins.market_cap}</p>
             <p>{props.coins.circulating_supply}</p>
             <p>{props.coins.total_supply}</p>
-
+            <div className ='coinChart'>
+              <CoinChart coins ={props.coins} />
+            </div>
         </div>
 
     </div>

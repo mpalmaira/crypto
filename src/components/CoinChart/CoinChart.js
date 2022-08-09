@@ -1,51 +1,75 @@
-import React from "react";
-import axios from "axios";
-import CoinItem from '../CoinItem/CoinItem'
-class CoinChart extends React.Component {
-    state = {
-        isLoading: false,
-        coins: null,
-        hasError: false
-    }
-
-    getData = async () => {
-        try{
-            this.setState({isLoading: true});
-            const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
-            this.setState({ coins: data, isLoading: false });
-            console.log(data)
-        }catch(err){
-            this.setState({ hasError: true, isLoading: false });
+import React from 'react'
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+  import { Line } from 'react-chartjs-2';
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+  
+  const options = {
+    responsive: true,
+    plugins: {
+        legend: {
+          display: false,
+        },
+        title: {
+          display: false,
+          text: "Chart.js Line Chart",
         }
-    }
-    componentDidMount(){
-        this.getData()
+      },
+      scales: {
+        y: {
+          display: false,
+          grid: {
+            display: false,
+            drawBorder: false,
+          },
+        },
+        x: {
+          display: false,
+          grid: {
+            display: false,
+            drawBorder: false,
+          },
+        },
+      },
+      tension: 0.5,
     }
 
+class CoinChart extends React.Component{
     render(){
+        const data = {
+            labels: this.props.coins.sparkline_in_7d.price,
+            datasets: [
+                {
+                    label: this.props.coins.id,
+                    data: this.props.coins.sparkline_in_7d.price,
+                    label: this.props.coins.id,
+                    data: this.props.coins.sparkline_in_7d.price,
+                    borderColor: "rgb(255, 99, 132)",
+                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                    pointRadius: 0,
+                    borderWidth: 3,
+                }
+            ]
+        }
         return(
-            <div>
-                {this.state.coins && (
-                    <div>
-                        <div>
-                            <div className ="heading">
-                            <p>#</p>
-                                <p>Name</p>
-                                <p>Price</p>
-                                <p>1h%</p>
-                                <p>7d%</p>
-                                <p>24h Volume/Market Cap</p>
-                                <p>Circulating/Total Supply</p>
-                                {this.state.coins.map((coins)=>{
-                                    return <CoinItem key = {coins.id} coins = {coins}/>
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
+            <div><Line options={options} data= {data} /></div>
         )
     }
 }
-
-export default CoinChart;
+export default CoinChart
