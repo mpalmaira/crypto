@@ -37,7 +37,7 @@ class CoinChart extends React.Component {
                                 <p>24h Volume/Market Cap</p>
                                 <p>Circulating/Total Supply</p>
                                 {this.state.coins.map((coins)=>{
-                                    return <CoinItem coins = {coins}/>
+                                    return <CoinItem key = {coins.id} coins = {coins}/>
                                 })}
                             </div>
                         </div>
