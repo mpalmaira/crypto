@@ -1,11 +1,11 @@
 import React from "react";
-import BitcoinChart from "../../components/BitcoinChart/BitcoinChart";
+import BitcoinTable from "../../components/BitcoinTable/BitcoinTable";
 import CoinTable from "../../components/CoinTable";
 class HomePage extends React.Component{
     render(){
         return(
             <div>
-                <BitcoinChart/>
+                <BitcoinTable/>
                 <CoinTable/>
             </div>
         )
