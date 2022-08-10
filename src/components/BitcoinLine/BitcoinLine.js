@@ -20,18 +20,21 @@ ChartJS.register(
   Legend
 );
 
-class CoinChart extends React.Component {
+class BitcoinLine extends React.Component {
   render() {
+    const bitcoinPriceData = this.props.bitcoin.prices.map((values) => ({
+      x: values[0],
+      y: values[1],
+    }));
     const data = {
-      labels: this.props.coins.sparkline_in_7d.price,
+      labels: bitcoinPriceData.map((val) => {
+        const date = new Date(val.x);
+        return date.getDate();
+      }),
       datasets: [
         {
-          label: this.props.coins.id,
-          data: this.props.coins.sparkline_in_7d.price,
-          borderColor:
-            this.props.coins.price_change_percentage_7d_in_currency > 0
-              ? "rgb(0,255,0)"
-              : "rgb(255,0,0)",
+          data: bitcoinPriceData.map((val) => val.y),
+          borderColor: "rgba(255, 99, 132, 0.5)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
           pointRadius: 0,
           borderWidth: 3,
@@ -58,7 +61,7 @@ class CoinChart extends React.Component {
           },
         },
         x: {
-          display: false,
+          display: true,
           grid: {
             display: false,
             drawBorder: false,
@@ -74,4 +77,4 @@ class CoinChart extends React.Component {
     );
   }
 }
-export default CoinChart;
+export default BitcoinLine;
