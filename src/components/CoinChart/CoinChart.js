@@ -20,35 +20,7 @@ import {
     Legend
   );
   
-  const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-          display: false,
-        },
-        title: {
-          display: false,
-          text: "Chart.js Line Chart",
-        }
-      },
-      scales: {
-        y: {
-          display: false,
-          grid: {
-            display: false,
-            drawBorder: false,
-          },
-        },
-        x: {
-          display: false,
-          grid: {
-            display: false,
-            drawBorder: false,
-          },
-        },
-      },
-      tension: 0.5,
-    }
+  
 
 class CoinChart extends React.Component{
     render(){
@@ -65,6 +37,35 @@ class CoinChart extends React.Component{
                 }
             ]
         }
+        const options = {
+            responsive: true,
+            plugins: {
+                legend: {
+                  display: false,
+                },
+                title: {
+                  display: false,
+                  text: "Chart.js Line Chart",
+                }
+              },
+              scales: {
+                y: {
+                  display: false,
+                  grid: {
+                    display: false,
+                    drawBorder: false,
+                  },
+                },
+                x: {
+                  display: false,
+                  grid: {
+                    display: false,
+                    drawBorder: false,
+                  },
+                },
+              },
+              tension: 0.5,
+            }
         return(
             <div><Line options={options} data= {data} /></div>
         )
