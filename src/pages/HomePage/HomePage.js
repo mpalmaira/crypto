@@ -1,11 +1,12 @@
 import React from "react";
-import CoinChart from "../../components/CoinChart";
-import Navbar from "../../components/Navbar";
+import BitcoinTable from "../../components/BitcoinTable/BitcoinTable";
+import CoinTable from "../../components/CoinTable";
 class HomePage extends React.Component{
     render(){
         return(
             <div>
-                <CoinChart/>
+                <BitcoinTable/>
+                <CoinTable/>
             </div>
         )
     }

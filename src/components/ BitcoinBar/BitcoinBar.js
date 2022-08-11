@@ -3,37 +3,37 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
 );
 
-class CoinChart extends React.Component {
+class BitcoinBar extends React.Component {
   render() {
+    const bitcoinVolumeData = this.props.bitcoin.total_volumes.map(
+      (values) => ({ x: values[0], y: values[1] })
+    );
     const data = {
-      labels: this.props.coins.sparkline_in_7d.price,
+      labels: bitcoinVolumeData.map((val) => {
+        const date = new Date(val.x);
+        return date.getHours();
+      }),
       datasets: [
         {
-          label: this.props.coins.id,
-          data: this.props.coins.sparkline_in_7d.price,
-          borderColor:
-            this.props.coins.price_change_percentage_7d_in_currency > 0
-              ? "rgb(0,255,0)"
-              : "rgb(255,0,0)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          pointRadius: 0,
+          data: bitcoinVolumeData.map((val) => val.y),
+          borderColor: "rgba(43, 114, 229, 0.5)",
+          backgroundColor: "rgba(43, 114, 229, 0.5)",
+          pointRadius: 3,
           borderWidth: 3,
         },
       ],
@@ -58,7 +58,7 @@ class CoinChart extends React.Component {
           },
         },
         x: {
-          display: false,
+          display: true,
           grid: {
             display: false,
             drawBorder: false,
@@ -69,9 +69,9 @@ class CoinChart extends React.Component {
     };
     return (
       <div>
-        <Line options={options} data={data} />
+        <Bar options={options} data={data} />
       </div>
     );
   }
 }
-export default CoinChart;
+export default BitcoinBar;
