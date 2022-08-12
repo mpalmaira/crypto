@@ -1,4 +1,5 @@
 import React from "react";
+import {ChartContainer} from './CoinChart.styles';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -68,9 +69,9 @@ class CoinChart extends React.Component {
       tension: 0.5,
     };
     return (
-      <div>
+      <ChartContainer>
         <Line options={options} data={data} />
-      </div>
+      </ChartContainer>
     );
   }
 }

@@ -12,17 +12,26 @@ export const CoinIcon = styled.img`
   width: 34px;
   height: 34px;
   margin: 0 5px;
+  text-align: center;
 `;
 
 export const TableItem = styled.td`
   text-align: center;
-  margin-left: 80px;
+  padding: 40px 0px;
 `;
 export const TableRow = styled.tr`
-  display: flex;
-  align-items:center;
-  font-size: 19px;
+  border-bottom: 2px solid #707070;
+  padding: 20px;
 `
 export const CoinSymbol = styled.td`
-    padding-left: 35px
+  text-align: center;
+`
+export const CoinRank = styled.td`
+  text-align: left;
+  padding: 20px;
+`
+export const TableCoinChart = styled.td`
+  display: flex;
+  justify-content: center;
+  align-items:center;
 `
