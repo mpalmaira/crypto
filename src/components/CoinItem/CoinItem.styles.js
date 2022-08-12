@@ -20,18 +20,25 @@ export const TableItem = styled.td`
   padding: 40px 0px;
 `;
 export const TableRow = styled.tr`
-  border-bottom: 2px solid #707070;
+  border-bottom: 0.5px solid ${(props) => props.theme.mainTableBorder};
   padding: 20px;
-`
+`;
 export const CoinSymbol = styled.td`
   text-align: center;
-`
+`;
 export const CoinRank = styled.td`
   text-align: left;
   padding: 20px;
-`
+`;
 export const TableCoinChart = styled.td`
   display: flex;
   justify-content: center;
-  align-items:center;
-`
+  align-items: center;
+`;
+export const ArrowWrapper = styled.div`
+  text-align: center;
+`;
+export const TableItemNum = styled.span`
+  color: ${(props) => (props.value > 0 ? "lime" : "red")};
+`;
+export const StyledArrow = styled.span``;

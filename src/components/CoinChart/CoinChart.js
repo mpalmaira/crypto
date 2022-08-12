@@ -1,5 +1,5 @@
 import React from "react";
-import {ChartContainer} from './CoinChart.styles';
+import { ChartContainer } from "./CoinChart.styles";
 import {
   Chart as ChartJS,
   CategoryScale,

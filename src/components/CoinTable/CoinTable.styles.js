@@ -16,7 +16,6 @@ export const StyledTable = styled.table`
   border-radius: 20px;
   padding: 20px;
   border-collapse: collapse;
-
 `;
 
 export const TableHeadRank = styled.th`
@@ -27,9 +26,8 @@ export const TableHeadRank = styled.th`
 export const TableHeadName = styled.th`
   text-align: left;
   width: 15%;
-  `;
+`;
 export const TableHead = styled.th`
   width: 10%;
   text-align: center;
-`
-
+`;

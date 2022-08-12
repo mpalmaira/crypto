@@ -5,11 +5,14 @@ import {
   TableRow,
   CoinSymbol,
   CoinRank,
-  TableCoinChart
-
+  TableCoinChart,
+  TableItemNum,
+  StyledArrow,
 } from "./CoinItem.styles";
 import CoinChart from "../CoinChart/CoinChart";
 import { convertedNumber } from "../util/ConvertedNumber";
+import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
+import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
 
 const CoinItem = (props) => {
   return (
@@ -25,13 +28,46 @@ const CoinItem = (props) => {
 
       <TableItem>${props.coins.current_price.toLocaleString()}</TableItem>
       <TableItem>
-        {props.coins.price_change_percentage_1h_in_currency.toFixed(2)}%
+        <StyledArrow>
+          {props.coins.price_change_percentage_1h_in_currency > 0 ? (
+            <ArrowUp />
+          ) : (
+            <ArrowDown />
+          )}
+        </StyledArrow>
+        <TableItemNum
+          value={props.coins.price_change_percentage_1h_in_currency}
+        >
+          {props.coins.price_change_percentage_1h_in_currency.toFixed(2)}%
+        </TableItemNum>
       </TableItem>
       <TableItem>
-        {props.coins.price_change_percentage_24h_in_currency.toFixed(2)}%
+        <StyledArrow>
+          {props.coins.price_change_percentage_24h_in_currency > 0 ? (
+            <ArrowUp />
+          ) : (
+            <ArrowDown />
+          )}
+        </StyledArrow>
+        <TableItemNum
+          value={props.coins.price_change_percentage_24h_in_currency}
+        >
+          {props.coins.price_change_percentage_24h_in_currency.toFixed(2)}%
+        </TableItemNum>
       </TableItem>
       <TableItem>
-        {props.coins.price_change_percentage_7d_in_currency.toFixed(2)}%
+        <StyledArrow>
+          {props.coins.price_change_percentage_7d_in_currency > 0 ? (
+            <ArrowUp />
+          ) : (
+            <ArrowDown />
+          )}
+        </StyledArrow>
+        <TableItemNum
+          value={props.coins.price_change_percentage_7d_in_currency}
+        >
+          {props.coins.price_change_percentage_7d_in_currency.toFixed(2)}%
+        </TableItemNum>
       </TableItem>
       <TableItem>
         {convertedNumber(props.coins.total_volume)}
