@@ -1,28 +1,43 @@
 import React from "react";
+import {
+  CoinIcon,
+  TableItem,
+  TableRow,
+  CoinSymbol,
+  CoinName,
+} from "./CoinItem.styles";
 import CoinChart from "../CoinChart/CoinChart";
+import { convertedNumber } from "../util/ConvertedNumber";
 
 const CoinItem = (props) => {
+  console.log(props.coins.total_supply);
   return (
     <div>
-      <div className="coin-row">
-        <p>{props.coins.market_cap_rank}</p>
-        <div className="img-symbol">
-          <img src={props.coins.image} alt="" />
-        </div>
-        <p>{props.coins.name}</p>
-        <p>{props.coins.symbol}</p>
-        <p>${props.coins.current_price}</p>
-        <p>{props.coins.price_change_percentage_1h_in_currency}%</p>
-        <p>{props.coins.price_change_percentage_24h_in_currency}%</p>
-        <p>{props.coins.price_change_percentage_7d_in_currency}%</p>
-        <p>${props.coins.total_volume}</p>
-        <p>${props.coins.market_cap}</p>
-        <p>{props.coins.circulating_supply}</p>
-        <p>{props.coins.total_supply}</p>
-        <div className="coinChart">
+      <TableRow>
+        <td>{props.coins.market_cap_rank}</td>
+        <CoinSymbol>
+          <CoinIcon src={props.coins.image} alt="" />
+        </CoinSymbol>
+        <td>{props.coins.name}</td>
+        <td>({props.coins.symbol.toUpperCase()})</td>
+        <TableItem>${props.coins.current_price.toLocaleString()}</TableItem>
+        <TableItem>
+          {props.coins.price_change_percentage_1h_in_currency.toFixed(2)}%
+        </TableItem>
+        <TableItem>
+          {props.coins.price_change_percentage_24h_in_currency.toFixed(2)}%
+        </TableItem>
+        <TableItem>
+          {props.coins.price_change_percentage_7d_in_currency.toFixed(2)}%
+        </TableItem>
+        <TableItem>{convertedNumber(props.coins.total_volume)}</TableItem>
+        <TableItem>{convertedNumber(props.coins.market_cap)}</TableItem>
+        <TableItem>{convertedNumber(props.coins.circulating_supply)}</TableItem>
+        <TableItem>{convertedNumber(props.coins.total_supply)}</TableItem>
+        <TableItem>
           <CoinChart coins={props.coins} />
-        </div>
-      </div>
+        </TableItem>
+      </TableRow>
     </div>
   );
 };

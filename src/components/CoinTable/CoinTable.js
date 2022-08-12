@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { StyledTable, TheadNumandName, THeadRest } from "./CoinTable.styles";
 import CoinItem from "../CoinItem/CoinItem";
 class CoinTable extends React.Component {
   state = {
@@ -25,26 +26,33 @@ class CoinTable extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         {this.state.coins && (
-          <div>
-            <div>
-              <div className="heading">
-                <p>#</p>
-                <p>Name</p>
-                <p>Price</p>
-                <p>1h%</p>
-                <p>7d%</p>
-                <p>24h Volume/Market Cap</p>
-                <p>Circulating/Total Supply</p>
+          <StyledTable>
+            <thead>
+              <tr>
+                <TheadNumandName>
+                  <td>#</td>
+                  <td>Name</td>
+                </TheadNumandName>
+                <th>Price</th>
+                <th>1h%</th>
+                <th>7d%</th>
+                <th>24h Volume/Market Cap</th>
+                <th>Circulating/Total Supply</th>
+                <th>Last 7d</th>
+              </tr>
+            </thead>
+            <tr>
+              <tr>
                 {this.state.coins.map((coins) => {
                   return <CoinItem key={coins.id} coins={coins} />;
                 })}
-              </div>
-            </div>
-          </div>
+              </tr>
+            </tr>
+          </StyledTable>
         )}
-      </div>
+      </>
     );
   }
 }
