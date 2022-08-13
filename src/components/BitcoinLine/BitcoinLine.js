@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "./BitcoinLine.styles";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 ChartJS.register(
@@ -17,7 +19,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 class BitcoinLine extends React.Component {
@@ -34,10 +37,11 @@ class BitcoinLine extends React.Component {
       datasets: [
         {
           data: bitcoinPriceData.map((val) => val.y),
-          borderColor: "rgba(255, 99, 132, 0.5)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          borderColor: "#0CF864",
+          backgroundColor: "#363F3E",
           pointRadius: 0,
           borderWidth: 3,
+          fill: true,
         },
       ],
     };
@@ -71,9 +75,9 @@ class BitcoinLine extends React.Component {
       tension: 0.5,
     };
     return (
-      <div>
+      <Container>
         <Line options={options} data={data} />
-      </div>
+      </Container>
     );
   }
 }
