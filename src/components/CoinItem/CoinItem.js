@@ -8,9 +8,13 @@ import {
   TableCoinChart,
   TableItemNum,
   StyledArrow,
+  ConvertedNumberDiv,
+  ProgressandConvertedDiv,
+  ProgressBarContainer,
 } from "./CoinItem.styles";
 import CoinChart from "../CoinChart/CoinChart";
 import { convertedNumber } from "../util/ConvertedNumber";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
 
@@ -70,12 +74,31 @@ const CoinItem = (props) => {
         </TableItemNum>
       </TableItem>
       <TableItem>
-        {convertedNumber(props.coins.total_volume)}
-        {convertedNumber(props.coins.market_cap)}
+        <ProgressandConvertedDiv>
+          <ConvertedNumberDiv>
+            <span>{convertedNumber(props.coins.total_volume)}</span>
+            <span>{convertedNumber(props.coins.market_cap)}</span>
+          </ConvertedNumberDiv>
+          <ProgressBarContainer>
+            <ProgressBar
+              value={props.coins.total_volume}
+              max={props.coins.market_cap}
+            />
+          </ProgressBarContainer>
+        </ProgressandConvertedDiv>
       </TableItem>
       <TableItem>
-        {convertedNumber(props.coins.circulating_supply)}
-        {convertedNumber(props.coins.total_supply)}
+        <ProgressandConvertedDiv>
+          <ConvertedNumberDiv>
+            <span>{convertedNumber(props.coins.circulating_supply)}</span>
+            <span>{convertedNumber(props.coins.total_supply)}</span>
+          </ConvertedNumberDiv>
+
+          <ProgressBar
+            value={props.coins.circulating_supply}
+            max={props.coins.total_supply}
+          />
+        </ProgressandConvertedDiv>
       </TableItem>
       <TableCoinChart>
         <CoinChart coins={props.coins} />

@@ -10,6 +10,5 @@ export const lightTheme = {
   main: "#FCFCFC",
   secondary: "#FFFFFF",
   mainFont: "#2C2F36",
-  tertiary: "#FCFCFC",
   mainTableBorder: "#dcdcdc",
 };

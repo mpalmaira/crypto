@@ -42,3 +42,14 @@ export const TableItemNum = styled.span`
   color: ${(props) => (props.value > 0 ? "lime" : "red")};
 `;
 export const StyledArrow = styled.span``;
+
+export const ConvertedNumberDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: -5px;
+`;
+export const ProgressandConvertedDiv = styled.div`
+  padding: 0px 10px;
+`;
+export const ProgressBarContainer = styled.div``;
