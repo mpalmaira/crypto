@@ -1,5 +1,12 @@
 import React from "react";
 import axios from "axios";
+import {
+  TableContainer,
+  StyledTable,
+  TableHeadRank,
+  TableHeadName,
+  TableHead 
+} from "./CoinTable.styles";
 import CoinItem from "../CoinItem/CoinItem";
 class CoinTable extends React.Component {
   state = {
@@ -25,26 +32,30 @@ class CoinTable extends React.Component {
 
   render() {
     return (
-      <div>
+      <TableContainer>
         {this.state.coins && (
-          <div>
-            <div>
-              <div className="heading">
-                <p>#</p>
-                <p>Name</p>
-                <p>Price</p>
-                <p>1h%</p>
-                <p>7d%</p>
-                <p>24h Volume/Market Cap</p>
-                <p>Circulating/Total Supply</p>
-                {this.state.coins.map((coins) => {
-                  return <CoinItem key={coins.id} coins={coins} />;
-                })}
-              </div>
-            </div>
-          </div>
+          <StyledTable>
+            <thead>
+              <tr>
+                <TableHeadRank>#</TableHeadRank>
+                <TableHeadName>Name</TableHeadName>
+                <TableHead>Price</TableHead>
+                <TableHead>1h%</TableHead>
+                <TableHead>24h%</TableHead>
+                <TableHead>7d%</TableHead>
+                <th>24h Volume/Market Cap</th>
+                <th>Circulating/Total Supply</th>
+                <th>Last 7d</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.coins.map((coins) => {
+                return <CoinItem key={coins.id} coins={coins} />;
+              })}
+            </tbody>
+          </StyledTable>
         )}
-      </div>
+      </TableContainer>
     );
   }
 }
