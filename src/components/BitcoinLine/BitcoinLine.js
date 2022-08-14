@@ -41,7 +41,7 @@ class BitcoinLine extends React.Component {
           backgroundColor: (context) => {
             const ctx = context.chart.ctx;
             const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-            gradient.addColorStop(0, "rgb(50,205,50)");
+            gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
             gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
             return gradient;
           },
