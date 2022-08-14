@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import BitcoinLine from "../BitcoinLine/BitcoinLine";
 import BitcoinBar from "../ BitcoinBar/BitcoinBar";
+import { convertedNumber } from "../util/ConvertedNumber";
 import {
   MainContainer,
   LineContainer,
@@ -18,6 +19,7 @@ class BitcoinTable extends React.Component {
     bitcoin: null,
     hasError: false,
     bitcoinHourly: null,
+    bitcoinCurrent: null,
   };
   getData = async () => {
     try {
@@ -28,12 +30,15 @@ class BitcoinTable extends React.Component {
       const { data: dataHourly } = await axios(
         "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1&interval=hourly"
       );
+      const { data: dataCurrent } = await axios(
+        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_vol=true"
+      );
       this.setState({
         bitcoin: data,
         isLoading: false,
         bitcoinHourly: dataHourly,
+        bitcoinCurrent: dataCurrent.bitcoin,
       });
-      console.log(this.state);
     } catch (err) {
       this.setState({ hasError: true, isLoading: false });
     }
@@ -61,7 +66,10 @@ class BitcoinTable extends React.Component {
             <LineContainer>
               <MainTextContainer>
                 <BitcoinHeader>BTC Price</BitcoinHeader>
-                <BitcoinNumber>$$$$$</BitcoinNumber>
+                <BitcoinNumber>
+                  $
+                  {Object.values(this.state.bitcoinCurrent)[0].toLocaleString()}
+                </BitcoinNumber>
                 <StyledDate>{this.getDate()}</StyledDate>
               </MainTextContainer>
               <BitcoinLine bitcoin={this.state.bitcoin} />
@@ -69,7 +77,9 @@ class BitcoinTable extends React.Component {
             <BarContainer>
               <MainTextContainer>
                 <BitcoinHeader>BTC Volume 24h</BitcoinHeader>
-                <BitcoinNumber>$$$$$</BitcoinNumber>
+                <BitcoinNumber>
+                  {convertedNumber(Object.values(this.state.bitcoinCurrent)[1])}
+                </BitcoinNumber>
                 <StyledDate>{this.getDate()}</StyledDate>
               </MainTextContainer>
               <BitcoinBar bitcoin={this.state.bitcoinHourly} />
