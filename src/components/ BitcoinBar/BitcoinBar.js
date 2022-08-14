@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "./BitcoinBar.styles";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -31,10 +32,11 @@ class BitcoinBar extends React.Component {
       datasets: [
         {
           data: bitcoinVolumeData.map((val) => val.y),
-          borderColor: "rgba(43, 114, 229, 0.5)",
-          backgroundColor: "rgba(43, 114, 229, 0.5)",
+          borderColor: "#2172E5",
+          backgroundColor: "#2172E5",
           pointRadius: 3,
           borderWidth: 3,
+          borderRadius: 5
         },
       ],
     };
@@ -68,9 +70,9 @@ class BitcoinBar extends React.Component {
       tension: 0.5,
     };
     return (
-      <div>
+      <Container>
         <Bar options={options} data={data} />
-      </div>
+      </Container>
     );
   }
 }

@@ -5,7 +5,7 @@ import {
   StyledTable,
   TableHeadRank,
   TableHeadName,
-  TableHead 
+  TableHead,
 } from "./CoinTable.styles";
 import CoinItem from "../CoinItem/CoinItem";
 class CoinTable extends React.Component {
