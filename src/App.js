@@ -17,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-//currency state here!
 
 export default class App extends React.Component {
   state = {
