@@ -1,4 +1,5 @@
 import React from "react";
+import Dropdown from '../Dropdown/Dropdown'
 import { LeftContainer, NavContainer, RightContainer, SearchInput, SearchDiv, StyledLink, DollarSignDiv, DropDownDiv, ColoredCurrency, ToggleThemeLeftDiv, ToggleThemeRigtDiv, ToggleThemeLogo, StyledSearchIcon, StyledToggleThemeLeft,StyledToggleThemeRight } from "./Navbar.styles";
 import { ReactComponent as DollarSign } from '../SVG/DollarSign.svg';
 import { ReactComponent as ArrowDown } from '../SVG/ArrowDown.svg';
@@ -19,11 +20,12 @@ export default class Navbar extends React.Component {
                     <SearchInput placeholder="Search..."/>
                 </SearchDiv>
                 <DropDownDiv>
-                    <DollarSignDiv>
+                    {/* <DollarSignDiv>
                         <DollarSign/>
                     </DollarSignDiv>
                     <ColoredCurrency>USD</ColoredCurrency>
-                    <ArrowDown/>
+                    <ArrowDown/> */}
+                    <Dropdown handleCurrency={this.props.handleCurrency}/>
                 </DropDownDiv>
                 <ToggleThemeLogo onClick={this.props.toggleTheme}>
                     <ToggleThemeLeftDiv>

@@ -29,7 +29,6 @@ class CoinTable extends React.Component {
   componentDidMount() {
     this.getData();
   }
-
   render() {
     return (
       <TableContainer>
