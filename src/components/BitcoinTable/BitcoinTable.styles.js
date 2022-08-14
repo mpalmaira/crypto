@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
-  justify-content: space-evenly;
+  width: 80%;
+  justify-content: space-between;
   padding: 90px 0px;
 `;
 export const LineContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
   border-radius: 15px;
-  padding: 30px 50px;
+  padding: 20px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,7 @@ export const MainTextContainer = styled.div`
 export const BarContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
   border-radius: 15px;
-  padding: 30px 50px;
+  padding: 20px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
