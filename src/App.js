@@ -6,16 +6,18 @@ import { HomePage, CoinPage, Portfolio } from "./pages";
 import { darkTheme, lightTheme } from "./components/Theme/Theme";
 import Navbar from "./components/Navbar";
 
-const GlobalStyle = createGlobalStyle `
+const GlobalStyle = createGlobalStyle`
   body{
     margin: 0;
-    background-color: ${props=>props.theme.main};
+    background-color: ${(props) => props.theme.main};
     font-family: 'Poppins', sans-serif;
   }
   *{
     box-sizing: border-box;
   }
-`
+`;
+
+//currency state here!
 
 export default class App extends React.Component {
   state = {
@@ -23,16 +25,16 @@ export default class App extends React.Component {
   };
   toggleTheme = () => {
     this.setState({
-      dark: !this.state.dark
+      dark: !this.state.dark,
     });
   };
   render() {
     const theme = this.state.dark ? darkTheme : lightTheme;
     return (
       <ThemeProvider theme={theme}>
-        <GlobalStyle/>
+        <GlobalStyle />
         <Router>
-            <Navbar toggleTheme={this.toggleTheme} />
+          <Navbar toggleTheme={this.toggleTheme} />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/portfolio" component={Portfolio} />

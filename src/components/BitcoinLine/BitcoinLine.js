@@ -38,7 +38,13 @@ class BitcoinLine extends React.Component {
         {
           data: bitcoinPriceData.map((val) => val.y),
           borderColor: "#0CF864",
-          backgroundColor: "#363F3E",
+          backgroundColor: (context) => {
+            const ctx = context.chart.ctx;
+            const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+            gradient.addColorStop(0, "rgb(50,205,50)");
+            gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+            return gradient;
+          },
           pointRadius: 0,
           borderWidth: 3,
           fill: true,
