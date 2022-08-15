@@ -21,6 +21,7 @@ export default class App extends React.Component {
   state = {
     dark: true,
     currency: "usd",
+    symbol: "$",
   };
   toggleTheme = () => {
     this.setState({
@@ -29,7 +30,25 @@ export default class App extends React.Component {
   };
   handleCurrency = (selectedCurrency) => {
     this.setState({ currency: selectedCurrency });
-    console.log(this.state.currency);
+    switch (selectedCurrency) {
+      case "usd":
+        this.setState({ symbol: "$" });
+        break;
+      case "gbp":
+        this.setState({ symbol: "£" });
+        break;
+      case "eur":
+        this.setState({ symbol: "€" });
+        break;
+      case "btc":
+        this.setState({ symbol: "₿" });
+        break;
+      case "eth":
+        this.setState({ symbol: "Ξ" });
+        break;
+      default:
+        this.setState({ symbol: "$" });
+    }
   };
   render() {
     const theme = this.state.dark ? darkTheme : lightTheme;
@@ -40,12 +59,19 @@ export default class App extends React.Component {
           <Navbar
             toggleTheme={this.toggleTheme}
             handleCurrency={this.handleCurrency}
+            handleSymbol = {this.handleSymbol}
           />
           <Switch>
             <Route
               exact
               path="/"
-              component={HomePage}
+              component={(props) => (
+                <HomePage
+                  {...props}
+                  currency={this.state.currency}
+                  symbol={this.state.symbol}
+                />
+              )}
             />
             <Route exact path="/portfolio" component={Portfolio} />
             <Route exact path="/coinpage/:coinId" component={CoinPage} />

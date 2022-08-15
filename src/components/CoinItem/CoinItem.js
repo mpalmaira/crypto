@@ -30,7 +30,10 @@ const CoinItem = (props) => {
         <td>({props.coins.symbol.toUpperCase()})</td>
       </td>
 
-      <TableItem>${props.coins.current_price.toLocaleString()}</TableItem>
+      <TableItem>
+        {props.symbol}
+        {props.coins.current_price.toLocaleString()}
+      </TableItem>
       <TableItem>
         <StyledArrow>
           {props.coins.price_change_percentage_1h_in_currency > 0 ? (
@@ -76,8 +79,14 @@ const CoinItem = (props) => {
       <TableItem>
         <ProgressandConvertedDiv>
           <ConvertedNumberDiv>
-            <span>{convertedNumber(props.coins.total_volume)}</span>
-            <span>{convertedNumber(props.coins.market_cap)}</span>
+            <span>
+              {props.symbol}
+              {convertedNumber(props.coins.total_volume)}
+            </span>
+            <span>
+              {props.symbol}
+              {convertedNumber(props.coins.market_cap)}
+            </span>
           </ConvertedNumberDiv>
           <ProgressBarContainer>
             <ProgressBar
@@ -90,8 +99,14 @@ const CoinItem = (props) => {
       <TableItem>
         <ProgressandConvertedDiv>
           <ConvertedNumberDiv>
-            <span>{convertedNumber(props.coins.circulating_supply)}</span>
-            <span>{convertedNumber(props.coins.total_supply)}</span>
+            <span>
+              {props.symbol}
+              {convertedNumber(props.coins.circulating_supply)}
+            </span>
+            <span>
+              {props.symbol}
+              {convertedNumber(props.coins.total_supply)}
+            </span>
           </ConvertedNumberDiv>
 
           <ProgressBar
