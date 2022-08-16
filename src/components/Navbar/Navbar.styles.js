@@ -93,7 +93,7 @@ export const ToggleThemeLogo = styled.div`
   algin-items: center;
   justify-content: center;
   background-color: ${(props) => props.theme.main};
-  padding: 15px 10px;
+  padding: 18px 10px;
   border-radius: 10px;
   margin-right: 25px;
   cursor: pointer;
@@ -114,6 +114,6 @@ export const StyledToggleThemeLeft = styled(ToggleThemeLeft)`
 export const StyledToggleThemeRight = styled(ToggleThemeRight)`
   fill: ${(props) => props.theme.mainFont};
   path {
-    fill: ${(props) => props.theme.fontColor};
+    fill: ${(props) => props.theme.mainFont};
   }
 `;

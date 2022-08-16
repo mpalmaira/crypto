@@ -5,19 +5,38 @@ import {
   DropDownListContainer,
   DropDownList,
   ListItem,
+  CurrencyDiv,
+  StyledGBP,
+  StyledEUR,
+  StyledBTC,
+  StyledETH,
 } from "./Dropdown.styles";
+import { ReactComponent as ArrowDown } from "../SVG/ArrowDown.svg";
+import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
+import { ReactComponent as USD } from "../SVG/DollarSign.svg";
 
 class Dropdown extends React.Component {
   state = {
     isOpen: false,
     selectedCurrency: "USD",
-    options: ["USD", "GBP", "EUR", "BTC", "ETH"],
+    selectedSymbol: <USD />,
+    options: [
+      { symbol: <USD />, currency: "USD" },
+      { symbol: <StyledGBP />, currency: "GBP" },
+      { symbol: <StyledEUR />, currency: "EUR" },
+      { symbol: <StyledBTC />, currency: "BTC" },
+      { symbol: <StyledETH />, currency: "ETH" },
+    ],
   };
   handleToggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
-  handleOptionClicked = (selectedCurrency) => {
-    this.setState({ selectedCurrency: selectedCurrency, isOpen: false });
+  handleOptionClicked = (selectedCurrency, selectedSymbol) => {
+    this.setState({
+      selectedCurrency: selectedCurrency,
+      selectedSymbol: selectedSymbol,
+      isOpen: false,
+    });
     this.props.handleCurrency(selectedCurrency);
   };
   render() {
@@ -25,7 +44,9 @@ class Dropdown extends React.Component {
       <div>
         <DropDownContainer>
           <DropDownHeader onClick={this.handleToggle}>
-            {this.state.selectedCurrency}
+            <CurrencyDiv>{this.state.selectedSymbol}</CurrencyDiv>
+            <span>{this.state.selectedCurrency}</span>{" "}
+            {this.state.isOpen ? <ArrowUp /> : <ArrowDown />}
           </DropDownHeader>
           {this.state.isOpen && (
             <DropDownListContainer>
@@ -33,10 +54,13 @@ class Dropdown extends React.Component {
                 {this.state.options.map((option) => {
                   return (
                     <ListItem
-                      onClick={() => this.handleOptionClicked(option)}
+                      onClick={() =>
+                        this.handleOptionClicked(option.currency, option.symbol)
+                      }
                       key={Math.random()}
                     >
-                      {option}
+                      <CurrencyDiv>{option.symbol}</CurrencyDiv>
+                      {option.currency}
                     </ListItem>
                   );
                 })}
