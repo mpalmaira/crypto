@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DropDownContainer = styled("div")`
   width: 136px;
-  background-color: ${(props) => props.theme.tertiary};
+  background-color: ${(props) => props.theme.main};
   height: 50px;
   border-radius: 10px;
   color: ${(props) => props.theme.mainFont};
@@ -19,7 +19,7 @@ export const DropDownHeader = styled("div")`
 `;
 export const DropDownListContainer = styled("div")``;
 export const DropDownList = styled("ul")`
-  background-color: ${(props) => props.theme.tertiary};
+  background-color: ${(props) => props.theme.main};
   border-radius: 10px;
   width: 100%;
   padding: 10px;
@@ -31,4 +31,13 @@ export const DropDownList = styled("ul")`
 export const ListItem = styled("li")`
   list-style: none;
   padding: 5px;
+  cursor: pointer;
+`;
+
+export const StyledSelect = styled.select`
+  background-color: ${(props) => props.theme.main};
+  font-size: 17px;
+  color: ${(props) => props.theme.mainFont};
+  border: none;
+  padding: 5px 15px;
 `;

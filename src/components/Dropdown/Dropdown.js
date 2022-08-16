@@ -9,24 +9,41 @@ import {
 
 class Dropdown extends React.Component {
   state = {
-    selectedCurrency: "usd",
+    isOpen: false,
+    selectedCurrency: "USD",
+    options: ["USD", "GBP", "EUR", "BTC", "ETH"],
   };
-  handleCurrency = (e) => {
-    const selectedCurrency = e.target.value;
-    this.setState({ selectedCurrency: e.target.value });
+  handleToggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+  handleOptionClicked = (selectedCurrency) => {
+    this.setState({ selectedCurrency: selectedCurrency, isOpen: false });
     this.props.handleCurrency(selectedCurrency);
-   
   };
   render() {
     return (
       <div>
-        <select onChange={this.handleCurrency}>
-          <option value="usd">USD</option>
-          <option value="gbp">GBP</option>
-          <option value="eur">EUR</option>
-          <option value="btc">BTC</option>
-          <option value="eth">ETH</option>
-        </select>
+        <DropDownContainer>
+          <DropDownHeader onClick={this.handleToggle}>
+            {this.state.selectedCurrency}
+          </DropDownHeader>
+          {this.state.isOpen && (
+            <DropDownListContainer>
+              <DropDownList>
+                {this.state.options.map((option) => {
+                  return (
+                    <ListItem
+                      onClick={() => this.handleOptionClicked(option)}
+                      key={Math.random()}
+                    >
+                      {option}
+                    </ListItem>
+                  );
+                })}
+              </DropDownList>
+            </DropDownListContainer>
+          )}
+        </DropDownContainer>
       </div>
     );
   }

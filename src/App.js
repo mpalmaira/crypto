@@ -31,19 +31,19 @@ export default class App extends React.Component {
   handleCurrency = (selectedCurrency) => {
     this.setState({ currency: selectedCurrency });
     switch (selectedCurrency) {
-      case "usd":
+      case "USD":
         this.setState({ symbol: "$" });
         break;
-      case "gbp":
+      case "GBP":
         this.setState({ symbol: "£" });
         break;
-      case "eur":
+      case "EUR":
         this.setState({ symbol: "€" });
         break;
-      case "btc":
+      case "BTC":
         this.setState({ symbol: "₿" });
         break;
-      case "eth":
+      case "ETH":
         this.setState({ symbol: "Ξ" });
         break;
       default:
