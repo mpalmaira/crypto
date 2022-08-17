@@ -20,7 +20,29 @@ const GlobalStyle = createGlobalStyle`
 export default class App extends React.Component {
   state = {
     dark: true,
-    currency: {
+    currencies: {
+      USD: {
+        value: "USD",
+        symbol: "$",
+      },
+      GBP: {
+        value: "GBP",
+        symbol: "£",
+      },
+      EUR: {
+        value: "EUR",
+        symbol: "€",
+      },
+      BTC: {
+        value: "BTC",
+        symbol: "₿",
+      },
+      ETH: {
+        value: "ETC",
+        symbol: "Ξ",
+      },
+    },
+    SelectedCurrency: {
       value: "usd",
       symbol: "$",
     },
@@ -30,13 +52,14 @@ export default class App extends React.Component {
       dark: !this.state.dark,
     });
   };
-  handleCurrency = (selectedCurrency, selectedSymbol) => {
+  handleCurrency = (selectedCurrency) => {
     this.setState({
-      currency: { value: selectedCurrency, symbol: selectedSymbol },
+      SelectedCurrency: this.state.currencies[selectedCurrency],
     });
   };
   render() {
     const theme = this.state.dark ? darkTheme : lightTheme;
+
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyle />
@@ -52,8 +75,8 @@ export default class App extends React.Component {
               component={(props) => (
                 <HomePage
                   {...props}
-                  currency={this.state.currency.value}
-                  symbol={this.state.currency.symbol}
+                  currency={this.state.SelectedCurrency.value}
+                  symbol={this.state.SelectedCurrency.symbol}
                 />
               )}
             />

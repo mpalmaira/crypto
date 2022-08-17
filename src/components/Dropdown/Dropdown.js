@@ -32,8 +32,7 @@ class Dropdown extends React.Component {
       selectedSymbol: selectedSymbol,
       isOpen: false,
     });
-    console.log(this.state.options.selectedSymbol)
-    this.props.handleCurrency(selectedCurrency, selectedSymbol);
+    this.props.handleCurrency(selectedCurrency);
   };
   render() {
     return (
