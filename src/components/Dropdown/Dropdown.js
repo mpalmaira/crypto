@@ -6,26 +6,21 @@ import {
   DropDownList,
   ListItem,
   CurrencyDiv,
-  StyledGBP,
-  StyledEUR,
-  StyledBTC,
-  StyledETH,
 } from "./Dropdown.styles";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDown.svg";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
-import { ReactComponent as USD } from "../SVG/DollarSign.svg";
 
 class Dropdown extends React.Component {
   state = {
     isOpen: false,
     selectedCurrency: "USD",
-    selectedSymbol: <USD />,
+    selectedSymbol: "$",
     options: [
-      { symbol: <USD />, currency: "USD" },
-      { symbol: <StyledGBP />, currency: "GBP" },
-      { symbol: <StyledEUR />, currency: "EUR" },
-      { symbol: <StyledBTC />, currency: "BTC" },
-      { symbol: <StyledETH />, currency: "ETH" },
+      { symbol: "$", currency: "USD" },
+      { symbol: "£", currency: "GBP" },
+      { symbol: "€", currency: "EUR" },
+      { symbol: "₿", currency: "BTC" },
+      { symbol: "Ξ", currency: "ETH" },
     ],
   };
   handleToggle = () => {
@@ -37,7 +32,8 @@ class Dropdown extends React.Component {
       selectedSymbol: selectedSymbol,
       isOpen: false,
     });
-    this.props.handleCurrency(selectedCurrency);
+    console.log(this.state.options.selectedSymbol)
+    this.props.handleCurrency(selectedCurrency, selectedSymbol);
   };
   render() {
     return (

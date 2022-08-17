@@ -20,35 +20,20 @@ const GlobalStyle = createGlobalStyle`
 export default class App extends React.Component {
   state = {
     dark: true,
-    currency: "usd",
-    symbol: "$",
+    currency: {
+      value: "usd",
+      symbol: "$",
+    },
   };
   toggleTheme = () => {
     this.setState({
       dark: !this.state.dark,
     });
   };
-  handleCurrency = (selectedCurrency) => {
-    this.setState({ currency: selectedCurrency });
-    switch (selectedCurrency) {
-      case "USD":
-        this.setState({ symbol: "$" });
-        break;
-      case "GBP":
-        this.setState({ symbol: "£" });
-        break;
-      case "EUR":
-        this.setState({ symbol: "€" });
-        break;
-      case "BTC":
-        this.setState({ symbol: "₿" });
-        break;
-      case "ETH":
-        this.setState({ symbol: "Ξ" });
-        break;
-      default:
-        this.setState({ symbol: "$" });
-    }
+  handleCurrency = (selectedCurrency, selectedSymbol) => {
+    this.setState({
+      currency: { value: selectedCurrency, symbol: selectedSymbol },
+    });
   };
   render() {
     const theme = this.state.dark ? darkTheme : lightTheme;
@@ -59,7 +44,6 @@ export default class App extends React.Component {
           <Navbar
             toggleTheme={this.toggleTheme}
             handleCurrency={this.handleCurrency}
-            handleSymbol = {this.handleSymbol}
           />
           <Switch>
             <Route
@@ -68,8 +52,8 @@ export default class App extends React.Component {
               component={(props) => (
                 <HomePage
                   {...props}
-                  currency={this.state.currency}
-                  symbol={this.state.symbol}
+                  currency={this.state.currency.value}
+                  symbol={this.state.currency.symbol}
                 />
               )}
             />

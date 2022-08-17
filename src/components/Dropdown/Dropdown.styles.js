@@ -1,8 +1,4 @@
 import styled from "styled-components";
-import { ReactComponent as GBP } from "../SVG/gbp.svg";
-import { ReactComponent as EUR } from "../SVG/euro.svg";
-import { ReactComponent as BTC } from "../SVG/btc.svg";
-import { ReactComponent as ETH } from "../SVG/eth.svg";
 
 export const DropDownContainer = styled("div")`
   width: 136px;
@@ -58,24 +54,5 @@ export const CurrencyDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-export const StyledGBP = styled(GBP)`
-  height: 15px;
-  width: 15px;
-  fill: lime;
-`;
-export const StyledEUR = styled(EUR)`
-  height: 15px;
-  width: 15px;
-  fill: lime;
-`;
-export const StyledBTC = styled(BTC)`
-  height: 15px;
-  width: 15px;
-  fill: lime;
-`;
-export const StyledETH = styled(ETH)`
-  height: 15px;
-  width: 15px;
-  fill: lime;
+  color: lime;
 `;
