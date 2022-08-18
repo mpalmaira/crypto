@@ -12,5 +12,5 @@ export function convertedNumber(value) {
   newValue = newValue.toPrecision(4);
 
   newValue += suffixes[suffixNum];
-  return `$${newValue}`;
+  return newValue;
 }

@@ -12,12 +12,23 @@ import {
     ReactComponent as ToggleThemeLeft
 } from '../SVG/ToggleThemeLeft.svg';
 
-export const NavContainer = styled.div `
+export const NavContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+`
+
+export const NavTopContainer = styled.div `
     width: 100%;
     background-color: ${props => props.theme.secondary};
     display: flex;
     align-items: center;
     justify-content: space-between;
+`
+export const MarketDataContainer = styled.div`
+    width: 100%;
 `
 export const LeftContainer = styled.div `
     display: flex;
@@ -122,3 +133,4 @@ export const StyledToggleThemeRight = styled(ToggleThemeRight)
     fill:  ${props => props.theme.mainFont};
     path{fill:${props => props.theme.fontColor};}
 `
+
