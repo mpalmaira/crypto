@@ -72,13 +72,11 @@ export default class Navbar extends React.Component {
             </ToggleThemeLogo>
           </RightContainer>
         </NavTopContainer>
-        <div>
+        <MarketDataContainer>
           {this.state.marketData && (
-            <MarketDataContainer>
-              <NavMarketData marketData={this.state.marketData} />
-            </MarketDataContainer>
+            <NavMarketData marketData={this.state.marketData} />
           )}
-        </div>
+        </MarketDataContainer>
       </NavContainer>
     );
   }
