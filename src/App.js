@@ -16,33 +16,33 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 `;
+const currencies = {
+  usd: {
+    value: "usd",
+    symbol: "$",
+  },
+  gbp: {
+    value: "gbp",
+    symbol: "£",
+  },
+  eur: {
+    value: "eur",
+    symbol: "€",
+  },
+  btc: {
+    value: "btc",
+    symbol: "₿",
+  },
+  eth: {
+    value: "eth",
+    symbol: "Ξ",
+  },
+};
 
 export default class App extends React.Component {
   state = {
     dark: true,
-    currencies: {
-      USD: {
-        value: "USD",
-        symbol: "$",
-      },
-      GBP: {
-        value: "GBP",
-        symbol: "£",
-      },
-      EUR: {
-        value: "EUR",
-        symbol: "€",
-      },
-      BTC: {
-        value: "BTC",
-        symbol: "₿",
-      },
-      ETH: {
-        value: "ETC",
-        symbol: "Ξ",
-      },
-    },
-    SelectedCurrency: {
+    selectedCurrency: {
       value: "usd",
       symbol: "$",
     },
@@ -54,12 +54,11 @@ export default class App extends React.Component {
   };
   handleCurrency = (selectedCurrency) => {
     this.setState({
-      SelectedCurrency: this.state.currencies[selectedCurrency],
+      selectedCurrency: {value: currencies[selectedCurrency].value, symbol: currencies[selectedCurrency].symbol}
     });
   };
   render() {
     const theme = this.state.dark ? darkTheme : lightTheme;
-
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyle />
@@ -67,6 +66,7 @@ export default class App extends React.Component {
           <Navbar
             toggleTheme={this.toggleTheme}
             handleCurrency={this.handleCurrency}
+            currencies={currencies}
           />
           <Switch>
             <Route
@@ -75,8 +75,8 @@ export default class App extends React.Component {
               component={(props) => (
                 <HomePage
                   {...props}
-                  currency={this.state.SelectedCurrency.value}
-                  symbol={this.state.SelectedCurrency.symbol}
+                  currency={this.state.selectedCurrency.value}
+                  symbol={this.state.selectedCurrency.symbol}
                 />
               )}
             />

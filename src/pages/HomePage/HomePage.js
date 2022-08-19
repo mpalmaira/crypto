@@ -7,8 +7,9 @@ class HomePage extends React.Component {
   render() {
     return (
       <Container>
-        <BitcoinTable currency = {this.props.currency} symbol = {this.props.symbol}/>
-        <CoinTable currency = {this.props.currency} symbol = {this.props.symbol}/>
+        <BitcoinTable currency = {this.props.currency} symbol = {this.props.symbol} 
+        />
+        <CoinTable currency = {this.props.currency} symbol = {this.props.symbol} />
       </Container>
     );
   }

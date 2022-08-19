@@ -13,16 +13,10 @@ import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 class Dropdown extends React.Component {
   state = {
     isOpen: false,
-    selectedCurrency: "USD",
+    selectedCurrency: "usd",
     selectedSymbol: "$",
-    options: [
-      { symbol: "$", currency: "USD" },
-      { symbol: "£", currency: "GBP" },
-      { symbol: "€", currency: "EUR" },
-      { symbol: "₿", currency: "BTC" },
-      { symbol: "Ξ", currency: "ETH" },
-    ],
   };
+
   handleToggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
@@ -35,27 +29,28 @@ class Dropdown extends React.Component {
     this.props.handleCurrency(selectedCurrency);
   };
   render() {
+    const options = Object.values(this.props.currencies);
     return (
       <div>
         <DropDownContainer>
           <DropDownHeader onClick={this.handleToggle}>
             <CurrencyDiv>{this.state.selectedSymbol}</CurrencyDiv>
-            <span>{this.state.selectedCurrency}</span>{" "}
+            <span>{this.state.selectedCurrency.toUpperCase()}</span>
             {this.state.isOpen ? <ArrowUp /> : <ArrowDown />}
           </DropDownHeader>
           {this.state.isOpen && (
             <DropDownListContainer>
               <DropDownList>
-                {this.state.options.map((option) => {
+                {options.map((option) => {
                   return (
                     <ListItem
                       onClick={() =>
-                        this.handleOptionClicked(option.currency, option.symbol)
+                        this.handleOptionClicked(option.value, option.symbol)
                       }
                       key={Math.random()}
                     >
                       <CurrencyDiv>{option.symbol}</CurrencyDiv>
-                      {option.currency}
+                      {option.value.toUpperCase()}
                     </ListItem>
                   );
                 })}
