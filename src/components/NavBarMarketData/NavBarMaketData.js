@@ -18,10 +18,10 @@ export const NavMarketData = (props) => {
         <div>Exchange {props.marketData.markets}</div>
       </MarketDataItem>
       <MarketDataItem>
-        <div>• {convertedNumber(props.marketData.total_market_cap.usd)}</div>
+        <div>• ${convertedNumber(props.marketData.total_market_cap.usd)}</div>
       </MarketDataItem>
       <MarketDataItemSlider>
-        <div>• {convertedNumber(props.marketData.total_volume.usd)}</div>
+        <div>• ${convertedNumber(props.marketData.total_volume.usd)}</div>
         <ProgressBarDiv>
           <ProgressBar
             value={props.marketData.total_volume.usd}

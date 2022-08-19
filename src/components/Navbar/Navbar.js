@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Dropdown from "../Dropdown/Dropdown";
 import {
   LeftContainer,
   NavContainer,
@@ -9,9 +10,7 @@ import {
   SearchInput,
   SearchDiv,
   StyledLink,
-  DollarSignDiv,
   DropDownDiv,
-  ColoredCurrency,
   ToggleThemeLeftDiv,
   ToggleThemeRigtDiv,
   ToggleThemeLogo,
@@ -19,8 +18,6 @@ import {
   StyledToggleThemeLeft,
   StyledToggleThemeRight,
 } from "./Navbar.styles";
-import { ReactComponent as DollarSign } from "../SVG/DollarSign.svg";
-import { ReactComponent as ArrowDown } from "../SVG/ArrowDown.svg";
 import { NavMarketData } from "../NavBarMarketData/NavBarMaketData";
 export default class Navbar extends React.Component {
   state = {
@@ -56,11 +53,10 @@ export default class Navbar extends React.Component {
               <SearchInput placeholder="Search..." />
             </SearchDiv>
             <DropDownDiv>
-              <DollarSignDiv>
-                <DollarSign />
-              </DollarSignDiv>
-              <ColoredCurrency>USD</ColoredCurrency>
-              <ArrowDown />
+              <Dropdown
+                handleCurrency={this.props.handleCurrency}
+                selectedCurrency={this.props.selectedCurrency}
+              />
             </DropDownDiv>
             <ToggleThemeLogo onClick={this.props.toggleTheme}>
               <ToggleThemeLeftDiv>
@@ -74,7 +70,7 @@ export default class Navbar extends React.Component {
         </NavTopContainer>
         <MarketDataContainer>
           {this.state.marketData && (
-            <NavMarketData marketData={this.state.marketData} />
+            <NavMarketData marketData={this.state.marketData} symbol = {this.props.symbol}/>
           )}
         </MarketDataContainer>
       </NavContainer>
