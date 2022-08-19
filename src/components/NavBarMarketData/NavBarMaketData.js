@@ -4,7 +4,7 @@ import {
   MarketDataItem,
   MarketDataItemSlider,
   ProgressBarDiv,
-  StyledImage
+  StyledImage,
 } from "./NavBarMarketData.styles";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { convertedNumber } from "../util/ConvertedNumber";
