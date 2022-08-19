@@ -7,6 +7,7 @@ import {
   ListItem,
   CurrencyDiv,
 } from "./Dropdown.styles";
+import { currencies } from "../../App";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDown.svg";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 
@@ -29,7 +30,7 @@ class Dropdown extends React.Component {
     this.props.handleCurrency(selectedCurrency);
   };
   render() {
-    const options = Object.values(this.props.currencies);
+    const options = Object.values(currencies);
     return (
       <div>
         <DropDownContainer>

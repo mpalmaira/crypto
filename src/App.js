@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 `;
-const currencies = {
+export const currencies = {
   usd: {
     value: "usd",
     symbol: "$",
@@ -66,7 +66,7 @@ export default class App extends React.Component {
           <Navbar
             toggleTheme={this.toggleTheme}
             handleCurrency={this.handleCurrency}
-            currencies={currencies}
+           
           />
           <Switch>
             <Route
