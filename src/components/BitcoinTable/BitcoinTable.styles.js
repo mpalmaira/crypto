@@ -34,16 +34,16 @@ export const BarContainer = styled.div`
 `;
 export const BitcoinHeader = styled.p`
   font-size: 22px;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 `;
 export const StyledDate = styled.p`
   font-size: 22px;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 `;
 export const BitcoinNumber = styled.p`
   font-size: 44px;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 `;

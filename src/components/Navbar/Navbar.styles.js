@@ -28,7 +28,6 @@ export const NavTopContainer = styled.div `
     justify-content: space-between;
 `
 export const MarketDataContainer = styled.div`
-    width: 50%
 `
 export const LeftContainer = styled.div `
     display: flex;

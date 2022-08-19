@@ -19,7 +19,7 @@ class CoinTable extends React.Component {
     try {
       this.setState({ isLoading: true });
       const { data } = await axios(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d"
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currency}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
       this.setState({ coins: data, isLoading: false });
     } catch (err) {
@@ -29,7 +29,6 @@ class CoinTable extends React.Component {
   componentDidMount() {
     this.getData();
   }
-
   render() {
     return (
       <TableContainer>
@@ -50,7 +49,7 @@ class CoinTable extends React.Component {
             </thead>
             <tbody>
               {this.state.coins.map((coins) => {
-                return <CoinItem key={coins.id} coins={coins} />;
+                return <CoinItem key={coins.id} coins={coins} symbol = {this.props.symbol} />;
               })}
             </tbody>
           </StyledTable>
