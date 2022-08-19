@@ -30,7 +30,7 @@ export default class Navbar extends React.Component {
             <SearchInput placeholder="Search..." />
           </SearchDiv>
           <DropDownDiv>
-            <Dropdown handleCurrency={this.props.handleCurrency} />
+            <Dropdown handleCurrency={this.props.handleCurrency} selectedCurrency = {this.props.selectedCurrency}/>
           </DropDownDiv>
           <ToggleThemeLogo onClick={this.props.toggleTheme}>
             <ToggleThemeLeftDiv>

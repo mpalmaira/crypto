@@ -14,8 +14,6 @@ import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 class Dropdown extends React.Component {
   state = {
     isOpen: false,
-    selectedCurrency: "usd",
-    selectedSymbol: "$",
   };
 
   handleToggle = () => {
@@ -23,20 +21,19 @@ class Dropdown extends React.Component {
   };
   handleOptionClicked = (selectedCurrency, selectedSymbol) => {
     this.setState({
-      selectedCurrency: selectedCurrency,
-      selectedSymbol: selectedSymbol,
       isOpen: false,
     });
     this.props.handleCurrency(selectedCurrency);
   };
   render() {
     const options = Object.values(currencies);
+
     return (
       <div>
         <DropDownContainer>
           <DropDownHeader onClick={this.handleToggle}>
-            <CurrencyDiv>{this.state.selectedSymbol}</CurrencyDiv>
-            <span>{this.state.selectedCurrency.toUpperCase()}</span>
+            <CurrencyDiv>{this.props.selectedCurrency.symbol}</CurrencyDiv>
+            <span>{this.props.selectedCurrency.value.toUpperCase()}</span>
             {this.state.isOpen ? <ArrowUp /> : <ArrowDown />}
           </DropDownHeader>
           {this.state.isOpen && (
@@ -48,7 +45,7 @@ class Dropdown extends React.Component {
                       onClick={() =>
                         this.handleOptionClicked(option.value, option.symbol)
                       }
-                      key={Math.random()}
+                      key={option.value}
                     >
                       <CurrencyDiv>{option.symbol}</CurrencyDiv>
                       {option.value.toUpperCase()}
