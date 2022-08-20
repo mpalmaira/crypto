@@ -19,6 +19,7 @@ import {
   StyledToggleThemeRight,
 } from "./Navbar.styles";
 import { NavMarketData } from "../NavBarMarketData/NavBarMaketData";
+
 export default class Navbar extends React.Component {
   state = {
     isLoading: false,
@@ -30,7 +31,6 @@ export default class Navbar extends React.Component {
       this.setState({ isLoading: true });
       const { data } = await axios("https://api.coingecko.com/api/v3/global");
       this.setState({ marketData: data.data, isLoading: false });
-      console.log(this.state.marketData);
     } catch (err) {
       this.setState({ hasError: true, isLoading: false });
     }
@@ -70,9 +70,7 @@ export default class Navbar extends React.Component {
         </NavTopContainer>
         <MarketDataContainer>
           {this.state.marketData && (
-            <NavMarketData
-              marketData={this.state.marketData}
-            />
+            <NavMarketData marketData={this.state.marketData} />
           )}
         </MarketDataContainer>
       </NavContainer>

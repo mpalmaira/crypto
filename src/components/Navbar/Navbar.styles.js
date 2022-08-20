@@ -101,6 +101,6 @@ export const StyledToggleThemeLeft = styled(ToggleThemeLeft)`
 export const StyledToggleThemeRight = styled(ToggleThemeRight)`
   fill: ${(props) => props.theme.mainFont};
   path {
-    fill: ${(props) => props.theme.fontColor};
+    fill: ${(props) => props.theme.mainFont};
   }
 `;
