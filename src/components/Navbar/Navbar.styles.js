@@ -5,13 +5,23 @@ import { ReactComponent as ToggleThemeRight } from "../SVG/ToggleThemeRight.svg"
 import { ReactComponent as ToggleThemeLeft } from "../SVG/ToggleThemeLeft.svg";
 
 export const NavContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  position: fixed;
+`;
+
+export const NavTopContainer = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.secondary};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
-  z-index: 1;
+`;
+export const MarketDataContainer = styled.div`
+  width: 50%;
 `;
 export const LeftContainer = styled.div`
   display: flex;
@@ -42,9 +52,9 @@ export const SearchInput = styled.input`
   }
 `;
 export const SearchDiv = styled.div`
-  background-color: ${(props) => props.theme.main};
+  background-color: ${(props) => props.theme.tertiary};
   width: 380px;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -53,31 +63,8 @@ export const SearchDiv = styled.div`
   color: black;
 `;
 
-export const DollarSignDiv = styled.div`
-  background-color: black;
-  border-radius: 30px;
-  height: 34px;
-  width: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 export const DropDownDiv = styled.div`
-  background-color: ${(props) => props.theme.secondary};
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 136px;
-  height: 50px;
   margin-right: 25px;
-  flex: 1;
-`;
-
-export const ColoredCurrency = styled.p`
-  color: ${(props) => props.theme.mainFont};
-  font-weight: 500;
 `;
 
 export const ToggleThemeLeftDiv = styled.div`
@@ -92,8 +79,8 @@ export const ToggleThemeLogo = styled.div`
   display: flex;
   algin-items: center;
   justify-content: center;
-  background-color: ${(props) => props.theme.main};
-  padding: 18px 10px;
+  background-color: ${(props) => props.theme.tertiary};
+  padding: 15px 10px;
   border-radius: 10px;
   margin-right: 25px;
   cursor: pointer;

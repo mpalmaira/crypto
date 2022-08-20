@@ -54,7 +54,7 @@ export default class App extends React.Component {
   };
   handleCurrency = (selectedCurrency) => {
     this.setState({
-      selectedCurrency: currencies[selectedCurrency]
+      selectedCurrency: currencies[selectedCurrency],
     });
   };
   render() {
@@ -66,8 +66,7 @@ export default class App extends React.Component {
           <Navbar
             toggleTheme={this.toggleTheme}
             handleCurrency={this.handleCurrency}
-            selectedCurrency = {this.state.selectedCurrency}
-           
+            selectedCurrency={this.state.selectedCurrency}
           />
           <Switch>
             <Route

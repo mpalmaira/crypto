@@ -5,7 +5,7 @@ export const MainContainer = styled.div`
   align-items: center;
   width: 80%;
   justify-content: space-between;
-  padding: 90px 0px;
+  padding: 60px 0px;
   margin-top: 100px;
 `;
 export const LineContainer = styled.div`
