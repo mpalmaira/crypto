@@ -72,7 +72,6 @@ export default class Navbar extends React.Component {
           {this.state.marketData && (
             <NavMarketData
               marketData={this.state.marketData}
-              symbol={this.props.symbol}
             />
           )}
         </MarketDataContainer>
