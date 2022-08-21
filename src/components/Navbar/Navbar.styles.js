@@ -10,7 +10,6 @@ export const NavContainer = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
-  position: fixed;
 `;
 
 export const NavTopContainer = styled.div`

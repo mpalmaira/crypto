@@ -60,9 +60,9 @@ class CoinTable extends React.Component {
                   <TableHead>1h%</TableHead>
                   <TableHead>24h%</TableHead>
                   <TableHead>7d%</TableHead>
-                  <th>24h Volume/Market Cap</th>
-                  <th>Circulating/Total Supply</th>
-                  <th>Last 7d</th>
+                  <TableHead>24h Volume/Market Cap</TableHead>
+                  <TableHead>Circulating/Total Supply</TableHead>
+                  <TableHead>Last 7d</TableHead>
                 </tr>
               </thead>
               <tbody>

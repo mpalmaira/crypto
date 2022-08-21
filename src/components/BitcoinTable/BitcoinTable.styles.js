@@ -6,7 +6,6 @@ export const MainContainer = styled.div`
   width: 80%;
   justify-content: space-between;
   padding: 60px 0px;
-  margin-top: 100px;
 `;
 export const LineContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};

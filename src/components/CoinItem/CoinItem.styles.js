@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledCoinRow = styled.td`
   color: ${(props) => props.theme.mainFont};
@@ -34,6 +35,7 @@ export const TableCoinChart = styled.td`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0px 10px;
 `;
 export const ArrowWrapper = styled.div`
   text-align: center;
@@ -53,3 +55,12 @@ export const ProgressandConvertedDiv = styled.div`
   padding: 0px 10px;
 `;
 export const ProgressBarContainer = styled.div``;
+
+export const StyledLink = styled(Link)`
+  color: ${(props) => props.theme.mainFont};
+  text-decoration: none;
+  width: 100%;
+  :hover {
+    text-decoration: underline;
+  }
+`;
