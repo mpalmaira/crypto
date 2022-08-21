@@ -32,10 +32,8 @@ import {
   DescriptionText,
   DescriptionDiv,
   CoinDescription,
-  LinksDiv,
-  LinkDivLeft,
-  LinkDivMiddle,
-  LinkDivRight,
+  MainLinksDiv,
+  LinkDiv,
   StyledCopyLink,
 } from "./CoinPage.styles";
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
@@ -286,8 +284,8 @@ class CoinPage extends React.Component {
                 {}
               </CoinDescription>
             </DescriptionDiv>
-            <LinksDiv>
-              <LinkDivLeft>
+            <MainLinksDiv>
+              <LinkDiv>
                 <StyledNewTab
                   onClick={() =>
                     this.openNewTab(this.state.coinData.links.homepage[0])
@@ -304,8 +302,8 @@ class CoinPage extends React.Component {
                     this.copyLink(this.state.coinData.links.homepage[0])
                   }
                 />
-              </LinkDivLeft>
-              <LinkDivMiddle>
+              </LinkDiv>
+              <LinkDiv>
                 <StyledNewTab />
                 <CoinLink href={this.state.coinData.links.blockchain_site[1]}>
                   {this.state.coinData.links.blockchain_site[1].replace(
@@ -318,8 +316,8 @@ class CoinPage extends React.Component {
                     this.copyLink(this.state.coinData.links.homepage[1])
                   }
                 />
-              </LinkDivMiddle>
-              <LinkDivRight>
+              </LinkDiv>
+              <LinkDiv>
                 <StyledNewTab
                   onClick={() =>
                     this.openNewTab(this.state.coinData.links.homepage[2])
@@ -336,8 +334,8 @@ class CoinPage extends React.Component {
                     this.copyLink(this.state.coinData.links.homepage[2])
                   }
                 />
-              </LinkDivRight>
-            </LinksDiv>
+              </LinkDiv>
+            </MainLinksDiv>
           </MainContainer>
         )}
       </>

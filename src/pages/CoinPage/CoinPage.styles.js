@@ -68,6 +68,9 @@ export const CoinLink = styled.a`
   margin-left: 20px;
   text-align: center;
   text-decoration: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   color: ${(props) => props.theme.mainFont};
   :hover {
     text-decoration: underline;
@@ -194,7 +197,7 @@ export const CoinDescription = styled.span`
   }
   line-height: 1.5;
 `;
-export const LinksDiv = styled.div`
+export const MainLinksDiv = styled.div`
   display: flex;
   width: 80%;
   justify-content: space-between;
@@ -202,7 +205,7 @@ export const LinksDiv = styled.div`
   padding: 20px 0px;
 `;
 
-export const LinkDivLeft = styled.div`
+export const LinkDiv = styled.div`
   background-color: ${(props) => props.theme.secondary};
   display: flex;
   align-items: center;
@@ -211,24 +214,7 @@ export const LinkDivLeft = styled.div`
   padding: 10px;
   border-radius: 10px;
 `;
-export const LinkDivMiddle = styled.div`
-  background-color: ${(props) => props.theme.secondary};
-  display: flex;
-  align-items: center;
-  width: 380px;
-  justify-content: space-between;
-  padding: 10px;
-  border-radius: 10px;
-`;
-export const LinkDivRight = styled.div`
-  background-color: ${(props) => props.theme.secondary};
-  display: flex;
-  align-items: center;
-  width: 380px;
-  justify-content: space-between;
-  padding: 10px;
-  border-radius: 10px;
-`;
+
 export const StyledCopyLink = styled(CopyLink)`
   fill: ${(props) => props.theme.mainFont};
   path {
