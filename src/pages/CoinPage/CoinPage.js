@@ -304,7 +304,9 @@ class CoinPage extends React.Component {
                 />
               </LinkDiv>
               <LinkDiv>
-                <StyledNewTab />
+                <StyledNewTab onClick={() =>
+                    this.openNewTab(this.state.coinData.links.homepage[1])
+                  } />
                 <CoinLink href={this.state.coinData.links.blockchain_site[1]}>
                   {this.state.coinData.links.blockchain_site[1].replace(
                     /^https?:\/\//,
