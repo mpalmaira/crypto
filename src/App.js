@@ -75,8 +75,7 @@ export default class App extends React.Component {
               component={(props) => (
                 <HomePage
                   {...props}
-                  currency={this.state.selectedCurrency.value}
-                  symbol={this.state.selectedCurrency.symbol}
+                  selectedCurrency={this.state.selectedCurrency}
                 />
               )}
             />
@@ -87,8 +86,7 @@ export default class App extends React.Component {
               component={(props) => (
                 <CoinPage
                   {...props}
-                  currency={this.state.selectedCurrency.value}
-                  symbol={this.state.selectedCurrency.symbol}
+                  selectedCurrency={this.state.selectedCurrency}
                 />
               )}
             />

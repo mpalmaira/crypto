@@ -25,13 +25,13 @@ class BitcoinTable extends React.Component {
     try {
       this.setState({ isLoading: true });
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${this.props.currency}&days=30&interval=daily`
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${this.props.selectedCurrency.value}&days=30&interval=daily`
       );
       const { data: dataHourly } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${this.props.currency}&days=1&interval=hourly`
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${this.props.selectedCurrency.value}&days=1&interval=hourly`
       );
       const { data: dataCurrent } = await axios(
-        `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${this.props.currency}&include_24hr_vol=true`
+        `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${this.props.selectedCurrency.value}&include_24hr_vol=true`
       );
       this.setState({
         bitcoin: data,
@@ -67,7 +67,7 @@ class BitcoinTable extends React.Component {
               <MainTextContainer>
                 <BitcoinHeader>BTC Price</BitcoinHeader>
                 <BitcoinNumber>
-                  {this.props.symbol}
+                  {this.props.selectedCurrency.symbol}
                   {Object.values(this.state.bitcoinCurrent)[0].toLocaleString()}
                 </BitcoinNumber>
                 <StyledDate>{this.getDate()}</StyledDate>
@@ -78,7 +78,7 @@ class BitcoinTable extends React.Component {
               <MainTextContainer>
                 <BitcoinHeader>BTC Volume 24h</BitcoinHeader>
                 <BitcoinNumber>
-                  {this.props.symbol}
+                  {this.props.selectedCurrency.symbol}
                   {convertedNumber(Object.values(this.state.bitcoinCurrent)[1])}
                 </BitcoinNumber>
                 <StyledDate>{this.getDate()}</StyledDate>

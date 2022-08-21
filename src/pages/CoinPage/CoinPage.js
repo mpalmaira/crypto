@@ -62,12 +62,12 @@ class CoinPage extends React.Component {
     const profit = ((priceChange24 * CurrentPrice) / 100).toFixed(5);
     return profit > 0 ? (
       <ProfitGain>
-        {this.props.symbol}
+        {this.props.selectedCurrency.symbol}
         {profit}
       </ProfitGain>
     ) : (
       <ProfitLoss>
-        {this.props.symbol}
+        {this.props.selectedCurrency.symbol}
         {profit}
       </ProfitLoss>
     );
@@ -134,29 +134,28 @@ class CoinPage extends React.Component {
               <CoinMiddle>
                 <CoinTop>
                   <CoinPrice>
-                    {this.props.symbol}
+                    {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.current_price[
-                      this.props.currency
-                    ].toLocaleString()}
+                      this.props.selectedCurrency.value].toLocaleString()}
                   </CoinPrice>
                   <CoinPercentage
                     value={
                       this.state.coinData.market_data
                         .price_change_percentage_24h_in_currency[
-                        this.props.currency
+                        this.props.selectedCurrency.value
                       ]
                     }
                   >
                     {this.state.coinData.market_data
                       .price_change_percentage_24h_in_currency[
-                      this.props.currency
+                      this.props.selectedCurrency.value
                     ] > 0 ? (
                       <ArrowUp />
                     ) : (
                       <ArrowDown />
                     )}
                     {this.state.coinData.market_data.price_change_percentage_24h_in_currency[
-                      this.props.currency
+                    this.props.selectedCurrency.value
                     ].toFixed(2)}
                     %
                   </CoinPercentage>
@@ -167,10 +166,10 @@ class CoinPage extends React.Component {
                     {this.getProfit(
                       this.state.coinData.market_data
                         .price_change_percentage_24h_in_currency[
-                        this.props.currency
+                        this.props.selectedCurrency.value
                       ],
                       this.state.coinData.market_data.current_price[
-                        this.props.currency
+                        this.props.selectedCurrency.value
                       ]
                     )}
                   </span>
@@ -182,15 +181,15 @@ class CoinPage extends React.Component {
                   <ArrowUp />
                   <ATH>
                     <span>
-                      All Time High: {this.props.symbol}
+                      All Time High: {this.props.selectedCurrency.symbol}
                       {this.state.coinData.market_data.ath[
-                        this.props.currency
+                        this.props.selectedCurrency.value
                       ].toLocaleString()}
                     </span>
                     <span>
                       {this.getDate(
                         this.state.coinData.market_data.ath_date[
-                          this.props.currency
+                          this.props.selectedCurrency.value
                         ]
                       )}
                     </span>
@@ -200,15 +199,15 @@ class CoinPage extends React.Component {
                   <ArrowDown />
                   <ATL>
                     <span>
-                      All Time Low: {this.props.symbol}
+                      All Time Low: {this.props.selectedCurrency.symbol}
                       {this.state.coinData.market_data.atl[
-                        this.props.currency
+                        this.props.selectedCurrency.value
                       ].toLocaleString()}
                     </span>
                     <span>
                       {this.getDate(
                         this.state.coinData.market_data.atl_date[
-                          this.props.currency
+                          this.props.selectedCurrency.value
                         ]
                       )}
                     </span>
@@ -218,44 +217,44 @@ class CoinPage extends React.Component {
               <CoinRight>
                 <CoinRightTop>
                   <CoinRightNum>
-                    <Plus>+</Plus>Market Cap: {this.props.symbol}
+                    <Plus>+</Plus>Market Cap: {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.market_cap[
-                      this.props.currency
+                      this.props.selectedCurrency.value
                     ].toLocaleString()}
                   </CoinRightNum>
                   <CoinRightNum>
-                    <Plus>+</Plus>Fully Diluted Valuation: {this.props.symbol}
+                    <Plus>+</Plus>Fully Diluted Valuation: {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.fully_diluted_valuation[
-                      this.props.currency
+                      this.props.selectedCurrency.value
                     ]
                       ? this.state.coinData.market_data.fully_diluted_valuation[
-                          this.props.currency
+                        this.props.selectedCurrency.value
                         ].toLocaleString()
                       : "0.00"}
                   </CoinRightNum>
                   <CoinRightNum>
-                    <Plus>+</Plus>Volume 24h: {this.props.symbol}
+                    <Plus>+</Plus>Volume 24h: {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.total_volume[
-                      this.props.currency
+                      this.props.selectedCurrency.value
                     ].toLocaleString()}
                   </CoinRightNum>
                   <CoinRightNum>
                     <Plus>+</Plus>Volume / Market:
                     {(
                       this.state.coinData.market_data.total_volume[
-                        this.props.currency
+                        this.props.selectedCurrency.value
                       ] /
                       this.state.coinData.market_data.market_cap[
-                        this.props.currency
+                        this.props.selectedCurrency.value
                       ]
                     ).toFixed(5)}
                   </CoinRightNum>
                 </CoinRightTop>
                 <CoinRightMiddle>
                   <CoinRightNum>
-                    <Plus>+</Plus>Total Volume: {this.props.symbol}
+                    <Plus>+</Plus>Total Volume: {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.total_volume[
-                      this.props.currency
+                      this.props.selectedCurrency.value
                     ].toLocaleString()}
                   </CoinRightNum>
                   <CoinRightNum>
