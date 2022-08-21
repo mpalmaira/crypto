@@ -1,11 +1,21 @@
 import styled from "styled-components";
 import { ReactComponent as Stacklayer } from "../../components/SVG/stack-layer.svg";
+import { ReactComponent as NewTab } from "../../components/SVG/newtab.svg";
+import { ReactComponent as CopyLink } from "../../components/SVG/copy-link.svg";
 
 export const MainContainer = styled.div`
   color: ${(props) => props.theme.mainFont};
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  margin-top: 60px;
+  flex-direction: column;
+`;
+export const YourSummary = styled.div`
+  display: flex;
+  width: 80%;
+  font-size: 22px;
+  margin-bottom: 20px;
 `;
 export const CoinContainer = styled.div`
   display: flex;
@@ -14,12 +24,12 @@ export const CoinContainer = styled.div`
   align-items: center;
 `;
 export const CoinLeft = styled.div`
-display: flex;
-flex-direction: column;
-height: 380px;
-justify-content: space-between;
-align-items: space-between;
-`
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  justify-content: space-between;
+  align-items: space-between;
+`;
 export const CoinImageContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
   height: 300px;
@@ -47,9 +57,22 @@ export const CoinLinkDiv = styled.div`
   border-radius: 10px;
   padding: 20px;
 `;
-export const CoinLink = styled.span`
+export const StyledNewTab = styled(NewTab)`
+  fill: ${(props) => props.theme.mainFont};
+  path {
+    fill: ${(props) => props.theme.mainFont};
+  }
+  cursor: pointer;
+`;
+export const CoinLink = styled.a`
   margin-left: 20px;
-`
+  text-align: center;
+  text-decoration: none;
+  color: ${(props) => props.theme.mainFont};
+  :hover {
+    text-decoration: underline;
+  }
+`;
 export const CoinMiddle = styled.div`
   background-color: ${(props) => props.theme.secondary};
   height: 380px;
@@ -93,9 +116,7 @@ export const Stackedimg = styled(Stacklayer)`
     fill: ${(props) => props.theme.mainFont};
   }
 `;
-export const StackImgDiv = styled.div`
-  margin: -30px 0;
-`;
+export const StackImgDiv = styled.div``;
 export const ATHDiv = styled.div`
   font-size: 18px;
   display: flex;
@@ -122,6 +143,9 @@ export const CoinRight = styled.div`
   padding: 20px 40px;
   border-radius: 10px;
   height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `;
 export const CoinRightTop = styled.div`
   display: flex;
@@ -145,7 +169,70 @@ export const CoinRightNum = styled.div`
   margin-top: 10px;
 `;
 export const CoinRightMiddle = styled.div`
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
+`;
+export const DescriptionText = styled.div`
+  display: flex;
+  width: 80%;
+  font-size: 22px;
+  margin: 20px 0px;
+`;
+export const DescriptionDiv = styled.div`
+  width: 80%;
+  background-color: ${(props) => props.theme.secondary};
+  text-align: center;
+  padding: 30px;
+  border-radius: 10px;
+`;
+export const CoinDescription = styled.span`
+  font-size: 19px;
+  color: ${(props) => props.theme.mainFont};
+  a {
+    color: lime;
+    text-decoration: none;
+  }
+  line-height: 1.5;
+`;
+export const LinksDiv = styled.div`
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+`;
+
+export const LinkDivLeft = styled.div`
+  background-color: ${(props) => props.theme.secondary};
+  display: flex;
+  align-items: center;
+  width: 380px;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+`;
+export const LinkDivMiddle = styled.div`
+  background-color: ${(props) => props.theme.secondary};
+  display: flex;
+  align-items: center;
+  width: 380px;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+`;
+export const LinkDivRight = styled.div`
+  background-color: ${(props) => props.theme.secondary};
+  display: flex;
+  align-items: center;
+  width: 380px;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+`;
+export const StyledCopyLink = styled(CopyLink)`
+  fill: ${(props) => props.theme.mainFont};
+  path {
+    fill: ${(props) => props.theme.mainFont};
+  }
+  cursor: pointer;
 `;

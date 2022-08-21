@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import {
   MainContainer,
+  YourSummary,
   CoinContainer,
   CoinLeft,
   CoinImage,
@@ -9,6 +10,7 @@ import {
   CoinName,
   CoinLink,
   CoinLinkDiv,
+  StyledNewTab,
   CoinMiddle,
   CoinPercentage,
   CoinPrice,
@@ -27,10 +29,17 @@ import {
   Plus,
   CoinRightNum,
   CoinRightMiddle,
+  DescriptionText,
+  DescriptionDiv,
+  CoinDescription,
+  LinksDiv,
+  LinkDivLeft,
+  LinkDivMiddle,
+  LinkDivRight,
+  StyledCopyLink,
 } from "./CoinPage.styles";
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../../components/SVG/ArrowDownRed.svg";
-import { ReactComponent as CopyLink } from "../../components/SVG/copylink.svg";
 
 class CoinPage extends React.Component {
   state = {
@@ -52,7 +61,7 @@ class CoinPage extends React.Component {
   };
 
   getProfit = (priceChange24, CurrentPrice) => {
-    const profit = ((priceChange24 * CurrentPrice) / 100).toFixed(2);
+    const profit = ((priceChange24 * CurrentPrice) / 100).toFixed(5);
     return profit > 0 ? (
       <ProfitGain>
         {this.props.symbol}
@@ -78,6 +87,13 @@ class CoinPage extends React.Component {
     ${hours < 12 ? "AM" : "PM"}`;
   };
 
+  openNewTab = (url) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+  copyLink = async (url) => {
+    await navigator.clipboard.writeText(url);
+  };
+
   componentDidMount() {
     this.getCoin(this.props.match.params.id);
   }
@@ -88,166 +104,243 @@ class CoinPage extends React.Component {
   }
   render() {
     return (
-      <MainContainer>
+      <>
         {this.state.coinData && (
-          <CoinContainer>
-            <CoinLeft>
-              <CoinImageContainer>
-                <CoinImage>
-                  <img src={this.state.coinData.image.small} alt="coin img" />
-                </CoinImage>
-                <CoinName>
-                  {this.state.coinData.name}(
-                  {this.state.coinData.symbol.toUpperCase()})
-                </CoinName>
-              </CoinImageContainer>
-              <CoinLinkDiv>
-                <CopyLink />
-                <CoinLink>{this.state.coinData.links.homepage[0]}</CoinLink>
-              </CoinLinkDiv>
-            </CoinLeft>
-            <CoinMiddle>
-              <CoinTop>
-                <CoinPrice>
-                  {this.props.symbol}
-                  {this.state.coinData.market_data.current_price[
-                    this.props.currency
-                  ].toLocaleString()}
-                </CoinPrice>
-                <CoinPercentage
-                  value={
-                    this.state.coinData.market_data
+          <MainContainer>
+            <YourSummary>Your Summary</YourSummary>
+            <CoinContainer>
+              <CoinLeft>
+                <CoinImageContainer>
+                  <CoinImage>
+                    <img src={this.state.coinData.image.small} alt="coin img" />
+                  </CoinImage>
+                  <CoinName>
+                    {this.state.coinData.name}(
+                    {this.state.coinData.symbol.toUpperCase()})
+                  </CoinName>
+                </CoinImageContainer>
+                <CoinLinkDiv>
+                  <StyledNewTab
+                    onClick={() =>
+                      this.openNewTab(this.state.coinData.links.homepage[0])
+                    }
+                  />
+                  <CoinLink href={this.state.coinData.links.homepage[0]}>
+                    {this.state.coinData.links.homepage[0].replace(
+                      /^https?:\/\//,
+                      ""
+                    )}
+                  </CoinLink>
+                </CoinLinkDiv>
+              </CoinLeft>
+              <CoinMiddle>
+                <CoinTop>
+                  <CoinPrice>
+                    {this.props.symbol}
+                    {this.state.coinData.market_data.current_price[
+                      this.props.currency
+                    ].toLocaleString()}
+                  </CoinPrice>
+                  <CoinPercentage
+                    value={
+                      this.state.coinData.market_data
+                        .price_change_percentage_24h_in_currency[
+                        this.props.currency
+                      ]
+                    }
+                  >
+                    {this.state.coinData.market_data
                       .price_change_percentage_24h_in_currency[
                       this.props.currency
-                    ]
-                  }
-                >
-                  {this.state.coinData.market_data
-                    .price_change_percentage_24h_in_currency[
-                    this.props.currency
-                  ] > 0 ? (
-                    <ArrowUp />
-                  ) : (
-                    <ArrowDown />
-                  )}
-                  {this.state.coinData.market_data.price_change_percentage_24h_in_currency[
-                    this.props.currency
-                  ].toFixed(2)}
-                  %
-                </CoinPercentage>
-              </CoinTop>
-              <Profit>
-                <span>
-                  Profit:{" "}
-                  {this.getProfit(
-                    this.state.coinData.market_data
-                      .price_change_percentage_24h_in_currency[
+                    ] > 0 ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    )}
+                    {this.state.coinData.market_data.price_change_percentage_24h_in_currency[
                       this.props.currency
-                    ],
-                    this.state.coinData.market_data.current_price[
+                    ].toFixed(2)}
+                    %
+                  </CoinPercentage>
+                </CoinTop>
+                <Profit>
+                  <span>
+                    Profit:{" "}
+                    {this.getProfit(
+                      this.state.coinData.market_data
+                        .price_change_percentage_24h_in_currency[
+                        this.props.currency
+                      ],
+                      this.state.coinData.market_data.current_price[
+                        this.props.currency
+                      ]
+                    )}
+                  </span>
+                </Profit>
+                <StackImgDiv>
+                  <Stackedimg />
+                </StackImgDiv>
+                <ATHDiv>
+                  <ArrowUp />
+                  <ATH>
+                    <span>
+                      All Time High: {this.props.symbol}
+                      {this.state.coinData.market_data.ath[
+                        this.props.currency
+                      ].toLocaleString()}
+                    </span>
+                    <span>
+                      {this.getDate(
+                        this.state.coinData.market_data.ath_date[
+                          this.props.currency
+                        ]
+                      )}
+                    </span>
+                  </ATH>
+                </ATHDiv>
+                <ATLDiv>
+                  <ArrowDown />
+                  <ATL>
+                    <span>
+                      All Time Low: {this.props.symbol}
+                      {this.state.coinData.market_data.atl[
+                        this.props.currency
+                      ].toLocaleString()}
+                    </span>
+                    <span>
+                      {this.getDate(
+                        this.state.coinData.market_data.atl_date[
+                          this.props.currency
+                        ]
+                      )}
+                    </span>
+                  </ATL>
+                </ATLDiv>
+              </CoinMiddle>
+              <CoinRight>
+                <CoinRightTop>
+                  <CoinRightNum>
+                    <Plus>+</Plus>Market Cap: {this.props.symbol}
+                    {this.state.coinData.market_data.market_cap[
+                      this.props.currency
+                    ].toLocaleString()}
+                  </CoinRightNum>
+                  <CoinRightNum>
+                    <Plus>+</Plus>Fully Diluted Valuation: {this.props.symbol}
+                    {this.state.coinData.market_data.fully_diluted_valuation[
                       this.props.currency
                     ]
-                  )}
-                </span>
-              </Profit>
+                      ? this.state.coinData.market_data.fully_diluted_valuation[
+                          this.props.currency
+                        ].toLocaleString()
+                      : "0.00"}
+                  </CoinRightNum>
+                  <CoinRightNum>
+                    <Plus>+</Plus>Volume 24h: {this.props.symbol}
+                    {this.state.coinData.market_data.total_volume[
+                      this.props.currency
+                    ].toLocaleString()}
+                  </CoinRightNum>
+                  <CoinRightNum>
+                    <Plus>+</Plus>Volume / Market:
+                    {(
+                      this.state.coinData.market_data.total_volume[
+                        this.props.currency
+                      ] /
+                      this.state.coinData.market_data.market_cap[
+                        this.props.currency
+                      ]
+                    ).toFixed(5)}
+                  </CoinRightNum>
+                </CoinRightTop>
+                <CoinRightMiddle>
+                  <CoinRightNum>
+                    <Plus>+</Plus>Total Volume: {this.props.symbol}
+                    {this.state.coinData.market_data.total_volume[
+                      this.props.currency
+                    ].toLocaleString()}
+                  </CoinRightNum>
+                  <CoinRightNum>
+                    <Plus>+</Plus>Circulating Supply:
+                    {this.state.coinData.market_data.circulating_supply.toLocaleString()}{" "}
+                    {this.state.coinData.symbol.toUpperCase()}
+                  </CoinRightNum>
+                  <CoinRightNum>
+                    <Plus>+</Plus>Max Supply:{" "}
+                    {this.state.coinData.market_data.circulating_supply.toLocaleString()}{" "}
+                    {this.state.coinData.symbol.toUpperCase()}
+                  </CoinRightNum>
+                </CoinRightMiddle>
+              </CoinRight>
+            </CoinContainer>
+            <DescriptionText>Description</DescriptionText>
+            <DescriptionDiv>
               <StackImgDiv>
                 <Stackedimg />
               </StackImgDiv>
-              <ATHDiv>
-                <ArrowUp />
-                <ATH>
-                  <span>
-                    All Time High: {this.props.symbol}
-                    {this.state.coinData.market_data.ath[
-                      this.props.currency
-                    ].toLocaleString()}
-                  </span>
-                  <span>
-                    {this.getDate(
-                      this.state.coinData.market_data.ath_date[
-                        this.props.currency
-                      ]
-                    )}
-                  </span>
-                </ATH>
-              </ATHDiv>
-              <ATLDiv>
-                <ArrowDown />
-                <ATL>
-                  <span>
-                    All Time Low: {this.props.symbol}
-                    {this.state.coinData.market_data.atl[
-                      this.props.currency
-                    ].toLocaleString()}
-                  </span>
-                  <span>
-                    {this.getDate(
-                      this.state.coinData.market_data.atl_date[
-                        this.props.currency
-                      ]
-                    )}
-                  </span>
-                </ATL>
-              </ATLDiv>
-            </CoinMiddle>
-            <CoinRight>
-              <CoinRightTop>
-                <CoinRightNum>
-                  <Plus>+</Plus>Market Cap: {this.props.symbol}
-                  {this.state.coinData.market_data.market_cap[
-                    this.props.currency
-                  ].toLocaleString()}
-                </CoinRightNum>
-                <CoinRightNum>
-                  <Plus>+</Plus>Fully Diluted Valuation: {this.props.symbol}
-                  {this.state.coinData.market_data.fully_diluted_valuation[
-                    this.props.currency
-                  ]
-                    ? this.state.coinData.market_data.fully_diluted_valuation[
-                        this.props.currency
-                      ]
-                    : "0.00"}
-                </CoinRightNum>
-                <CoinRightNum>
-                  <Plus>+</Plus>Volume 24h: {this.props.symbol}
-                  {this.state.coinData.market_data.total_volume[
-                    this.props.currency
-                  ].toLocaleString()}
-                </CoinRightNum>
-                <CoinRightNum>
-                  <Plus>+</Plus>Volume / Market:
-                  {(
-                    this.state.coinData.market_data.total_volume[
-                      this.props.currency
-                    ] /
-                    this.state.coinData.market_data.market_cap[
-                      this.props.currency
-                    ]
-                  ).toFixed(5)}
-                </CoinRightNum>
-              </CoinRightTop>
-              <CoinRightMiddle>
-                <CoinRightNum>
-                  <Plus>+</Plus>Total Volume: {this.props.symbol}
-                  {this.state.coinData.market_data.total_volume[
-                    this.props.currency
-                  ].toLocaleString()}
-                </CoinRightNum>
-                <CoinRightNum>
-                  <Plus>+</Plus>Circulating Supply:
-                  {this.state.coinData.market_data.circulating_supply.toLocaleString()}{" "}
-                  {this.state.coinData.symbol.toUpperCase()}
-                </CoinRightNum>
-                <CoinRightNum>
-                  <Plus>+</Plus>Max Supply:{" "}
-                  {this.state.coinData.market_data.circulating_supply.toLocaleString()}{" "}
-                  {this.state.coinData.symbol.toUpperCase()}
-                </CoinRightNum>
-              </CoinRightMiddle>
-            </CoinRight>
-          </CoinContainer>
+              <CoinDescription
+                dangerouslySetInnerHTML={{
+                  __html: this.state.coinData.description.en,
+                }}
+              >
+                {}
+              </CoinDescription>
+            </DescriptionDiv>
+            <LinksDiv>
+              <LinkDivLeft>
+                <StyledNewTab
+                  onClick={() =>
+                    this.openNewTab(this.state.coinData.links.homepage[0])
+                  }
+                />
+                <CoinLink href={this.state.coinData.links.blockchain_site[0]}>
+                  {this.state.coinData.links.blockchain_site[0].replace(
+                    /^https?:\/\//,
+                    ""
+                  )}
+                </CoinLink>
+                <StyledCopyLink
+                  onClick={() =>
+                    this.copyLink(this.state.coinData.links.homepage[0])
+                  }
+                />
+              </LinkDivLeft>
+              <LinkDivMiddle>
+                <StyledNewTab />
+                <CoinLink href={this.state.coinData.links.blockchain_site[1]}>
+                  {this.state.coinData.links.blockchain_site[1].replace(
+                    /^https?:\/\//,
+                    ""
+                  )}
+                </CoinLink>
+                <StyledCopyLink
+                  onClick={() =>
+                    this.copyLink(this.state.coinData.links.homepage[1])
+                  }
+                />
+              </LinkDivMiddle>
+              <LinkDivRight>
+                <StyledNewTab
+                  onClick={() =>
+                    this.openNewTab(this.state.coinData.links.homepage[2])
+                  }
+                />
+                <CoinLink href={this.state.coinData.links.blockchain_site[2]}>
+                  {this.state.coinData.links.blockchain_site[2].replace(
+                    /^https?:\/\//,
+                    ""
+                  )}
+                </CoinLink>
+                <StyledCopyLink
+                  onClick={() =>
+                    this.copyLink(this.state.coinData.links.homepage[2])
+                  }
+                />
+              </LinkDivRight>
+            </LinksDiv>
+          </MainContainer>
         )}
-      </MainContainer>
+      </>
     );
   }
 }

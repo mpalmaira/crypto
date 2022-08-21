@@ -10,6 +10,7 @@ export const NavContainer = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
+  flex: 1;
 `;
 
 export const NavTopContainer = styled.div`
@@ -64,6 +65,7 @@ export const SearchDiv = styled.div`
 
 export const DropDownDiv = styled.div`
   margin-right: 25px;
+  z-index: 1;
 `;
 
 export const ToggleThemeLeftDiv = styled.div`
