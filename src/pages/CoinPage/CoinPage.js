@@ -101,6 +101,7 @@ class CoinPage extends React.Component {
     }
   }
   render() {
+    
     return (
       <>
         {this.state.coinData && (
@@ -287,7 +288,7 @@ class CoinPage extends React.Component {
               <LinkDiv>
                 <StyledNewTab
                   onClick={() =>
-                    this.openNewTab(this.state.coinData.links.homepage[0])
+                    this.openNewTab(this.state.coinData.links.blockchain_site[0])
                   }
                 />
                 <CoinLink href={this.state.coinData.links.blockchain_site[0]}>
@@ -298,13 +299,13 @@ class CoinPage extends React.Component {
                 </CoinLink>
                 <StyledCopyLink
                   onClick={() =>
-                    this.copyLink(this.state.coinData.links.homepage[0])
+                    this.copyLink(this.state.coinData.links.blockchain_site[0])
                   }
                 />
               </LinkDiv>
               <LinkDiv>
                 <StyledNewTab onClick={() =>
-                    this.openNewTab(this.state.coinData.links.homepage[1])
+                    this.openNewTab(this.state.coinData.links.blockchain_site[1])
                   } />
                 <CoinLink href={this.state.coinData.links.blockchain_site[1]}>
                   {this.state.coinData.links.blockchain_site[1].replace(
@@ -314,14 +315,14 @@ class CoinPage extends React.Component {
                 </CoinLink>
                 <StyledCopyLink
                   onClick={() =>
-                    this.copyLink(this.state.coinData.links.homepage[1])
+                    this.copyLink(this.state.coinData.links.blockchain_site[1])
                   }
                 />
               </LinkDiv>
               <LinkDiv>
                 <StyledNewTab
                   onClick={() =>
-                    this.openNewTab(this.state.coinData.links.homepage[2])
+                    this.openNewTab(this.state.coinData.links.blockchain_site[2])
                   }
                 />
                 <CoinLink href={this.state.coinData.links.blockchain_site[2]}>
@@ -332,7 +333,7 @@ class CoinPage extends React.Component {
                 </CoinLink>
                 <StyledCopyLink
                   onClick={() =>
-                    this.copyLink(this.state.coinData.links.homepage[2])
+                    this.copyLink(this.state.coinData.links.blockchain_site[2])
                   }
                 />
               </LinkDiv>
