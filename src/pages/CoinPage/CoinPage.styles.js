@@ -222,3 +222,10 @@ export const StyledCopyLink = styled(CopyLink)`
   }
   cursor: pointer;
 `;
+export const ToolTip = styled.span`
+  color: ${props=>props.theme.mainFont};
+  background-color: ${props=>props.theme.secondary};
+  padding: 5px;
+  border-radius: 10px
+
+`

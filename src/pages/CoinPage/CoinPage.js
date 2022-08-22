@@ -35,10 +35,11 @@ import {
   MainLinksDiv,
   LinkDiv,
   StyledCopyLink,
+  ToolTip,
 } from "./CoinPage.styles";
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../../components/SVG/ArrowDownRed.svg";
-import ReactTooltip from "react-tooltip";
+import Tippy from "@tippyjs/react";
 
 class CoinPage extends React.Component {
   state = {
@@ -304,14 +305,18 @@ class CoinPage extends React.Component {
                     ""
                   )}
                 </CoinLink>
-                <StyledCopyLink
-                  data-tip="Copied Link!"
-                  data-event="click focus"
-                  onClick={() =>
-                    this.copyLink(this.state.coinData.links.blockchain_site[0])
-                  }
-                />
-                <ReactTooltip globalEventOff="click" delayHide={1000}/>
+                <Tippy
+                  content={<ToolTip>Copied Link!</ToolTip>}
+                  trigger="click"
+                >
+                  <StyledCopyLink
+                    onClick={() =>
+                      this.copyLink(
+                        this.state.coinData.links.blockchain_site[0]
+                      )
+                    }
+                  />
+                </Tippy>
               </LinkDiv>
               <LinkDiv>
                 <StyledNewTab
@@ -327,14 +332,18 @@ class CoinPage extends React.Component {
                     ""
                   )}
                 </CoinLink>
-                <StyledCopyLink
-                  data-tip="Copied Link!"
-                  data-event="click focus"
-                  onClick={() =>
-                    this.copyLink(this.state.coinData.links.blockchain_site[1])
-                  }
-                />
-                <ReactTooltip globalEventOff="click" delayHide={1000}/>
+                <Tippy
+                  content={<ToolTip>Copied Link!</ToolTip>}
+                  trigger="click"
+                >
+                  <StyledCopyLink
+                    onClick={() =>
+                      this.copyLink(
+                        this.state.coinData.links.blockchain_site[1]
+                      )
+                    }
+                  />
+                </Tippy>
               </LinkDiv>
               <LinkDiv>
                 <StyledNewTab
@@ -350,14 +359,18 @@ class CoinPage extends React.Component {
                     ""
                   )}
                 </CoinLink>
-                <StyledCopyLink
-                  data-tip="Copied Link!"
-                  data-event="click focus"
-                  onClick={() =>
-                    this.copyLink(this.state.coinData.links.blockchain_site[2])
-                  }
-                />
-                <ReactTooltip globalEventOff="click" delayHide={1000}/>
+                <Tippy
+                  content={<ToolTip>Copied Link!</ToolTip>}
+                  trigger="click"
+                >
+                  <StyledCopyLink
+                    onClick={() =>
+                      this.copyLink(
+                        this.state.coinData.links.blockchain_site[2]
+                      )
+                    }
+                  />
+                </Tippy>
               </LinkDiv>
             </MainLinksDiv>
           </MainContainer>
