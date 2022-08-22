@@ -35,9 +35,11 @@ import {
   MainLinksDiv,
   LinkDiv,
   StyledCopyLink,
+  ToolTip,
 } from "./CoinPage.styles";
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../../components/SVG/ArrowDownRed.svg";
+import Tippy from "@tippyjs/react";
 
 class CoinPage extends React.Component {
   state = {
@@ -101,7 +103,6 @@ class CoinPage extends React.Component {
     }
   }
   render() {
-    
     return (
       <>
         {this.state.coinData && (
@@ -137,7 +138,8 @@ class CoinPage extends React.Component {
                   <CoinPrice>
                     {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.current_price[
-                      this.props.selectedCurrency.value].toLocaleString()}
+                      this.props.selectedCurrency.value
+                    ].toLocaleString()}
                   </CoinPrice>
                   <CoinPercentage
                     value={
@@ -156,7 +158,7 @@ class CoinPage extends React.Component {
                       <ArrowDown />
                     )}
                     {this.state.coinData.market_data.price_change_percentage_24h_in_currency[
-                    this.props.selectedCurrency.value
+                      this.props.selectedCurrency.value
                     ].toFixed(2)}
                     %
                   </CoinPercentage>
@@ -218,23 +220,26 @@ class CoinPage extends React.Component {
               <CoinRight>
                 <CoinRightTop>
                   <CoinRightNum>
-                    <Plus>+</Plus>Market Cap: {this.props.selectedCurrency.symbol}
+                    <Plus>+</Plus>Market Cap:{" "}
+                    {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.market_cap[
                       this.props.selectedCurrency.value
                     ].toLocaleString()}
                   </CoinRightNum>
                   <CoinRightNum>
-                    <Plus>+</Plus>Fully Diluted Valuation: {this.props.selectedCurrency.symbol}
+                    <Plus>+</Plus>Fully Diluted Valuation:{" "}
+                    {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.fully_diluted_valuation[
                       this.props.selectedCurrency.value
                     ]
                       ? this.state.coinData.market_data.fully_diluted_valuation[
-                        this.props.selectedCurrency.value
+                          this.props.selectedCurrency.value
                         ].toLocaleString()
                       : "0.00"}
                   </CoinRightNum>
                   <CoinRightNum>
-                    <Plus>+</Plus>Volume 24h: {this.props.selectedCurrency.symbol}
+                    <Plus>+</Plus>Volume 24h:{" "}
+                    {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.total_volume[
                       this.props.selectedCurrency.value
                     ].toLocaleString()}
@@ -253,7 +258,8 @@ class CoinPage extends React.Component {
                 </CoinRightTop>
                 <CoinRightMiddle>
                   <CoinRightNum>
-                    <Plus>+</Plus>Total Volume: {this.props.selectedCurrency.symbol}
+                    <Plus>+</Plus>Total Volume:{" "}
+                    {this.props.selectedCurrency.symbol}
                     {this.state.coinData.market_data.total_volume[
                       this.props.selectedCurrency.value
                     ].toLocaleString()}
@@ -288,7 +294,9 @@ class CoinPage extends React.Component {
               <LinkDiv>
                 <StyledNewTab
                   onClick={() =>
-                    this.openNewTab(this.state.coinData.links.blockchain_site[0])
+                    this.openNewTab(
+                      this.state.coinData.links.blockchain_site[0]
+                    )
                   }
                 />
                 <CoinLink href={this.state.coinData.links.blockchain_site[0]}>
@@ -297,32 +305,52 @@ class CoinPage extends React.Component {
                     ""
                   )}
                 </CoinLink>
-                <StyledCopyLink
-                  onClick={() =>
-                    this.copyLink(this.state.coinData.links.blockchain_site[0])
-                  }
-                />
+                <Tippy
+                  content={<ToolTip>Copied Link!</ToolTip>}
+                  trigger="click"
+                >
+                  <StyledCopyLink
+                    onClick={() =>
+                      this.copyLink(
+                        this.state.coinData.links.blockchain_site[0]
+                      )
+                    }
+                  />
+                </Tippy>
               </LinkDiv>
               <LinkDiv>
-                <StyledNewTab onClick={() =>
-                    this.openNewTab(this.state.coinData.links.blockchain_site[1])
-                  } />
+                <StyledNewTab
+                  onClick={() =>
+                    this.openNewTab(
+                      this.state.coinData.links.blockchain_site[1]
+                    )
+                  }
+                />
                 <CoinLink href={this.state.coinData.links.blockchain_site[1]}>
                   {this.state.coinData.links.blockchain_site[1].replace(
                     /^https?:\/\//,
                     ""
                   )}
                 </CoinLink>
-                <StyledCopyLink
-                  onClick={() =>
-                    this.copyLink(this.state.coinData.links.blockchain_site[1])
-                  }
-                />
+                <Tippy
+                  content={<ToolTip>Copied Link!</ToolTip>}
+                  trigger="click"
+                >
+                  <StyledCopyLink
+                    onClick={() =>
+                      this.copyLink(
+                        this.state.coinData.links.blockchain_site[1]
+                      )
+                    }
+                  />
+                </Tippy>
               </LinkDiv>
               <LinkDiv>
                 <StyledNewTab
                   onClick={() =>
-                    this.openNewTab(this.state.coinData.links.blockchain_site[2])
+                    this.openNewTab(
+                      this.state.coinData.links.blockchain_site[2]
+                    )
                   }
                 />
                 <CoinLink href={this.state.coinData.links.blockchain_site[2]}>
@@ -331,11 +359,18 @@ class CoinPage extends React.Component {
                     ""
                   )}
                 </CoinLink>
-                <StyledCopyLink
-                  onClick={() =>
-                    this.copyLink(this.state.coinData.links.blockchain_site[2])
-                  }
-                />
+                <Tippy
+                  content={<ToolTip>Copied Link!</ToolTip>}
+                  trigger="click"
+                >
+                  <StyledCopyLink
+                    onClick={() =>
+                      this.copyLink(
+                        this.state.coinData.links.blockchain_site[2]
+                      )
+                    }
+                  />
+                </Tippy>
               </LinkDiv>
             </MainLinksDiv>
           </MainContainer>
