@@ -11,6 +11,7 @@ import {
   ConvertedNumberDiv,
   ProgressandConvertedDiv,
   ProgressBarContainer,
+  StyledLink,
 } from "./CoinItem.styles";
 import CoinChart from "../CoinChart/CoinChart";
 import { convertedNumber } from "../util/ConvertedNumber";
@@ -26,8 +27,11 @@ const CoinItem = (props) => {
         <CoinSymbol>
           <CoinIcon src={props.coins.image} alt="" />
         </CoinSymbol>
-        <td>{props.coins.name}</td>
-        <td>({props.coins.symbol.toUpperCase()})</td>
+        <td>
+          <StyledLink to={`/coinpage/${props.coins.id}`}>
+            {props.coins.name}({props.coins.symbol.toUpperCase()})
+          </StyledLink>
+        </td>
       </td>
 
       <TableItem>
