@@ -9,27 +9,33 @@ import {
   Symbol,
 } from "./CurrencyConverter.styles";
 
-class CurrencyConverter extends React.Component {
+export default class CurrencyConverter extends React.Component {
   state = {
     crypto: 1,
     currency: this.props.currentPrice,
   };
+  currentPrice = this.props.currentPrice;
   handleCryptoChange = (e) => {
-    const value = Number(e.target.value);
+    const value = e.target.value;
     this.setState({
       crypto: value,
-      currency: value * this.state.currency,
+      currency: (
+        parseInt(value) * parseInt(this.currentPrice)
+      ).toLocaleString(),
     });
     if (value === "") {
       this.setState({ crypto: "", currency: "" });
     }
   };
   handleCurrencyChange = (e) => {
-    const value = Number(e.target.value);
+    const value = e.target.value;
     this.setState({
       currency: value,
-      crypto: value / this.state.currency,
+      crypto: (parseInt(value) / parseInt(this.currentPrice)).toFixed(5),
     });
+    if (value === "") {
+      this.setState({ crypto: "", currency: "" });
+    }
   };
 
   render() {
@@ -44,7 +50,7 @@ class CurrencyConverter extends React.Component {
             <Input
               placeholder="Enter Amount"
               onChange={this.handleCryptoChange}
-              value={this.state.crypto.toLocaleString()}
+              value={this.state.crypto}
               type="text"
             ></Input>
           </InputDiv>
@@ -59,7 +65,7 @@ class CurrencyConverter extends React.Component {
             <Input
               placeholder="Enter Amount"
               onChange={this.handleCurrencyChange}
-              value={this.state.currency.toLocaleString()}
+              value={this.state.currency}
               type="text"
             ></Input>
           </InputDiv>
@@ -68,4 +74,3 @@ class CurrencyConverter extends React.Component {
     );
   }
 }
-export default CurrencyConverter;

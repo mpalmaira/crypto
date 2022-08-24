@@ -40,6 +40,7 @@ export const StyledName = styled.div`
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
   overflow: hidden;
+  font-weight: bold;
 `;
 export const Symbol = styled.span`
   padding: 0px 8px;
