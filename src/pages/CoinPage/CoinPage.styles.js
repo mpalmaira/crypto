@@ -228,3 +228,6 @@ export const ToolTip = styled.span`
   padding: 5px;
   border-radius: 10px;
 `;
+export const CurrencyConverterDiv = styled.div`
+  width: 50%;
+`;
