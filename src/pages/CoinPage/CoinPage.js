@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import Tippy from "@tippyjs/react";
+import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import {
   MainContainer,
   YourSummary,
@@ -36,10 +38,10 @@ import {
   LinkDiv,
   StyledCopyLink,
   ToolTip,
+  CurrencyConverterDiv,
 } from "./CoinPage.styles";
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../../components/SVG/ArrowDownRed.svg";
-import Tippy from "@tippyjs/react";
 
 class CoinPage extends React.Component {
   state = {
@@ -373,6 +375,17 @@ class CoinPage extends React.Component {
                 </Tippy>
               </LinkDiv>
             </MainLinksDiv>
+            <CurrencyConverterDiv>
+              <CurrencyConverter
+                selectedCurrency={this.props.selectedCurrency}
+                currentPrice={
+                  this.state.coinData.market_data.current_price[
+                    this.props.selectedCurrency.value
+                  ]
+                }
+                cryptoName={this.state.coinData.symbol}
+              />
+            </CurrencyConverterDiv>
           </MainContainer>
         )}
       </>
