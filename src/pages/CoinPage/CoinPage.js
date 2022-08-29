@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import Tippy from "@tippyjs/react";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
+import IndividualChart from "../../components/IndividualChart/IndividualChart";
+import { RangeSelector } from "../../components/RangeSelector/RangeSelector";
 import {
   MainContainer,
   YourSummary,
@@ -48,6 +50,8 @@ class CoinPage extends React.Component {
     isLoading: false,
     coinData: null,
     hasError: false,
+    chartData: null,
+    days: 1,
   };
 
   getCoin = async (coin) => {
@@ -56,7 +60,14 @@ class CoinPage extends React.Component {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
       );
-      this.setState({ coinData: data, isLoading: false });
+      const { data: dataChart } =
+        await axios(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=${this.props.selectedCurrency.value}&days=${this.state.days}
+      `);
+      this.setState({
+        coinData: data,
+        chartData: dataChart.prices,
+        isLoading: false,
+      });
     } catch (error) {
       this.setState({ hasError: true, isLoading: false });
     }
@@ -95,12 +106,18 @@ class CoinPage extends React.Component {
   copyLink = async (url) => {
     await navigator.clipboard.writeText(url);
   };
+  handleRangeChange = (range) => {
+    this.setState({ days: range });
+  };
 
   componentDidMount() {
     this.getCoin(this.props.match.params.id);
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.getCoin(this.props.match.params.id);
+    }
+    if (prevState.days !== this.state.days) {
       this.getCoin(this.props.match.params.id);
     }
   }
@@ -386,6 +403,8 @@ class CoinPage extends React.Component {
                 cryptoName={this.state.coinData.symbol}
               />
             </CurrencyConverterDiv>
+            <RangeSelector handleRangeChange={this.handleRangeChange} />
+            <IndividualChart chart={this.state.chartData} />
           </MainContainer>
         )}
       </>
