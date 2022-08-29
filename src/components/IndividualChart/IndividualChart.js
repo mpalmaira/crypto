@@ -39,8 +39,8 @@ class IndividualChart extends React.Component {
           backgroundColor: (context) => {
             const ctx = context.chart.ctx;
             const gradient = ctx.createLinearGradient(0, 0, 0, 210);
-            gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
-            gradient.addColorStop(0, "rgba(44, 47, 54, .5)");
+            gradient.addColorStop(0, "rgba(0, 0, 0, 0.0)");
+            gradient.addColorStop(1, "rgba(44, 47, 54, .5)");
             return gradient;
           },
           pointRadius: 0,
