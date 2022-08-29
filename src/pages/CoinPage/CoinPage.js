@@ -3,6 +3,7 @@ import axios from "axios";
 import Tippy from "@tippyjs/react";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import IndividualChart from "../../components/IndividualChart/IndividualChart";
+import { RangeSelector } from "../../components/RangeSelector/RangeSelector";
 import {
   MainContainer,
   YourSummary,
@@ -62,7 +63,11 @@ class CoinPage extends React.Component {
       const { data: dataChart } =
         await axios(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=${this.props.selectedCurrency.value}&days=${this.state.days}
       `);
-      this.setState({ coinData: data, chartData: dataChart.prices, isLoading: false });
+      this.setState({
+        coinData: data,
+        chartData: dataChart.prices,
+        isLoading: false,
+      });
     } catch (error) {
       this.setState({ hasError: true, isLoading: false });
     }
@@ -101,12 +106,18 @@ class CoinPage extends React.Component {
   copyLink = async (url) => {
     await navigator.clipboard.writeText(url);
   };
+  handleRangeChange = (range) => {
+    this.setState({ days: range });
+  };
 
   componentDidMount() {
     this.getCoin(this.props.match.params.id);
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.getCoin(this.props.match.params.id);
+    }
+    if (prevState.days !== this.state.days) {
       this.getCoin(this.props.match.params.id);
     }
   }
@@ -392,7 +403,8 @@ class CoinPage extends React.Component {
                 cryptoName={this.state.coinData.symbol}
               />
             </CurrencyConverterDiv>
-            <IndividualChart chart = {this.state.chartData}/>
+            <RangeSelector handleRangeChange={this.handleRangeChange} />
+            <IndividualChart chart={this.state.chartData} />
           </MainContainer>
         )}
       </>

@@ -81,7 +81,7 @@ class IndividualChart extends React.Component {
     };
     return (
       <Container>
-        <Line options={options} data={data} height ={70}/>
+        <Line options={options} data={data} height={70} />
       </Container>
     );
   }
