@@ -4,33 +4,27 @@ import { Button, Container, ButtonContainer } from "./RangeSelector.styles";
 const range = {
   day1: {
     range: 1,
-    text: "1d",
-    id: Math.random(),
+    value: "1d",
   },
   day7: {
     range: 7,
-    text: "1w",
-    id: Math.random(),
+    value: "1w",
   },
   day30: {
     range: 30,
-    text: "1m",
-    id: Math.random(),
+    value: "1m",
   },
   day90: {
     range: 90,
-    text: "3m",
-    id: Math.random(),
+    value: "3m",
   },
   day365: {
     range: 365,
-    text: "1y",
-    id: Math.random(),
+    value: "1y",
   },
   max: {
     range: "max",
-    text: "Max",
-    id: Math.random(),
+    value: "Max",
   },
 };
 const buttons = Object.values(range);
@@ -39,11 +33,11 @@ const RangeButton = (props) => {
     return (
       <ButtonContainer>
         <Button
-          id={button.id}
+          id={button.value}
           onClick={props.handleClick}
           selected={props.active === button.range}
         ></Button>
-        <div>{button.text}</div>
+        <div>{button.value}</div>
       </ButtonContainer>
     );
   });
@@ -55,7 +49,7 @@ export class RangeSelector extends React.Component {
   };
   handleClick = (e) => {
     const newActive = buttons.find(
-      (element) => `${element.id}` === e.target.id
+      (element) => `${element.value}` === e.target.id
     );
     this.setState({ activeRange: newActive.range });
     this.props.handleRangeChange(newActive.range);
