@@ -19,61 +19,59 @@ ChartJS.register(
   Legend
 );
 
-class BitcoinBar extends React.Component {
-  render() {
-    const bitcoinVolumeData = this.props.bitcoin.total_volumes.map(
-      (values) => ({ x: values[0], y: values[1] })
-    );
-    const data = {
-      labels: bitcoinVolumeData.map((val) => {
-        const date = new Date(val.x);
-        return date.getHours();
-      }),
-      datasets: [
-        {
-          data: bitcoinVolumeData.map((val) => val.y),
-          borderColor: "#2172E5",
-          backgroundColor: "#2172E5",
-          pointRadius: 3,
-          borderWidth: 3,
-          borderRadius: 5
-        },
-      ],
-    };
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
+export default function BitcoinBar(props) {
+  const bitcoinVolumeData = props.bitcoin.total_volumes.map((values) => ({
+    x: values[0],
+    y: values[1],
+  }));
+  const data = {
+    labels: bitcoinVolumeData.map((val) => {
+      const date = new Date(val.x);
+      return date.getHours();
+    }),
+    datasets: [
+      {
+        data: bitcoinVolumeData.map((val) => val.y),
+        borderColor: "#2172E5",
+        backgroundColor: "#2172E5",
+        pointRadius: 3,
+        borderWidth: 3,
+        borderRadius: 5,
+      },
+    ],
+  };
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: false,
+        text: "Chart.js Line Chart",
+      },
+    },
+    scales: {
+      y: {
+        display: false,
+        grid: {
           display: false,
-        },
-        title: {
-          display: false,
-          text: "Chart.js Line Chart",
+          drawBorder: false,
         },
       },
-      scales: {
-        y: {
+      x: {
+        display: true,
+        grid: {
           display: false,
-          grid: {
-            display: false,
-            drawBorder: false,
-          },
-        },
-        x: {
-          display: true,
-          grid: {
-            display: false,
-            drawBorder: false,
-          },
+          drawBorder: false,
         },
       },
-      tension: 0.5,
-    };
-    return (
-      <Container>
-        <Bar options={options} data={data} />
-      </Container>
-    );
-  }
+    },
+    tension: 0.5,
+  };
+  return (
+    <Container>
+      <Bar options={options} data={data} />
+    </Container>
+  );
 }
-export default BitcoinBar;

@@ -23,68 +23,65 @@ ChartJS.register(
   Filler
 );
 
-class BitcoinLine extends React.Component {
-  render() {
-    const bitcoinPriceData = this.props.bitcoin.prices.map((values) => ({
-      x: values[0],
-      y: values[1],
-    }));
-    const data = {
-      labels: bitcoinPriceData.map((val) => {
-        const date = new Date(val.x);
-        return date.getDate();
-      }),
-      datasets: [
-        {
-          data: bitcoinPriceData.map((val) => val.y),
-          borderColor: "#0CF864",
-          backgroundColor: (context) => {
-            const ctx = context.chart.ctx;
-            const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-            gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
-            gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
-            return gradient;
-          },
-          pointRadius: 0,
-          borderWidth: 3,
-          fill: true,
+export default function BitcoinLine(props) {
+  const bitcoinPriceData = props.bitcoin.prices.map((values) => ({
+    x: values[0],
+    y: values[1],
+  }));
+  const data = {
+    labels: bitcoinPriceData.map((val) => {
+      const date = new Date(val.x);
+      return date.getDate();
+    }),
+    datasets: [
+      {
+        data: bitcoinPriceData.map((val) => val.y),
+        borderColor: "#0CF864",
+        backgroundColor: (context) => {
+          const ctx = context.chart.ctx;
+          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+          gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
+          gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+          return gradient;
         },
-      ],
-    };
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
+        pointRadius: 0,
+        borderWidth: 3,
+        fill: true,
+      },
+    ],
+  };
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: false,
+        text: "Chart.js Line Chart",
+      },
+    },
+    scales: {
+      y: {
+        display: false,
+        grid: {
           display: false,
-        },
-        title: {
-          display: false,
-          text: "Chart.js Line Chart",
+          drawBorder: false,
         },
       },
-      scales: {
-        y: {
+      x: {
+        display: true,
+        grid: {
           display: false,
-          grid: {
-            display: false,
-            drawBorder: false,
-          },
-        },
-        x: {
-          display: true,
-          grid: {
-            display: false,
-            drawBorder: false,
-          },
+          drawBorder: false,
         },
       },
-      tension: 0.5,
-    };
-    return (
-      <Container>
-        <Line options={options} data={data} />
-      </Container>
-    );
-  }
+    },
+    tension: 0.5,
+  };
+  return (
+    <Container>
+      <Line options={options} data={data} />
+    </Container>
+  );
 }
-export default BitcoinLine;

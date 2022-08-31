@@ -76,7 +76,7 @@ export default function App() {
             component={(props) => (
               <CoinPage {...props} selectedCurrency={selectedCurrency} />
             )}
-          />
+          />j
         </Switch>
       </Router>
     </ThemeProvider>

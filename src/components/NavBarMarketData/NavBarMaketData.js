@@ -8,6 +8,7 @@ import {
 } from "./NavBarMarketData.styles";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { convertedNumber } from "../util/ConvertedNumber";
+
 export const NavMarketData = (props) => {
   return (
     <MarketDataDiv>

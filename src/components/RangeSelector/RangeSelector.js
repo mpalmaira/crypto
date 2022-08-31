@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container, ButtonContainer } from "./RangeSelector.styles";
 
 const range = {
@@ -43,25 +43,19 @@ const RangeButton = (props) => {
   });
 };
 
-export class RangeSelector extends React.Component {
-  state = {
-    activeRange: 1,
-  };
-  handleClick = (e) => {
+export default function RangeSelector(props) {
+  const [activeRange, setActiveRange] = useState(1);
+
+  const handleClick = (e) => {
     const newActive = buttons.find(
       (element) => `${element.value}` === e.target.id
     );
-    this.setState({ activeRange: newActive.range });
-    this.props.handleRangeChange(newActive.range);
+    setActiveRange(newActive.range);
+    props.handleRangeChange(newActive.range);
   };
-  render() {
-    return (
-      <Container>
-        <RangeButton
-          handleClick={this.handleClick}
-          active={this.state.activeRange}
-        />
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      <RangeButton handleClick={handleClick} active={activeRange} />
+    </Container>
+  );
 }
