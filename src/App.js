@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { createGlobalStyle } from "styled-components";
@@ -39,60 +39,57 @@ export const currencies = {
   },
 };
 
-export default class App extends React.Component {
-  state = {
-    dark: true,
-    selectedCurrency: {
-      value: "usd",
-      symbol: "$",
-    },
+function useLocalState(key, initialValue) {
+  const storedValue = window.localStorage.getItem(key);
+  const item = storedValue ? JSON.parse(storedValue) : initialValue;
+  const [state, setState] = useState(item);
+  const updateState = (value) => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+    setState(value);
   };
-  toggleTheme = () => {
-    this.setState({
-      dark: !this.state.dark,
-    });
+  return [state, updateState];
+}
+export default function App() {
+  const [dark, setDark] = useLocalState("theme", true);
+  const [selectedCurrency, setSelectedCurrency] = useLocalState("currency", {
+    value: "usd",
+    symbol: "$",
+  });
+  const toggleTheme = () => {
+    setDark(!dark);
   };
-  handleCurrency = (selectedCurrency) => {
-    this.setState({
-      selectedCurrency: currencies[selectedCurrency],
-    });
+  const handleCurrency = (selectedCurrency) => {
+    setSelectedCurrency(currencies[selectedCurrency]);
   };
-  render() {
-    const theme = this.state.dark ? darkTheme : lightTheme;
-    return (
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Router>
-          <Navbar
-            toggleTheme={this.toggleTheme}
-            handleCurrency={this.handleCurrency}
-            selectedCurrency={this.state.selectedCurrency}
+  const theme = dark ? darkTheme : lightTheme;
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>
+        <Navbar
+          toggleTheme={toggleTheme}
+          handleCurrency={handleCurrency}
+          selectedCurrency={selectedCurrency}
+        />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={(props) => (
+              <HomePage {...props} selectedCurrency={selectedCurrency} />
+            )}
           />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              component={(props) => (
-                <HomePage
-                  {...props}
-                  selectedCurrency={this.state.selectedCurrency}
-                />
-              )}
-            />
-            <Route exact path="/portfolio" component={Portfolio} />
-            <Route
-              exact
-              path="/coinpage/:id"
-              component={(props) => (
-                <CoinPage
-                  {...props}
-                  selectedCurrency={this.state.selectedCurrency}
-                />
-              )}
-            />
-          </Switch>
-        </Router>
-      </ThemeProvider>
-    );
-  }
+          <Route exact path="/portfolio" component={Portfolio} />
+          <Route
+            exact
+            path="/coinpage/:id"
+            component={(props) => (
+              <CoinPage {...props} selectedCurrency={selectedCurrency} />
+            )}
+          />
+          j
+        </Switch>
+      </Router>
+    </ThemeProvider>
+  );
 }

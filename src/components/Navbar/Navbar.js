@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Dropdown from "../Dropdown/Dropdown";
 import {
@@ -20,60 +20,57 @@ import {
 } from "./Navbar.styles";
 import { NavMarketData } from "../NavBarMarketData/NavBarMaketData";
 
-export default class Navbar extends React.Component {
-  state = {
-    isLoading: false,
-    marketData: null,
-    hasError: false,
-  };
-  getData = async () => {
+export default function Navbar(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [marketData, setMarketData] = useState(null);
+  const [hasError, setHasError] = useState(false);
+
+  const getData = async () => {
     try {
-      this.setState({ isLoading: true });
+      setIsLoading(true);
       const { data } = await axios("https://api.coingecko.com/api/v3/global");
-      this.setState({ marketData: data.data, isLoading: false });
+      setMarketData(data.data);
+      setIsLoading(false);
     } catch (err) {
-      this.setState({ hasError: true, isLoading: false });
+      setHasError(true);
+      setIsLoading(false);
     }
   };
-  componentDidMount() {
-    this.getData();
-  }
 
-  render() {
-    return (
-      <NavContainer>
-        <NavTopContainer>
-          <LeftContainer>
-            <StyledLink to="/">Coins</StyledLink>
-            <StyledLink to="/Portfolio">Portfolio</StyledLink>
-          </LeftContainer>
-          <RightContainer>
-            <SearchDiv>
-              <StyledSearchIcon />
-              <SearchInput placeholder="Search..." />
-            </SearchDiv>
-            <DropDownDiv>
-              <Dropdown
-                handleCurrency={this.props.handleCurrency}
-                selectedCurrency={this.props.selectedCurrency}
-              />
-            </DropDownDiv>
-            <ToggleThemeLogo onClick={this.props.toggleTheme}>
-              <ToggleThemeLeftDiv>
-                <StyledToggleThemeLeft />
-              </ToggleThemeLeftDiv>
-              <ToggleThemeRigtDiv>
-                <StyledToggleThemeRight />
-              </ToggleThemeRigtDiv>
-            </ToggleThemeLogo>
-          </RightContainer>
-        </NavTopContainer>
-        <MarketDataContainer>
-          {this.state.marketData && (
-            <NavMarketData marketData={this.state.marketData} />
-          )}
-        </MarketDataContainer>
-      </NavContainer>
-    );
-  }
+  useEffect(() => {
+    getData();
+  }, []);
+  return (
+    <NavContainer>
+      <NavTopContainer>
+        <LeftContainer>
+          <StyledLink to="/">Coins</StyledLink>
+          <StyledLink to="/Portfolio">Portfolio</StyledLink>
+        </LeftContainer>
+        <RightContainer>
+          <SearchDiv>
+            <StyledSearchIcon />
+            <SearchInput placeholder="Search..." />
+          </SearchDiv>
+          <DropDownDiv>
+            <Dropdown
+              handleCurrency={props.handleCurrency}
+              selectedCurrency={props.selectedCurrency}
+            />
+          </DropDownDiv>
+          <ToggleThemeLogo onClick={props.toggleTheme}>
+            <ToggleThemeLeftDiv>
+              <StyledToggleThemeLeft />
+            </ToggleThemeLeftDiv>
+            <ToggleThemeRigtDiv>
+              <StyledToggleThemeRight />
+            </ToggleThemeRigtDiv>
+          </ToggleThemeLogo>
+        </RightContainer>
+      </NavTopContainer>
+      <MarketDataContainer>
+        {marketData && <NavMarketData marketData={marketData} />}
+      </MarketDataContainer>
+    </NavContainer>
+  );
 }

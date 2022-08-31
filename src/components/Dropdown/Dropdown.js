@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   DropDownContainer,
   DropDownHeader,
@@ -11,53 +11,46 @@ import { currencies } from "../../App";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDown.svg";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 
-class Dropdown extends React.Component {
-  state = {
-    isOpen: false,
-  };
+export default function Dropdown(props) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  handleToggle = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
   };
-  handleOptionClicked = (selectedCurrency, selectedSymbol) => {
-    this.setState({
-      isOpen: false,
-    });
-    this.props.handleCurrency(selectedCurrency);
+  const handleOptionClicked = (selectedCurrency, selectedSymbol) => {
+    setIsOpen(!isOpen);
+    props.handleCurrency(selectedCurrency);
   };
-  render() {
-    const options = Object.values(currencies);
+  const options = Object.values(currencies);
 
-    return (
-      <div>
-        <DropDownContainer>
-          <DropDownHeader onClick={this.handleToggle}>
-            <CurrencyDiv>{this.props.selectedCurrency.symbol}</CurrencyDiv>
-            <span>{this.props.selectedCurrency.value.toUpperCase()}</span>
-            {this.state.isOpen ? <ArrowUp /> : <ArrowDown />}
-          </DropDownHeader>
-          {this.state.isOpen && (
-            <DropDownListContainer>
-              <DropDownList>
-                {options.map((option) => {
-                  return (
-                    <ListItem
-                      onClick={() =>
-                        this.handleOptionClicked(option.value, option.symbol)
-                      }
-                      key={option.value}
-                    >
-                      <CurrencyDiv>{option.symbol}</CurrencyDiv>
-                      {option.value.toUpperCase()}
-                    </ListItem>
-                  );
-                })}
-              </DropDownList>
-            </DropDownListContainer>
-          )}
-        </DropDownContainer>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <DropDownContainer>
+        <DropDownHeader onClick={handleToggle}>
+          <CurrencyDiv>{props.selectedCurrency.symbol}</CurrencyDiv>
+          <span>{props.selectedCurrency.value.toUpperCase()}</span>
+          {isOpen ? <ArrowUp /> : <ArrowDown />}
+        </DropDownHeader>
+        {isOpen && (
+          <DropDownListContainer>
+            <DropDownList>
+              {options.map((option) => {
+                return (
+                  <ListItem
+                    onClick={() =>
+                      handleOptionClicked(option.value, option.symbol)
+                    }
+                    key={option.value}
+                  >
+                    <CurrencyDiv>{option.symbol}</CurrencyDiv>
+                    {option.value.toUpperCase()}
+                  </ListItem>
+                );
+              })}
+            </DropDownList>
+          </DropDownListContainer>
+        )}
+      </DropDownContainer>
+    </div>
+  );
 }
-export default Dropdown;

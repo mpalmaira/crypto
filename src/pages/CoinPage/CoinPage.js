@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Tippy from "@tippyjs/react";
+import { useParams } from "react-router-dom";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import IndividualChart from "../../components/IndividualChart/IndividualChart";
-import { RangeSelector } from "../../components/RangeSelector/RangeSelector";
+import RangeSelector from "../../components/RangeSelector/RangeSelector";
 import {
   MainContainer,
   YourSummary,
@@ -45,49 +46,57 @@ import {
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../../components/SVG/ArrowDownRed.svg";
 
-class CoinPage extends React.Component {
-  state = {
-    isLoading: false,
-    coinData: null,
-    hasError: false,
-    chartData: null,
-    days: 1,
-  };
+function usePrevious(value) {
+  const prevRef = useRef();
+  useEffect(() => {
+    prevRef.current = value;
+  }, [value]);
+  return prevRef.current;
+}
 
-  getCoin = async (coin) => {
+export default function CoinPage(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [coinData, setCoinData] = useState(null);
+  const [hasError, setHasError] = useState(false);
+  const [chartData, setChartData] = useState(null);
+  const [days, setDays] = useState(1);
+  const { id } = useParams();
+  const prevId = usePrevious(id);
+  const prevDays = usePrevious(days);
+
+  const getCoin = async (coin) => {
     try {
-      this.setState({ isLoading: true });
+      setIsLoading(true);
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
       );
       const { data: dataChart } =
-        await axios(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=${this.props.selectedCurrency.value}&days=${this.state.days}
+        await axios(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=${props.selectedCurrency.value}&days=${days}
       `);
-      this.setState({
-        coinData: data,
-        chartData: dataChart.prices,
-        isLoading: false,
-      });
+      setCoinData(data);
+      setChartData(dataChart.prices);
+      setIsLoading(false);
     } catch (error) {
-      this.setState({ hasError: true, isLoading: false });
+      setHasError(true);
+      setIsLoading(false);
     }
   };
 
-  getProfit = (priceChange24, CurrentPrice) => {
+  const getProfit = (priceChange24, CurrentPrice) => {
     const profit = ((priceChange24 * CurrentPrice) / 100).toFixed(5);
     return profit > 0 ? (
       <ProfitGain>
-        {this.props.selectedCurrency.symbol}
+        {props.selectedCurrency.symbol}
         {profit}
       </ProfitGain>
     ) : (
       <ProfitLoss>
-        {this.props.selectedCurrency.symbol}
+        {props.selectedCurrency.symbol}
         {profit}
       </ProfitLoss>
     );
   };
-  getDate = (date) => {
+  const getDate = (date) => {
     const formatDate = new Date(date);
     const hours = formatDate.getHours();
     const minutes = formatDate.getMinutes();
@@ -100,315 +109,260 @@ class CoinPage extends React.Component {
     ${hours < 12 ? "AM" : "PM"}`;
   };
 
-  openNewTab = (url) => {
+  const openNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
-  copyLink = async (url) => {
+  const copyLink = async (url) => {
     await navigator.clipboard.writeText(url);
   };
-  handleRangeChange = (range) => {
-    this.setState({ days: range });
+  const handleRangeChange = (range) => {
+    setDays(range);
   };
+  useEffect(() => {
+    getCoin(id);
+    //eslint-disable-next-line
+  }, []);
 
-  componentDidMount() {
-    this.getCoin(this.props.match.params.id);
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.getCoin(this.props.match.params.id);
+  useEffect(() => {
+    if (id !== prevId) {
+      getCoin(id);
     }
-    if (prevState.days !== this.state.days) {
-      this.getCoin(this.props.match.params.id);
+    if (days !== prevDays) {
+      getCoin(id);
     }
-  }
-  render() {
-    return (
-      <>
-        {this.state.coinData && (
-          <MainContainer>
-            <YourSummary>Your Summary</YourSummary>
-            <CoinContainer>
-              <CoinLeft>
-                <CoinImageContainer>
-                  <CoinImage>
-                    <img src={this.state.coinData.image.small} alt="coin img" />
-                  </CoinImage>
-                  <CoinName>
-                    {this.state.coinData.name}(
-                    {this.state.coinData.symbol.toUpperCase()})
-                  </CoinName>
-                </CoinImageContainer>
-                <CoinLinkDiv>
-                  <StyledNewTab
-                    onClick={() =>
-                      this.openNewTab(this.state.coinData.links.homepage[0])
-                    }
-                  />
-                  <CoinLink href={this.state.coinData.links.homepage[0]}>
-                    {this.state.coinData.links.homepage[0].replace(
-                      /^https?:\/\//,
-                      ""
-                    )}
-                  </CoinLink>
-                </CoinLinkDiv>
-              </CoinLeft>
-              <CoinMiddle>
-                <CoinTop>
-                  <CoinPrice>
-                    {this.props.selectedCurrency.symbol}
-                    {this.state.coinData.market_data.current_price[
-                      this.props.selectedCurrency.value
-                    ].toLocaleString()}
-                  </CoinPrice>
-                  <CoinPercentage
-                    value={
-                      this.state.coinData.market_data
-                        .price_change_percentage_24h_in_currency[
-                        this.props.selectedCurrency.value
-                      ]
-                    }
-                  >
-                    {this.state.coinData.market_data
+    //eslint-disable-next-line
+  }, [id, days]);
+  return (
+    <>
+      {coinData && (
+        <MainContainer>
+          <YourSummary>Your Summary</YourSummary>
+          <CoinContainer>
+            <CoinLeft>
+              <CoinImageContainer>
+                <CoinImage>
+                  <img src={coinData.image.small} alt="coin img" />
+                </CoinImage>
+                <CoinName>
+                  {coinData.name}({coinData.symbol.toUpperCase()})
+                </CoinName>
+              </CoinImageContainer>
+              <CoinLinkDiv>
+                <StyledNewTab
+                  onClick={() => openNewTab(coinData.links.homepage[0])}
+                />
+                <CoinLink href={coinData.links.homepage[0]}>
+                  {coinData.links.homepage[0].replace(/^https?:\/\//, "")}
+                </CoinLink>
+              </CoinLinkDiv>
+            </CoinLeft>
+            <CoinMiddle>
+              <CoinTop>
+                <CoinPrice>
+                  {props.selectedCurrency.symbol}
+                  {coinData.market_data.current_price[
+                    props.selectedCurrency.value
+                  ].toLocaleString()}
+                </CoinPrice>
+                <CoinPercentage
+                  value={
+                    coinData.market_data
                       .price_change_percentage_24h_in_currency[
-                      this.props.selectedCurrency.value
-                    ] > 0 ? (
-                      <ArrowUp />
-                    ) : (
-                      <ArrowDown />
-                    )}
-                    {this.state.coinData.market_data.price_change_percentage_24h_in_currency[
-                      this.props.selectedCurrency.value
-                    ].toFixed(2)}
-                    %
-                  </CoinPercentage>
-                </CoinTop>
-                <Profit>
-                  <span>
-                    Profit:{" "}
-                    {this.getProfit(
-                      this.state.coinData.market_data
-                        .price_change_percentage_24h_in_currency[
-                        this.props.selectedCurrency.value
-                      ],
-                      this.state.coinData.market_data.current_price[
-                        this.props.selectedCurrency.value
-                      ]
-                    )}
-                  </span>
-                </Profit>
-                <StackImgDiv>
-                  <Stackedimg />
-                </StackImgDiv>
-                <ATHDiv>
-                  <ArrowUp />
-                  <ATH>
-                    <span>
-                      All Time High: {this.props.selectedCurrency.symbol}
-                      {this.state.coinData.market_data.ath[
-                        this.props.selectedCurrency.value
-                      ].toLocaleString()}
-                    </span>
-                    <span>
-                      {this.getDate(
-                        this.state.coinData.market_data.ath_date[
-                          this.props.selectedCurrency.value
-                        ]
-                      )}
-                    </span>
-                  </ATH>
-                </ATHDiv>
-                <ATLDiv>
-                  <ArrowDown />
-                  <ATL>
-                    <span>
-                      All Time Low: {this.props.selectedCurrency.symbol}
-                      {this.state.coinData.market_data.atl[
-                        this.props.selectedCurrency.value
-                      ].toLocaleString()}
-                    </span>
-                    <span>
-                      {this.getDate(
-                        this.state.coinData.market_data.atl_date[
-                          this.props.selectedCurrency.value
-                        ]
-                      )}
-                    </span>
-                  </ATL>
-                </ATLDiv>
-              </CoinMiddle>
-              <CoinRight>
-                <CoinRightTop>
-                  <CoinRightNum>
-                    <Plus>+</Plus>Market Cap:{" "}
-                    {this.props.selectedCurrency.symbol}
-                    {this.state.coinData.market_data.market_cap[
-                      this.props.selectedCurrency.value
-                    ].toLocaleString()}
-                  </CoinRightNum>
-                  <CoinRightNum>
-                    <Plus>+</Plus>Fully Diluted Valuation:{" "}
-                    {this.props.selectedCurrency.symbol}
-                    {this.state.coinData.market_data.fully_diluted_valuation[
-                      this.props.selectedCurrency.value
+                      props.selectedCurrency.value
                     ]
-                      ? this.state.coinData.market_data.fully_diluted_valuation[
-                          this.props.selectedCurrency.value
-                        ].toLocaleString()
-                      : "0.00"}
-                  </CoinRightNum>
-                  <CoinRightNum>
-                    <Plus>+</Plus>Volume 24h:{" "}
-                    {this.props.selectedCurrency.symbol}
-                    {this.state.coinData.market_data.total_volume[
-                      this.props.selectedCurrency.value
-                    ].toLocaleString()}
-                  </CoinRightNum>
-                  <CoinRightNum>
-                    <Plus>+</Plus>Volume / Market:
-                    {(
-                      this.state.coinData.market_data.total_volume[
-                        this.props.selectedCurrency.value
-                      ] /
-                      this.state.coinData.market_data.market_cap[
-                        this.props.selectedCurrency.value
-                      ]
-                    ).toFixed(5)}
-                  </CoinRightNum>
-                </CoinRightTop>
-                <CoinRightMiddle>
-                  <CoinRightNum>
-                    <Plus>+</Plus>Total Volume:{" "}
-                    {this.props.selectedCurrency.symbol}
-                    {this.state.coinData.market_data.total_volume[
-                      this.props.selectedCurrency.value
-                    ].toLocaleString()}
-                  </CoinRightNum>
-                  <CoinRightNum>
-                    <Plus>+</Plus>Circulating Supply:
-                    {this.state.coinData.market_data.circulating_supply.toLocaleString()}{" "}
-                    {this.state.coinData.symbol.toUpperCase()}
-                  </CoinRightNum>
-                  <CoinRightNum>
-                    <Plus>+</Plus>Max Supply:{" "}
-                    {this.state.coinData.market_data.circulating_supply.toLocaleString()}{" "}
-                    {this.state.coinData.symbol.toUpperCase()}
-                  </CoinRightNum>
-                </CoinRightMiddle>
-              </CoinRight>
-            </CoinContainer>
-            <DescriptionText>Description</DescriptionText>
-            <DescriptionDiv>
+                  }
+                >
+                  {coinData.market_data.price_change_percentage_24h_in_currency[
+                    props.selectedCurrency.value
+                  ] > 0 ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  )}
+                  {coinData.market_data.price_change_percentage_24h_in_currency[
+                    props.selectedCurrency.value
+                  ].toFixed(2)}
+                  %
+                </CoinPercentage>
+              </CoinTop>
+              <Profit>
+                <span>
+                  Profit:{" "}
+                  {getProfit(
+                    coinData.market_data
+                      .price_change_percentage_24h_in_currency[
+                      props.selectedCurrency.value
+                    ],
+                    coinData.market_data.current_price[
+                      props.selectedCurrency.value
+                    ]
+                  )}
+                </span>
+              </Profit>
               <StackImgDiv>
                 <Stackedimg />
               </StackImgDiv>
-              <CoinDescription
-                dangerouslySetInnerHTML={{
-                  __html: this.state.coinData.description.en,
-                }}
-              >
-                {}
-              </CoinDescription>
-            </DescriptionDiv>
-            <MainLinksDiv>
-              <LinkDiv>
-                <StyledNewTab
-                  onClick={() =>
-                    this.openNewTab(
-                      this.state.coinData.links.blockchain_site[0]
-                    )
-                  }
-                />
-                <CoinLink href={this.state.coinData.links.blockchain_site[0]}>
-                  {this.state.coinData.links.blockchain_site[0].replace(
-                    /^https?:\/\//,
-                    ""
-                  )}
-                </CoinLink>
-                <Tippy
-                  content={<ToolTip>Copied Link!</ToolTip>}
-                  trigger="click"
-                >
-                  <StyledCopyLink
-                    onClick={() =>
-                      this.copyLink(
-                        this.state.coinData.links.blockchain_site[0]
-                      )
-                    }
-                  />
-                </Tippy>
-              </LinkDiv>
-              <LinkDiv>
-                <StyledNewTab
-                  onClick={() =>
-                    this.openNewTab(
-                      this.state.coinData.links.blockchain_site[1]
-                    )
-                  }
-                />
-                <CoinLink href={this.state.coinData.links.blockchain_site[1]}>
-                  {this.state.coinData.links.blockchain_site[1].replace(
-                    /^https?:\/\//,
-                    ""
-                  )}
-                </CoinLink>
-                <Tippy
-                  content={<ToolTip>Copied Link!</ToolTip>}
-                  trigger="click"
-                >
-                  <StyledCopyLink
-                    onClick={() =>
-                      this.copyLink(
-                        this.state.coinData.links.blockchain_site[1]
-                      )
-                    }
-                  />
-                </Tippy>
-              </LinkDiv>
-              <LinkDiv>
-                <StyledNewTab
-                  onClick={() =>
-                    this.openNewTab(
-                      this.state.coinData.links.blockchain_site[2]
-                    )
-                  }
-                />
-                <CoinLink href={this.state.coinData.links.blockchain_site[2]}>
-                  {this.state.coinData.links.blockchain_site[2].replace(
-                    /^https?:\/\//,
-                    ""
-                  )}
-                </CoinLink>
-                <Tippy
-                  content={<ToolTip>Copied Link!</ToolTip>}
-                  trigger="click"
-                >
-                  <StyledCopyLink
-                    onClick={() =>
-                      this.copyLink(
-                        this.state.coinData.links.blockchain_site[2]
-                      )
-                    }
-                  />
-                </Tippy>
-              </LinkDiv>
-            </MainLinksDiv>
-            <CurrencyConverterDiv>
-              <CurrencyConverter
-                selectedCurrency={this.props.selectedCurrency}
-                currentPrice={
-                  this.state.coinData.market_data.current_price[
-                    this.props.selectedCurrency.value
+              <ATHDiv>
+                <ArrowUp />
+                <ATH>
+                  <span>
+                    All Time High: {props.selectedCurrency.symbol}
+                    {coinData.market_data.ath[
+                      props.selectedCurrency.value
+                    ].toLocaleString()}
+                  </span>
+                  <span>
+                    {getDate(
+                      coinData.market_data.ath_date[
+                        props.selectedCurrency.value
+                      ]
+                    )}
+                  </span>
+                </ATH>
+              </ATHDiv>
+              <ATLDiv>
+                <ArrowDown />
+                <ATL>
+                  <span>
+                    All Time Low: {props.selectedCurrency.symbol}
+                    {coinData.market_data.atl[
+                      props.selectedCurrency.value
+                    ].toLocaleString()}
+                  </span>
+                  <span>
+                    {getDate(
+                      coinData.market_data.atl_date[
+                        props.selectedCurrency.value
+                      ]
+                    )}
+                  </span>
+                </ATL>
+              </ATLDiv>
+            </CoinMiddle>
+            <CoinRight>
+              <CoinRightTop>
+                <CoinRightNum>
+                  <Plus>+</Plus>Market Cap: {props.selectedCurrency.symbol}
+                  {coinData.market_data.market_cap[
+                    props.selectedCurrency.value
+                  ].toLocaleString()}
+                </CoinRightNum>
+                <CoinRightNum>
+                  <Plus>+</Plus>Fully Diluted Valuation:
+                  {props.selectedCurrency.symbol}
+                  {coinData.market_data.fully_diluted_valuation[
+                    props.selectedCurrency.value
                   ]
-                }
-                cryptoName={this.state.coinData.symbol}
+                    ? coinData.market_data.fully_diluted_valuation[
+                        props.selectedCurrency.value
+                      ].toLocaleString()
+                    : "0.00"}
+                </CoinRightNum>
+                <CoinRightNum>
+                  <Plus>+</Plus>Volume 24h: {props.selectedCurrency.symbol}
+                  {coinData.market_data.total_volume[
+                    props.selectedCurrency.value
+                  ].toLocaleString()}
+                </CoinRightNum>
+                <CoinRightNum>
+                  <Plus>+</Plus>Volume / Market:
+                  {(
+                    coinData.market_data.total_volume[
+                      props.selectedCurrency.value
+                    ] /
+                    coinData.market_data.market_cap[
+                      props.selectedCurrency.value
+                    ]
+                  ).toFixed(5)}
+                </CoinRightNum>
+              </CoinRightTop>
+              <CoinRightMiddle>
+                <CoinRightNum>
+                  <Plus>+</Plus>Total Volume: {props.selectedCurrency.symbol}
+                  {coinData.market_data.total_volume[
+                    props.selectedCurrency.value
+                  ].toLocaleString()}
+                </CoinRightNum>
+                <CoinRightNum>
+                  <Plus>+</Plus>Circulating Supply:
+                  {coinData.market_data.circulating_supply.toLocaleString()}{" "}
+                  {coinData.symbol.toUpperCase()}
+                </CoinRightNum>
+                <CoinRightNum>
+                  <Plus>+</Plus>Max Supply:{" "}
+                  {coinData.market_data.circulating_supply.toLocaleString()}{" "}
+                  {coinData.symbol.toUpperCase()}
+                </CoinRightNum>
+              </CoinRightMiddle>
+            </CoinRight>
+          </CoinContainer>
+          <DescriptionText>Description</DescriptionText>
+          <DescriptionDiv>
+            <StackImgDiv>
+              <Stackedimg />
+            </StackImgDiv>
+            <CoinDescription
+              dangerouslySetInnerHTML={{
+                __html: coinData.description.en,
+              }}
+            >
+              {}
+            </CoinDescription>
+          </DescriptionDiv>
+          <MainLinksDiv>
+            <LinkDiv>
+              <StyledNewTab
+                onClick={() => openNewTab(coinData.links.blockchain_site[0])}
               />
-            </CurrencyConverterDiv>
-            <RangeSelector handleRangeChange={this.handleRangeChange} />
-            <IndividualChart chart={this.state.chartData} />
-          </MainContainer>
-        )}
-      </>
-    );
-  }
+              <CoinLink href={coinData.links.blockchain_site[0]}>
+                {coinData.links.blockchain_site[0].replace(/^https?:\/\//, "")}
+              </CoinLink>
+              <Tippy content={<ToolTip>Copied Link!</ToolTip>} trigger="click">
+                <StyledCopyLink
+                  onClick={() => copyLink(coinData.links.blockchain_site[0])}
+                />
+              </Tippy>
+            </LinkDiv>
+            <LinkDiv>
+              <StyledNewTab
+                onClick={() => openNewTab(coinData.links.blockchain_site[1])}
+              />
+              <CoinLink href={coinData.links.blockchain_site[1]}>
+                {coinData.links.blockchain_site[1].replace(/^https?:\/\//, "")}
+              </CoinLink>
+              <Tippy content={<ToolTip>Copied Link!</ToolTip>} trigger="click">
+                <StyledCopyLink
+                  onClick={() => copyLink(coinData.links.blockchain_site[1])}
+                />
+              </Tippy>
+            </LinkDiv>
+            <LinkDiv>
+              <StyledNewTab
+                onClick={() => openNewTab(coinData.links.blockchain_site[2])}
+              />
+              <CoinLink href={coinData.links.blockchain_site[2]}>
+                {coinData.links.blockchain_site[2].replace(/^https?:\/\//, "")}
+              </CoinLink>
+              <Tippy content={<ToolTip>Copied Link!</ToolTip>} trigger="click">
+                <StyledCopyLink
+                  onClick={() => copyLink(coinData.links.blockchain_site[2])}
+                />
+              </Tippy>
+            </LinkDiv>
+          </MainLinksDiv>
+          <CurrencyConverterDiv>
+            <CurrencyConverter
+              selectedCurrency={props.selectedCurrency}
+              currentPrice={
+                coinData.market_data.current_price[props.selectedCurrency.value]
+              }
+              cryptoName={coinData.symbol}
+            />
+          </CurrencyConverterDiv>
+          <RangeSelector handleRangeChange={handleRangeChange} />
+          <IndividualChart chart={chartData} />
+        </MainContainer>
+      )}
+    </>
+  );
 }
-export default CoinPage;
