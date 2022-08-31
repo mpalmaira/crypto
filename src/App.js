@@ -39,9 +39,19 @@ export const currencies = {
   },
 };
 
+function useLocalState(key, initialValue) {
+  const storedValue = window.localStorage.getItem(key);
+  const item = storedValue ? JSON.parse(storedValue) : initialValue;
+  const [state, setState] = useState(item);
+  const updateState = (value) => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+    setState(value);
+  };
+  return [state, updateState];
+}
 export default function App() {
-  const [dark, setDark] = useState(true);
-  const [selectedCurrency, setSelectedCurrency] = useState({
+  const [dark, setDark] = useLocalState("theme", true);
+  const [selectedCurrency, setSelectedCurrency] = useLocalState("currency", {
     value: "usd",
     symbol: "$",
   });
@@ -76,7 +86,8 @@ export default function App() {
             component={(props) => (
               <CoinPage {...props} selectedCurrency={selectedCurrency} />
             )}
-          />j
+          />
+          j
         </Switch>
       </Router>
     </ThemeProvider>

@@ -10,13 +10,20 @@ import {
 } from "./CoinTable.styles";
 import CoinItem from "../CoinItem/CoinItem";
 
+function usePrevious(value) {
+  const prevRef = useRef();
+  useEffect(() => {
+    prevRef.current = value;
+  }, [value]);
+  return prevRef.current;
+}
+
 export default function CoinTable(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [coins, setCoins] = useState([]);
   const [hasError, setHasError] = useState(false);
   const [page, setPage] = useState(1);
-  const prevPageRef = useRef();
-  const prevPage = prevPageRef.current;
+  const prevPage = usePrevious(page);
 
   const getData = async () => {
     try {
@@ -36,9 +43,7 @@ export default function CoinTable(props) {
     getData();
     //eslint-disable-next-line
   }, []);
-  useEffect(() => {
-    prevPageRef.current = page;
-  }, [page]);
+
   useEffect(() => {
     if (page !== prevPage) {
       getData();

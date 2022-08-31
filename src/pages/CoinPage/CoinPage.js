@@ -46,6 +46,14 @@ import {
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../../components/SVG/ArrowDownRed.svg";
 
+function usePrevious(value) {
+  const prevRef = useRef();
+  useEffect(() => {
+    prevRef.current = value;
+  }, [value]);
+  return prevRef.current;
+}
+
 export default function CoinPage(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [coinData, setCoinData] = useState(null);
@@ -53,11 +61,8 @@ export default function CoinPage(props) {
   const [chartData, setChartData] = useState(null);
   const [days, setDays] = useState(1);
   const { id } = useParams();
-  const prevIdRef = useRef();
-  const prevId = prevIdRef.current;
-  const prevDaysRef = useRef();
-  const prevDays = prevDaysRef.current;
-  useEffect(() => {}, [id, days]);
+  const prevId = usePrevious(id);
+  const prevDays = usePrevious(days);
 
   const getCoin = async (coin) => {
     try {
@@ -119,8 +124,6 @@ export default function CoinPage(props) {
   }, []);
 
   useEffect(() => {
-    prevIdRef.current = id;
-    prevDaysRef.current = days;
     if (id !== prevId) {
       getCoin(id);
     }
