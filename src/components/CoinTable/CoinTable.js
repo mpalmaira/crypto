@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getData, updatePage } from "../store/coinTable/actions";
 import {
@@ -43,7 +42,7 @@ export default function CoinTable(props) {
           <InfiniteScroll
             dataLength={coins.length}
             next={() => {
-              dispatch(updatePage(page));
+              dispatch(updatePage());
             }}
             hasMore={true}
             loader={<h4>Loading 10 more items...</h4>}

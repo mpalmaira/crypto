@@ -10,7 +10,6 @@ export const GOT_COINS_ERROR = "GOT_COINS_ERROR";
 export const UPDATING_PAGE = "UPDATING_PAGE";
 
 function coinTableReducer(state = initialState, action) {
-  console.log(action.type);
   switch (action.type) {
     case GOT_COINS_PENDING:
       return {
@@ -31,12 +30,11 @@ function coinTableReducer(state = initialState, action) {
         isLoading: false,
       };
     case UPDATING_PAGE:
-        return{
-            ...state,
-            page: action.payload
-        }
+      return {
+        ...state,
+        page: action.payload,
+      };
     default:
-
       return state;
   }
 }
