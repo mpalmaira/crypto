@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { getData, updatePage } from "../store/coinTable/actions";
 import {
   TableContainer,
   StyledTable,
@@ -19,34 +21,19 @@ function usePrevious(value) {
 }
 
 export default function CoinTable(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [coins, setCoins] = useState([]);
-  const [hasError, setHasError] = useState(false);
-  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const coins = useSelector((state) => state.coins.coins);
+  const page = useSelector((state) => state.coins.page);
   const prevPage = usePrevious(page);
 
-  const getData = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${props.selectedCurrency.value}&order=market_cap_desc&per_page=10&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-      );
-      setCoins([...coins, ...data]);
-      setIsLoading(false);
-    } catch (err) {
-      setHasError(true);
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getData();
+    dispatch(getData());
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (page !== prevPage) {
-      getData();
+      dispatch(getData());
     }
   });
   return (
@@ -56,7 +43,7 @@ export default function CoinTable(props) {
           <InfiniteScroll
             dataLength={coins.length}
             next={() => {
-              setPage(page + 1);
+              dispatch(updatePage(page));
             }}
             hasMore={true}
             loader={<h4>Loading 10 more items...</h4>}
