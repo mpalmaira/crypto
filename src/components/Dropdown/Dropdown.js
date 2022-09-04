@@ -7,11 +7,12 @@ import {
   ListItem,
   CurrencyDiv,
 } from "./Dropdown.styles";
-import { currencies } from "../../App";
+import { currencies } from "../store/currency/index";
 import { useSelector, useDispatch } from "react-redux";
 import { handleToggle } from "../store/currency/actions";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDown.svg";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
+import {handleCurrency} from '../store/currency/actions'
 
 export default function Dropdown(props) {
   // const [isOpen, setIsOpen] = useState(false);
@@ -20,19 +21,22 @@ export default function Dropdown(props) {
   //   setIsOpen(!isOpen);
   // };
   const dispatch = useDispatch();
+  const selectedCurrency = useSelector(
+    (state) => state.currency.selectedCurrency
+  );
   const isOpen = useSelector((state) => state.currency.isOpen);
-  const handleOptionClicked = (selectedCurrency, selectedSymbol) => {
-    dispatch(handleToggle());
-    props.handleCurrency(selectedCurrency);
-  };
+  // const handleOptionClicked = (selectedCurrency, selectedSymbol) => {
+  //   dispatch(handleToggle());
+  //   props.handleCurrency(selectedCurrency);
+  // };
   const options = Object.values(currencies);
 
   return (
     <div>
       <DropDownContainer>
         <DropDownHeader onClick={() => dispatch(handleToggle())}>
-          <CurrencyDiv>{props.selectedCurrency.symbol}</CurrencyDiv>
-          <span>{props.selectedCurrency.value.toUpperCase()}</span>
+          <CurrencyDiv>{selectedCurrency.symbol}</CurrencyDiv>
+          <span>{selectedCurrency.value.toUpperCase()}</span>
           {isOpen ? <ArrowUp /> : <ArrowDown />}
         </DropDownHeader>
         {isOpen && (
@@ -42,7 +46,7 @@ export default function Dropdown(props) {
                 return (
                   <ListItem
                     onClick={() =>
-                      handleOptionClicked(option.value, option.symbol)
+                      dispatch(handleCurrency(option.value, option.symbol))
                     }
                     key={option.value}
                   >

@@ -18,8 +18,13 @@ import { convertedNumber } from "../util/ConvertedNumber";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
+import { useSelector, useDispatch } from "react-redux";
 
 const CoinItem = (props) => {
+  const selectedCurrency = useSelector(
+    (state) => state.currency.selectedCurrency
+  );
+
   return (
     <TableRow>
       <CoinRank>{props.coins.market_cap_rank}</CoinRank>
@@ -35,7 +40,7 @@ const CoinItem = (props) => {
       </td>
 
       <TableItem>
-        {props.symbol}
+        {selectedCurrency.symbol}
         {props.coins.current_price.toLocaleString()}
       </TableItem>
       <TableItem>
@@ -84,11 +89,11 @@ const CoinItem = (props) => {
         <ProgressandConvertedDiv>
           <ConvertedNumberDiv>
             <span>
-              {props.symbol}
+              {selectedCurrency.symbol}
               {convertedNumber(props.coins.total_volume)}
             </span>
             <span>
-              {props.symbol}
+              {selectedCurrency.symbol}
               {convertedNumber(props.coins.market_cap)}
             </span>
           </ConvertedNumberDiv>
@@ -104,11 +109,11 @@ const CoinItem = (props) => {
         <ProgressandConvertedDiv>
           <ConvertedNumberDiv>
             <span>
-              {props.symbol}
+              {selectedCurrency.symbol}
               {convertedNumber(props.coins.circulating_supply)}
             </span>
             <span>
-              {props.symbol}
+              {selectedCurrency.symbol}
               {convertedNumber(props.coins.total_supply)}
             </span>
           </ConvertedNumberDiv>

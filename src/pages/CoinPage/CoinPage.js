@@ -70,8 +70,9 @@ export default function CoinPage(props) {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
       );
-      const { data: dataChart } =
-        await axios(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=${props.selectedCurrency.value}&days=${days}
+      const {
+        data: dataChart,
+      } = await axios(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=${props.selectedCurrency.value}&days=${days}
       `);
       setCoinData(data);
       setChartData(dataChart.prices);

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { handleCurrency } from "../src/components/store/currency/actions";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import { HomePage, CoinPage, Portfolio } from "./pages";
 import { darkTheme, lightTheme } from "./components/Theme/Theme";
 import Navbar from "./components/Navbar";
+import { currencies } from "../src/components/store/currency/index";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -16,28 +19,28 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 `;
-export const currencies = {
-  usd: {
-    value: "usd",
-    symbol: "$",
-  },
-  gbp: {
-    value: "gbp",
-    symbol: "£",
-  },
-  eur: {
-    value: "eur",
-    symbol: "€",
-  },
-  btc: {
-    value: "btc",
-    symbol: "₿",
-  },
-  eth: {
-    value: "eth",
-    symbol: "Ξ",
-  },
-};
+// export const currencies = {
+//   usd: {
+//     value: "usd",
+//     symbol: "$",
+//   },
+//   gbp: {
+//     value: "gbp",
+//     symbol: "£",
+//   },
+//   eur: {
+//     value: "eur",
+//     symbol: "€",
+//   },
+//   btc: {
+//     value: "btc",
+//     symbol: "₿",
+//   },
+//   eth: {
+//     value: "eth",
+//     symbol: "Ξ",
+//   },
+// };
 
 function useLocalState(key, initialValue) {
   const storedValue = window.localStorage.getItem(key);
@@ -51,15 +54,12 @@ function useLocalState(key, initialValue) {
 }
 export default function App() {
   const [dark, setDark] = useLocalState("theme", true);
-  const [selectedCurrency, setSelectedCurrency] = useLocalState("currency", {
-    value: "usd",
-    symbol: "$",
-  });
+  const selectedCurrency = useSelector(
+    (state) => state.currency.selectedCurrency
+  );
+
   const toggleTheme = () => {
     setDark(!dark);
-  };
-  const handleCurrency = (selectedCurrency) => {
-    setSelectedCurrency(currencies[selectedCurrency]);
   };
   const theme = dark ? darkTheme : lightTheme;
   return (
@@ -68,15 +68,15 @@ export default function App() {
       <Router>
         <Navbar
           toggleTheme={toggleTheme}
-          handleCurrency={handleCurrency}
-          selectedCurrency={selectedCurrency}
+          // handleCurrency={handleCurrency}
+          // selectedCurrency={selectedCurrency}
         />
         <Switch>
           <Route
             exact
             path="/"
             component={(props) => (
-              <HomePage {...props} selectedCurrency={selectedCurrency} />
+              <HomePage />
             )}
           />
           <Route exact path="/portfolio" component={Portfolio} />

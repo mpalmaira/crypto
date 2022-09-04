@@ -22,6 +22,7 @@ function coinTableReducer(state = initialState, action) {
         ...state,
         coins: action.payload,
         isLoading: false,
+        page: 1
       };
     case GOT_COINS_ERROR:
       return {
@@ -32,7 +33,8 @@ function coinTableReducer(state = initialState, action) {
     case UPDATING_PAGE:
       return {
         ...state,
-        page: action.payload,
+        page: action.payload.page,
+        coins: action.payload.coins
       };
     default:
       return state;

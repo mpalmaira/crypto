@@ -53,10 +53,7 @@ export default function Navbar(props) {
             <SearchInput placeholder="Search..." />
           </SearchDiv>
           <DropDownDiv>
-            <Dropdown
-              handleCurrency={props.handleCurrency}
-              selectedCurrency={props.selectedCurrency}
-            />
+            <Dropdown />
           </DropDownDiv>
           <ToggleThemeLogo onClick={props.toggleTheme}>
             <ToggleThemeLeftDiv>

@@ -12,6 +12,7 @@ import {
   BitcoinNumber,
   StyledDate,
 } from "./BitcoinTable.styles";
+import { useSelector } from "react-redux";
 
 export default function BitcoinTable(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,18 +20,21 @@ export default function BitcoinTable(props) {
   const [hasError, setHasError] = useState(false);
   const [bitcoinHourly, setBitcoinHourly] = useState(null);
   const [bitcoinCurrent, setBitcoinCurrent] = useState(null);
+  const selectedCurrency = useSelector(
+    (state) => state.currency.selectedCurrency
+  );
 
   const getData = async () => {
     try {
       setIsLoading(true);
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${props.selectedCurrency.value}&days=30&interval=daily`
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${selectedCurrency.value}&days=30&interval=daily`
       );
       const { data: dataHourly } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${props.selectedCurrency.value}&days=1&interval=hourly`
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${selectedCurrency.value}&days=1&interval=hourly`
       );
       const { data: dataCurrent } = await axios(
-        `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${props.selectedCurrency.value}&include_24hr_vol=true`
+        `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${selectedCurrency.value}&include_24hr_vol=true`
       );
       setBitcoin(data);
       setIsLoading(false);
@@ -65,7 +69,7 @@ export default function BitcoinTable(props) {
             <MainTextContainer>
               <BitcoinHeader>BTC Price</BitcoinHeader>
               <BitcoinNumber>
-                {props.selectedCurrency.symbol}
+                {selectedCurrency.symbol}
                 {Object.values(bitcoinCurrent)[0].toLocaleString()}
               </BitcoinNumber>
               <StyledDate>{getDate()}</StyledDate>
@@ -76,7 +80,7 @@ export default function BitcoinTable(props) {
             <MainTextContainer>
               <BitcoinHeader>BTC Volume 24h</BitcoinHeader>
               <BitcoinNumber>
-                {props.selectedCurrency.symbol}
+                {selectedCurrency.symbol}
                 {convertedNumber(Object.values(bitcoinCurrent)[1])}
               </BitcoinNumber>
               <StyledDate>{getDate()}</StyledDate>

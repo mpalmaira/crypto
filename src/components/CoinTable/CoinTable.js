@@ -22,19 +22,12 @@ function usePrevious(value) {
 export default function CoinTable(props) {
   const dispatch = useDispatch();
   const coins = useSelector((state) => state.coins.coins);
-  const page = useSelector((state) => state.coins.page);
-  const prevPage = usePrevious(page);
 
   useEffect(() => {
     dispatch(getData());
     //eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    if (page !== prevPage) {
-      dispatch(getData());
-    }
-  });
   return (
     <TableContainer>
       {coins && (
@@ -61,14 +54,8 @@ export default function CoinTable(props) {
               </tr>
             </thead>
             <tbody>
-              {coins.map((coins) => {
-                return (
-                  <CoinItem
-                    key={coins.id}
-                    coins={coins}
-                    symbol={props.selectedCurrency.symbol}
-                  />
-                );
+              {coins.map((coins, index) => {
+                return <CoinItem key={index} coins={coins} />;
               })}
             </tbody>
           </InfiniteScroll>
