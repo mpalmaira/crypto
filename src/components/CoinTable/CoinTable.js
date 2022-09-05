@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getData, updatePage } from "../store/coinTable/actions";
@@ -11,17 +11,10 @@ import {
 } from "./CoinTable.styles";
 import CoinItem from "../CoinItem/CoinItem";
 
-function usePrevious(value) {
-  const prevRef = useRef();
-  useEffect(() => {
-    prevRef.current = value;
-  }, [value]);
-  return prevRef.current;
-}
-
 export default function CoinTable(props) {
   const dispatch = useDispatch();
   const coins = useSelector((state) => state.coins.coins);
+ 
 
   useEffect(() => {
     dispatch(getData());

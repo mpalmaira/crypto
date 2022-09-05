@@ -18,7 +18,7 @@ import { convertedNumber } from "../util/ConvertedNumber";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const CoinItem = (props) => {
   const selectedCurrency = useSelector(

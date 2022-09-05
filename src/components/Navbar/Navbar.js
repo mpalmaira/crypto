@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Dropdown from "../Dropdown/Dropdown";
 import {
   LeftContainer,
@@ -19,26 +19,14 @@ import {
   StyledToggleThemeRight,
 } from "./Navbar.styles";
 import { NavMarketData } from "../NavBarMarketData/NavBarMaketData";
+import { getData } from "../store/marketData/action";
 
 export default function Navbar(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [marketData, setMarketData] = useState(null);
-  const [hasError, setHasError] = useState(false);
-
-  const getData = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await axios("https://api.coingecko.com/api/v3/global");
-      setMarketData(data.data);
-      setIsLoading(false);
-    } catch (err) {
-      setHasError(true);
-      setIsLoading(false);
-    }
-  };
+  const dispatch = useDispatch();
+  const marketData = useSelector((state) => state.marketData.marketData);
 
   useEffect(() => {
-    getData();
+    dispatch(getData());
   }, []);
   return (
     <NavContainer>
