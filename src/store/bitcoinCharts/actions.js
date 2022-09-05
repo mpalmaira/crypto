@@ -7,7 +7,7 @@ import {
 
 export const getData = () => async (dispatch, getState) => {
   const state = getState();
-  const selectedCurrency = state.currency.selectedCurrency;
+  const selectedCurrency = state.settings.selectedCurrency;
   try {
     dispatch({ type: GOT_BITCOIN_PENDING });
     const { data } = await axios(

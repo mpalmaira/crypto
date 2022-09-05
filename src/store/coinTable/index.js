@@ -36,6 +36,11 @@ function coinTableReducer(state = initialState, action) {
         page: action.payload.page,
         coins: action.payload.coins
       };
+    case "CHANGE_PAGE":
+      return{
+        ...state,
+        page: action.payload
+      }
     default:
       return state;
   }

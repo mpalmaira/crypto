@@ -43,7 +43,7 @@ export default function Navbar(props) {
           <DropDownDiv>
             <Dropdown />
           </DropDownDiv>
-          <ToggleThemeLogo onClick={props.toggleTheme}>
+          <ToggleThemeLogo onClick={props.switchTheme}>
             <ToggleThemeLeftDiv>
               <StyledToggleThemeLeft />
             </ToggleThemeLeftDiv>

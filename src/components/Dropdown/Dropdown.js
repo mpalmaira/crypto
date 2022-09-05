@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from "react";
 import {
   DropDownContainer,
   DropDownHeader,
@@ -7,31 +7,32 @@ import {
   ListItem,
   CurrencyDiv,
 } from "./Dropdown.styles";
-import { currencies } from "../../store/currency/index";
+import { currencies } from "../../store/settings/index";
 import { useSelector, useDispatch } from "react-redux";
-import { handleToggle } from "../../store/currency/actions";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDown.svg";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
-import { handleCurrency } from "../../store/currency/actions";
+import { handleCurrency } from "../../store/settings/actions";
 
 export default function Dropdown(props) {
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const selectedCurrency = useSelector(
-    (state) => state.currency.selectedCurrency
+    (state) => state.settings.selectedCurrency
   );
-  const isOpen = useSelector((state) => state.currency.isOpen);
   const options = Object.values(currencies);
-
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div>
       <DropDownContainer>
-        <DropDownHeader onClick={() => dispatch(handleToggle())}>
+        <DropDownHeader onClick={() => handleToggle()}>
           <CurrencyDiv>{selectedCurrency.symbol}</CurrencyDiv>
           <span>{selectedCurrency.value.toUpperCase()}</span>
           {isOpen ? <ArrowUp /> : <ArrowDown />}
         </DropDownHeader>
         {isOpen && (
-          <DropDownListContainer>
+          <DropDownListContainer onMouseLeave={() => handleToggle()}>
             <DropDownList>
               {options.map((option) => {
                 return (

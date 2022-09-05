@@ -14,12 +14,18 @@ import CoinItem from "../CoinItem/CoinItem";
 export default function CoinTable(props) {
   const dispatch = useDispatch();
   const coins = useSelector((state) => state.coins.coins);
- 
+  const selectedCurrency = useSelector(
+    (state) => state.settings.selectedCurrency
+  );
 
   useEffect(() => {
     dispatch(getData());
     //eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    dispatch(getData());
+    //eslint-disable-next-line
+  }, [selectedCurrency.value]);
 
   return (
     <TableContainer>

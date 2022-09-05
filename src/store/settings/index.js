@@ -1,13 +1,13 @@
 const initialState = {
-  isOpen: false,
   selectedCurrency: {
     value: "usd",
     symbol: "$",
   },
+  dark: true,
 };
-export const DROPDOWN_STATUS = "DROPDOWN_STATUS";
+//add theme to settings
 export const ACTIVE_CURRENCY = "ACTIVE_CURRENCY";
-
+export const SWITCH_THEME = "SWITCH_THEME";
 export const currencies = {
   usd: {
     value: "usd",
@@ -31,21 +31,20 @@ export const currencies = {
   },
 };
 
-function currencyReducer(state = initialState, action) {
-  console.log(action.type);
+function settingsReducer(state = initialState, action) {
   switch (action.type) {
-    case DROPDOWN_STATUS:
-      return {
-        ...state,
-        isOpen: action.payload,
-      };
     case ACTIVE_CURRENCY:
       return {
         ...state,
         selectedCurrency: action.payload,
       };
+    case SWITCH_THEME:
+      return {
+        ...state,
+        dark: action.payload,
+      };
     default:
       return state;
   }
 }
-export default currencyReducer;
+export default settingsReducer;

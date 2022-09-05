@@ -17,7 +17,7 @@ import { getData } from "../../store/bitcoinCharts/actions";
 export default function BitcoinTable(props) {
   const dispatch = useDispatch();
   const selectedCurrency = useSelector(
-    (state) => state.currency.selectedCurrency
+    (state) => state.settings.selectedCurrency
   );
   const bitcoin = useSelector((state) => state.bitcoin.bitcoin);
   const isLoading = useSelector((state) => state.bitcoin.isLoading);
@@ -38,6 +38,11 @@ export default function BitcoinTable(props) {
     getDate();
     //eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    dispatch(getData());
+    getDate();
+    //eslint-disable-next-line
+  }, [selectedCurrency.value])
 
   const showChart = bitcoin && !isLoading && !hasError;
   return (

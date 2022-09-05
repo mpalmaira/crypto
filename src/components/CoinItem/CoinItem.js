@@ -22,7 +22,7 @@ import { useSelector } from "react-redux";
 
 const CoinItem = (props) => {
   const selectedCurrency = useSelector(
-    (state) => state.currency.selectedCurrency
+    (state) => state.settings.selectedCurrency
   );
 
   return (
@@ -52,9 +52,16 @@ const CoinItem = (props) => {
           )}
         </StyledArrow>
         <TableItemNum
-          value={props.coins.price_change_percentage_1h_in_currency}
+          value={
+            props.coins.price_change_percentage_1h_in_currency
+              ? props.coins.price_change_percentage_1h_in_currency
+              : 0
+          }
         >
-          {props.coins.price_change_percentage_1h_in_currency.toFixed(2)}%
+          {props.coins.price_change_percentage_1h_in_currency.toFixed(2)
+            ? props.coins.price_change_percentage_1h_in_currency.toFixed(2)
+            : 0}
+          %
         </TableItemNum>
       </TableItem>
       <TableItem>

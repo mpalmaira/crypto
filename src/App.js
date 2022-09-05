@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import { HomePage, CoinPage, Portfolio } from "./pages";
 import { darkTheme, lightTheme } from "./components/Theme/Theme";
+import { HomePage, CoinPage, Portfolio } from "./pages";
 import Navbar from "./components/Navbar";
+import { switchTheme } from "./store/settings/actions";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -17,27 +19,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function useLocalState(key, initialValue) {
-  const storedValue = window.localStorage.getItem(key);
-  const item = storedValue ? JSON.parse(storedValue) : initialValue;
-  const [state, setState] = useState(item);
-  const updateState = (value) => {
-    window.localStorage.setItem(key, JSON.stringify(value));
-    setState(value);
-  };
-  return [state, updateState];
-}
 export default function App() {
-  const [dark, setDark] = useLocalState("theme", true);
-  const toggleTheme = () => {
-    setDark(!dark);
-  };
+  const dispatch = useDispatch();
+  const dark = useSelector((state) => state.settings.dark);
   const theme = dark ? darkTheme : lightTheme;
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
-        <Navbar toggleTheme={toggleTheme} />
+        <Navbar switchTheme={() => dispatch(switchTheme())} />
         <Switch>
           <Route exact path="/" component={(props) => <HomePage />} />
           <Route exact path="/portfolio" component={Portfolio} />
