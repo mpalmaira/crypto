@@ -1,5 +1,5 @@
-import { DROPDOWN_STATUS, ACTIVE_CURRENCY } from "../currency/index";
-import { currencies } from "../currency/index";
+import { DROPDOWN_STATUS, ACTIVE_CURRENCY } from "./index";
+import { currencies } from "./index";
 
 export const handleToggle = () => (dispatch, getState) => {
   const state = getState();

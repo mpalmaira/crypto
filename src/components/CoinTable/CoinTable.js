@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { getData, updatePage } from "../store/coinTable/actions";
+import { getData, updatePage } from "../../store/coinTable/actions";
 import {
   TableContainer,
   StyledTable,

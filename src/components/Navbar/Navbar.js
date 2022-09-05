@@ -19,7 +19,7 @@ import {
   StyledToggleThemeRight,
 } from "./Navbar.styles";
 import { NavMarketData } from "../NavBarMarketData/NavBarMaketData";
-import { getData } from "../store/marketData/action";
+import { getData } from "../../store/marketData/action";
 
 export default function Navbar(props) {
   const dispatch = useDispatch();

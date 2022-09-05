@@ -7,12 +7,12 @@ import {
   ListItem,
   CurrencyDiv,
 } from "./Dropdown.styles";
-import { currencies } from "../store/currency/index";
+import { currencies } from "../../store/currency/index";
 import { useSelector, useDispatch } from "react-redux";
-import { handleToggle } from "../store/currency/actions";
+import { handleToggle } from "../../store/currency/actions";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDown.svg";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
-import { handleCurrency } from "../store/currency/actions";
+import { handleCurrency } from "../../store/currency/actions";
 
 export default function Dropdown(props) {
   const dispatch = useDispatch();

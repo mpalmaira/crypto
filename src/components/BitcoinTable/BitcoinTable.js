@@ -12,7 +12,7 @@ import {
   StyledDate,
 } from "./BitcoinTable.styles";
 import { useSelector, useDispatch } from "react-redux";
-import { getData } from "../store/bitcoinCharts/actions";
+import { getData } from "../../store/bitcoinCharts/actions";
 
 export default function BitcoinTable(props) {
   const dispatch = useDispatch();

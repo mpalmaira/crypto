@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import IndividualChart from "../../components/IndividualChart/IndividualChart";
 import RangeSelector from "../../components/RangeSelector/RangeSelector";
-import { getCoin } from "../../components/store/coinPage/actions";
+import { getCoin } from "../../store/coinPage/actions";
 import {
   MainContainer,
   YourSummary,

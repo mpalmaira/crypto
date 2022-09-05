@@ -4,7 +4,7 @@ import {
   GOT_COINS_PENDING,
   GOT_COINS_ERROR,
   UPDATING_PAGE,
-} from "../coinTable/index";
+} from "./index";
 
 export const getData = () => async (dispatch, getState) => {
   const state = getState();
