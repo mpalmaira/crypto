@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { createGlobalStyle } from "styled-components";
@@ -30,10 +29,6 @@ function useLocalState(key, initialValue) {
 }
 export default function App() {
   const [dark, setDark] = useLocalState("theme", true);
-  const selectedCurrency = useSelector(
-    (state) => state.currency.selectedCurrency
-  );
-
   const toggleTheme = () => {
     setDark(!dark);
   };
@@ -49,9 +44,7 @@ export default function App() {
           <Route
             exact
             path="/coinpage/:id"
-            component={(props) => (
-              <CoinPage {...props} selectedCurrency={selectedCurrency} />
-            )}
+            component={(props) => <CoinPage />}
           />
           j
         </Switch>
