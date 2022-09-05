@@ -56,10 +56,6 @@ function usePrevious(value) {
 }
 
 export default function CoinPage(props) {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [coinData, setCoinData] = useState(null);
-  // const [hasError, setHasError] = useState(false);
-  // const [chartData, setChartData] = useState(null);
   const dispatch = useDispatch();
   const selectedCurrency = useSelector(
     (state) => state.currency.selectedCurrency
