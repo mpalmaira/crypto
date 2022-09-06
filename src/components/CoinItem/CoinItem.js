@@ -18,8 +18,13 @@ import { convertedNumber } from "../util/ConvertedNumber";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
+import { useSelector } from "react-redux";
 
 const CoinItem = (props) => {
+  const selectedCurrency = useSelector(
+    (state) => state.settings.selectedCurrency
+  );
+
   return (
     <TableRow>
       <CoinRank>{props.coins.market_cap_rank}</CoinRank>
@@ -35,7 +40,7 @@ const CoinItem = (props) => {
       </td>
 
       <TableItem>
-        {props.symbol}
+        {selectedCurrency.symbol}
         {props.coins.current_price.toLocaleString()}
       </TableItem>
       <TableItem>
@@ -47,9 +52,16 @@ const CoinItem = (props) => {
           )}
         </StyledArrow>
         <TableItemNum
-          value={props.coins.price_change_percentage_1h_in_currency}
+          value={
+            props.coins.price_change_percentage_1h_in_currency
+              ? props.coins.price_change_percentage_1h_in_currency
+              : 0
+          }
         >
-          {props.coins.price_change_percentage_1h_in_currency.toFixed(2)}%
+          {props.coins.price_change_percentage_1h_in_currency.toFixed(2)
+            ? props.coins.price_change_percentage_1h_in_currency.toFixed(2)
+            : 0}
+          %
         </TableItemNum>
       </TableItem>
       <TableItem>
@@ -84,11 +96,11 @@ const CoinItem = (props) => {
         <ProgressandConvertedDiv>
           <ConvertedNumberDiv>
             <span>
-              {props.symbol}
+              {selectedCurrency.symbol}
               {convertedNumber(props.coins.total_volume)}
             </span>
             <span>
-              {props.symbol}
+              {selectedCurrency.symbol}
               {convertedNumber(props.coins.market_cap)}
             </span>
           </ConvertedNumberDiv>
@@ -104,11 +116,11 @@ const CoinItem = (props) => {
         <ProgressandConvertedDiv>
           <ConvertedNumberDiv>
             <span>
-              {props.symbol}
+              {selectedCurrency.symbol}
               {convertedNumber(props.coins.circulating_supply)}
             </span>
             <span>
-              {props.symbol}
+              {selectedCurrency.symbol}
               {convertedNumber(props.coins.total_supply)}
             </span>
           </ConvertedNumberDiv>

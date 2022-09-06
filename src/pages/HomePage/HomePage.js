@@ -6,8 +6,8 @@ import { Container } from "./HomePage.styles";
 export default function HomePage(props) {
   return (
     <Container>
-      <BitcoinTable selectedCurrency={props.selectedCurrency} />
-      <CoinTable selectedCurrency={props.selectedCurrency} />
+      <BitcoinTable  />
+      <CoinTable />
     </Container>
   );
 }

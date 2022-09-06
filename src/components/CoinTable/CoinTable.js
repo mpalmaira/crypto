@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { getData, updatePage } from "../../store/coinTable/actions";
 import {
   TableContainer,
   StyledTable,
@@ -10,45 +11,22 @@ import {
 } from "./CoinTable.styles";
 import CoinItem from "../CoinItem/CoinItem";
 
-function usePrevious(value) {
-  const prevRef = useRef();
-  useEffect(() => {
-    prevRef.current = value;
-  }, [value]);
-  return prevRef.current;
-}
-
 export default function CoinTable(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [coins, setCoins] = useState([]);
-  const [hasError, setHasError] = useState(false);
-  const [page, setPage] = useState(1);
-  const prevPage = usePrevious(page);
-
-  const getData = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${props.selectedCurrency.value}&order=market_cap_desc&per_page=10&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-      );
-      setCoins([...coins, ...data]);
-      setIsLoading(false);
-    } catch (err) {
-      setHasError(true);
-      setIsLoading(false);
-    }
-  };
+  const dispatch = useDispatch();
+  const coins = useSelector((state) => state.coins.coins);
+  const selectedCurrency = useSelector(
+    (state) => state.settings.selectedCurrency
+  );
 
   useEffect(() => {
-    getData();
+    dispatch(getData());
     //eslint-disable-next-line
   }, []);
-
   useEffect(() => {
-    if (page !== prevPage) {
-      getData();
-    }
-  });
+    dispatch(getData());
+    //eslint-disable-next-line
+  }, [selectedCurrency.value]);
+
   return (
     <TableContainer>
       {coins && (
@@ -56,7 +34,7 @@ export default function CoinTable(props) {
           <InfiniteScroll
             dataLength={coins.length}
             next={() => {
-              setPage(page + 1);
+              dispatch(updatePage());
             }}
             hasMore={true}
             loader={<h4>Loading 10 more items...</h4>}
@@ -75,14 +53,8 @@ export default function CoinTable(props) {
               </tr>
             </thead>
             <tbody>
-              {coins.map((coins) => {
-                return (
-                  <CoinItem
-                    key={coins.id}
-                    coins={coins}
-                    symbol={props.selectedCurrency.symbol}
-                  />
-                );
+              {coins.map((coins, index) => {
+                return <CoinItem key={index} coins={coins} />;
               })}
             </tbody>
           </InfiniteScroll>

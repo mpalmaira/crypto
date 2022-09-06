@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import Tippy from "@tippyjs/react";
 import { useParams } from "react-router-dom";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import IndividualChart from "../../components/IndividualChart/IndividualChart";
 import RangeSelector from "../../components/RangeSelector/RangeSelector";
+import { getCoin } from "../../store/coinPage/actions";
 import {
   MainContainer,
   YourSummary,
@@ -55,43 +56,27 @@ function usePrevious(value) {
 }
 
 export default function CoinPage(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [coinData, setCoinData] = useState(null);
-  const [hasError, setHasError] = useState(false);
-  const [chartData, setChartData] = useState(null);
+  const dispatch = useDispatch();
+  const selectedCurrency = useSelector(
+    (state) => state.settings.selectedCurrency
+  );
+  const coinData = useSelector((state) => state.coinPage.coinData);
+  const chartData = useSelector((state) => state.coinPage.chartData);
   const [days, setDays] = useState(1);
   const { id } = useParams();
   const prevId = usePrevious(id);
   const prevDays = usePrevious(days);
 
-  const getCoin = async (coin) => {
-    try {
-      setIsLoading(true);
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
-      );
-      const { data: dataChart } =
-        await axios(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=${props.selectedCurrency.value}&days=${days}
-      `);
-      setCoinData(data);
-      setChartData(dataChart.prices);
-      setIsLoading(false);
-    } catch (error) {
-      setHasError(true);
-      setIsLoading(false);
-    }
-  };
-
   const getProfit = (priceChange24, CurrentPrice) => {
     const profit = ((priceChange24 * CurrentPrice) / 100).toFixed(5);
     return profit > 0 ? (
       <ProfitGain>
-        {props.selectedCurrency.symbol}
+        {selectedCurrency.symbol}
         {profit}
       </ProfitGain>
     ) : (
       <ProfitLoss>
-        {props.selectedCurrency.symbol}
+        {selectedCurrency.symbol}
         {profit}
       </ProfitLoss>
     );
@@ -119,16 +104,17 @@ export default function CoinPage(props) {
     setDays(range);
   };
   useEffect(() => {
-    getCoin(id);
+    console.log("calling!");
+    dispatch(getCoin(id, days));
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (id !== prevId) {
-      getCoin(id);
+      dispatch(getCoin(id, days));
     }
     if (days !== prevDays) {
-      getCoin(id);
+      dispatch(getCoin(id, days));
     }
     //eslint-disable-next-line
   }, [id, days]);
@@ -159,28 +145,28 @@ export default function CoinPage(props) {
             <CoinMiddle>
               <CoinTop>
                 <CoinPrice>
-                  {props.selectedCurrency.symbol}
+                  {selectedCurrency.symbol}
                   {coinData.market_data.current_price[
-                    props.selectedCurrency.value
+                    selectedCurrency.value
                   ].toLocaleString()}
                 </CoinPrice>
                 <CoinPercentage
                   value={
                     coinData.market_data
                       .price_change_percentage_24h_in_currency[
-                      props.selectedCurrency.value
+                      selectedCurrency.value
                     ]
                   }
                 >
                   {coinData.market_data.price_change_percentage_24h_in_currency[
-                    props.selectedCurrency.value
+                    selectedCurrency.value
                   ] > 0 ? (
                     <ArrowUp />
                   ) : (
                     <ArrowDown />
                   )}
                   {coinData.market_data.price_change_percentage_24h_in_currency[
-                    props.selectedCurrency.value
+                    selectedCurrency.value
                   ].toFixed(2)}
                   %
                 </CoinPercentage>
@@ -191,11 +177,9 @@ export default function CoinPage(props) {
                   {getProfit(
                     coinData.market_data
                       .price_change_percentage_24h_in_currency[
-                      props.selectedCurrency.value
+                      selectedCurrency.value
                     ],
-                    coinData.market_data.current_price[
-                      props.selectedCurrency.value
-                    ]
+                    coinData.market_data.current_price[selectedCurrency.value]
                   )}
                 </span>
               </Profit>
@@ -206,16 +190,14 @@ export default function CoinPage(props) {
                 <ArrowUp />
                 <ATH>
                   <span>
-                    All Time High: {props.selectedCurrency.symbol}
+                    All Time High: {selectedCurrency.symbol}
                     {coinData.market_data.ath[
-                      props.selectedCurrency.value
+                      selectedCurrency.value
                     ].toLocaleString()}
                   </span>
                   <span>
                     {getDate(
-                      coinData.market_data.ath_date[
-                        props.selectedCurrency.value
-                      ]
+                      coinData.market_data.ath_date[selectedCurrency.value]
                     )}
                   </span>
                 </ATH>
@@ -224,16 +206,14 @@ export default function CoinPage(props) {
                 <ArrowDown />
                 <ATL>
                   <span>
-                    All Time Low: {props.selectedCurrency.symbol}
+                    All Time Low: {selectedCurrency.symbol}
                     {coinData.market_data.atl[
-                      props.selectedCurrency.value
+                      selectedCurrency.value
                     ].toLocaleString()}
                   </span>
                   <span>
                     {getDate(
-                      coinData.market_data.atl_date[
-                        props.selectedCurrency.value
-                      ]
+                      coinData.market_data.atl_date[selectedCurrency.value]
                     )}
                   </span>
                 </ATL>
@@ -242,45 +222,41 @@ export default function CoinPage(props) {
             <CoinRight>
               <CoinRightTop>
                 <CoinRightNum>
-                  <Plus>+</Plus>Market Cap: {props.selectedCurrency.symbol}
+                  <Plus>+</Plus>Market Cap: {selectedCurrency.symbol}
                   {coinData.market_data.market_cap[
-                    props.selectedCurrency.value
+                    selectedCurrency.value
                   ].toLocaleString()}
                 </CoinRightNum>
                 <CoinRightNum>
                   <Plus>+</Plus>Fully Diluted Valuation:
-                  {props.selectedCurrency.symbol}
+                  {selectedCurrency.symbol}
                   {coinData.market_data.fully_diluted_valuation[
-                    props.selectedCurrency.value
+                    selectedCurrency.value
                   ]
                     ? coinData.market_data.fully_diluted_valuation[
-                        props.selectedCurrency.value
+                        selectedCurrency.value
                       ].toLocaleString()
                     : "0.00"}
                 </CoinRightNum>
                 <CoinRightNum>
-                  <Plus>+</Plus>Volume 24h: {props.selectedCurrency.symbol}
+                  <Plus>+</Plus>Volume 24h: {selectedCurrency.symbol}
                   {coinData.market_data.total_volume[
-                    props.selectedCurrency.value
+                    selectedCurrency.value
                   ].toLocaleString()}
                 </CoinRightNum>
                 <CoinRightNum>
                   <Plus>+</Plus>Volume / Market:
                   {(
-                    coinData.market_data.total_volume[
-                      props.selectedCurrency.value
-                    ] /
-                    coinData.market_data.market_cap[
-                      props.selectedCurrency.value
-                    ]
+                    coinData.market_data.total_volume[selectedCurrency.value] /
+                    coinData.market_data.market_cap[selectedCurrency.value]
                   ).toFixed(5)}
                 </CoinRightNum>
               </CoinRightTop>
               <CoinRightMiddle>
                 <CoinRightNum>
-                  <Plus>+</Plus>Total Volume: {props.selectedCurrency.symbol}
+                  <Plus>+</Plus>Total Volume: {selectedCurrency.symbol}
                   {coinData.market_data.total_volume[
-                    props.selectedCurrency.value
+                    selectedCurrency.value
                   ].toLocaleString()}
                 </CoinRightNum>
                 <CoinRightNum>
@@ -352,9 +328,9 @@ export default function CoinPage(props) {
           </MainLinksDiv>
           <CurrencyConverterDiv>
             <CurrencyConverter
-              selectedCurrency={props.selectedCurrency}
+              selectedCurrency={selectedCurrency}
               currentPrice={
-                coinData.market_data.current_price[props.selectedCurrency.value]
+                coinData.market_data.current_price[selectedCurrency.value]
               }
               cryptoName={coinData.symbol}
             />
