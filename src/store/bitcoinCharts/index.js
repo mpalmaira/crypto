@@ -22,9 +22,7 @@ function bitcoinReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         hasError: false,
-        bitcoin: action.payload.bitcoin,
-        bitcoinHourly: action.payload.bitcoinHourly,
-        bitcoinCurrent: action.payload.bitcoinCurrent,
+        ...action.payload,
       };
     case GOT_BITCOIN_ERROR:
       return {

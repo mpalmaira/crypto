@@ -19,8 +19,7 @@ function coinPageReducer(state = initialState, action) {
     case GOT_COINPAGE_SUCCESS:
       return {
         ...state,
-        coinData: action.payload.coinData,
-        chartData: action.payload.chartData,
+        ...action.payload
       };
     case GOT_COINPAGE_ERROR:
       return {
