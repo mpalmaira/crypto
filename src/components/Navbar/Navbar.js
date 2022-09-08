@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Dropdown from "../Dropdown/Dropdown";
+import { SearchBar } from "../SearchBar/SearchBar";
 import {
   LeftContainer,
   NavContainer,
   NavTopContainer,
   MarketDataContainer,
   RightContainer,
-  SearchInput,
-  SearchDiv,
   StyledLink,
   DropDownDiv,
   ToggleThemeLeftDiv,
   ToggleThemeRigtDiv,
   ToggleThemeLogo,
-  StyledSearchIcon,
   StyledToggleThemeLeft,
   StyledToggleThemeRight,
 } from "./Navbar.styles";
@@ -36,10 +34,7 @@ export default function Navbar(props) {
           <StyledLink to="/Portfolio">Portfolio</StyledLink>
         </LeftContainer>
         <RightContainer>
-          <SearchDiv>
-            <StyledSearchIcon />
-            <SearchInput placeholder="Search..." />
-          </SearchDiv>
+          <SearchBar/>
           <DropDownDiv>
             <Dropdown />
           </DropDownDiv>
