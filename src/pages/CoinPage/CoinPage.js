@@ -266,7 +266,7 @@ export default function CoinPage(props) {
                 </CoinRightNum>
                 <CoinRightNum>
                   <Plus>+</Plus>Max Supply:{" "}
-                  {coinData.market_data.circulating_supply.toLocaleString()}{" "}
+                  {coinData.market_data.max_supply.toLocaleString()}{" "}
                   {coinData.symbol.toUpperCase()}
                 </CoinRightNum>
               </CoinRightMiddle>

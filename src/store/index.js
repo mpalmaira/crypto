@@ -8,6 +8,7 @@ import bitcoinReducer from "./bitcoinCharts";
 import marketDataReducer from "./marketData";
 import coinPageReducer from "./coinPage";
 import searchReducer from "./search";
+import portfolioReducer from "./portfolio";
 
 const rootReducer = combineReducers({
   coins: coinTableReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   marketData: marketDataReducer,
   coinPage: coinPageReducer,
   search: searchReducer,
+  portfolio: portfolioReducer,
 });
 const persistConfig = {
   key: "root",

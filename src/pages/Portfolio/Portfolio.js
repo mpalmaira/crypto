@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import PortfolioModule from "../../components/PortfolioModule/PortfolioModule";
+import {
+  clearAssetSearch,
+  clearAssetFromResults,
+} from "../../store/portfolio/actions";
 import {
   MainContainer,
   AddAssetContainer,
@@ -9,11 +14,14 @@ import {
 
 export default function Portfolio() {
   const [openModule, setOpenModule] = useState(false);
+  const dispatch = useDispatch();
   const handleAddAssetClick = () => {
     setOpenModule(true);
   };
   const handleCloseClick = () => {
     setOpenModule(false);
+    dispatch(clearAssetSearch());
+    dispatch(clearAssetFromResults());
   };
   return (
     <MainContainer>
