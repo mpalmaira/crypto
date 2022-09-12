@@ -20,6 +20,7 @@ export const AddAssetButton = styled.button`
   font-size: 20px;
   border-radius: 10px;
   padding: 10px 100px;
+  cursor: pointer;
 `;
 export const StyledText = styled.span`
   font-size: 18px;

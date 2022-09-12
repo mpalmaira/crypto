@@ -56,7 +56,6 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
   const selectedCurrency = state.settings.selectedCurrency.value;
   const assets = state.portfolio.assets;
   const addedAsset = [...assets, asset];
-  console.log(addedAsset);
   try {
     dispatch({ type: ASSET_DATA_PENDING });
     const assetData = await Promise.all(
@@ -65,6 +64,9 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
           data,
         } = await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}
         `);
+        const { data: purchased } = await axios(
+          `https://api.coingecko.com/api/v3/coins/${coin.data.id}/history?date=${coin.datePurchased}`
+        );
         return {
           ...coin,
           currentPrice: data.market_data.current_price[selectedCurrency],
@@ -74,14 +76,14 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
           marketCap: data.market_data.market_cap[selectedCurrency],
           circulatingSupply: data.market_data.circulating_supply,
           maxSupply: data.market_data.max_supply,
+          purchasedPrice: purchased.market_data.current_price[selectedCurrency],
         };
       })
     );
     dispatch({
       type: ASSET_DATA_SUCCESS,
-      payload: [assetData],
+      payload: assetData,
     });
-    console.log([assetData]);
   } catch (err) {
     dispatch({
       type: ASSET_DATA_ERROR,

@@ -171,6 +171,7 @@ export const StyledClose = styled.div`
   justify-content: center;
   border-radius: 10px;
   font-size: 15px;
+  cursor: pointer;
 `;
 export const StyledSave = styled.div`
   color: ${(props) => props.theme.mainFont};
@@ -182,4 +183,5 @@ export const StyledSave = styled.div`
   justify-content: center;
   border-radius: 10px;
   font-size: 15px;
+  cursor: pointer;
 `;
