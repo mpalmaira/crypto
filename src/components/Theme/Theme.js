@@ -4,6 +4,7 @@ export const darkTheme = {
   mainFont: "#FFFFFF",
   tertiary: "#2C2F36",
   mainTableBorder: `#707070`,
+  saveButtonFont: `#18D860`,
 };
 
 export const lightTheme = {
@@ -11,4 +12,5 @@ export const lightTheme = {
   secondary: "#FFFFFF",
   mainFont: "#2C2F36",
   mainTableBorder: "#dcdcdc",
+  saveButtonFont: `#26282F`,
 };

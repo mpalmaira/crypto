@@ -8,7 +8,13 @@ import bitcoinReducer from "./bitcoinCharts";
 import marketDataReducer from "./marketData";
 import coinPageReducer from "./coinPage";
 import searchReducer from "./search";
+import portfolioReducer from "./portfolio";
 
+const assetsPersistConfig = {
+  key: "assets",
+  storage: storage,
+  whitelist: ["assets"],
+};
 const rootReducer = combineReducers({
   coins: coinTableReducer,
   settings: settingsReducer,
@@ -16,12 +22,14 @@ const rootReducer = combineReducers({
   marketData: marketDataReducer,
   coinPage: coinPageReducer,
   search: searchReducer,
+  portfolio: persistReducer(assetsPersistConfig,portfolioReducer),
 });
 const persistConfig = {
   key: "root",
   storage,
   whitelist: ["settings"],
 };
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(persistedReducer, applyMiddleware(thunk));
