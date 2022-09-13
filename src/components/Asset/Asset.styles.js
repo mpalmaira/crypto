@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
-  width: 80%;
-  margin-top: 10px;
-  box-sizing: border-box;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 `;
 export const AssetContainer = styled.div`
   display: flex;
@@ -40,10 +41,11 @@ export const CoinContainer = styled.div`
 `;
 export const MarketContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
-  width: 100%;
+  width: 70em;
   height: 20%;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   border-radius: 10px;
   padding: 30px 10px;
   margin: 15px 0px;
@@ -90,11 +92,12 @@ export const ProgressBarDiv = styled.div`
 `;
 export const YourCoinContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
-  width: 100%;
   height: 20%;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   border-radius: 10px;
   padding: 30px 10px;
   margin-top: 15px;
+  width: 70em;
 `;
