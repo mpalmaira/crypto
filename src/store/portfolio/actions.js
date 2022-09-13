@@ -9,6 +9,7 @@ import {
   ASSET_DATA_PENDING,
   ASSET_DATA_SUCCESS,
   ASSET_DATA_ERROR,
+  DELETE_ASSET
 } from "./index";
 
 export const getAssetSearchData = (searchTerm) => async (
@@ -69,6 +70,7 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
         );
         return {
           ...coin,
+          id: `${Math.random()}`,
           currentPrice: data.market_data.current_price[selectedCurrency],
           priceChange24h:
             data.market_data.price_change_24h_in_currency[selectedCurrency],
@@ -91,3 +93,12 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
     });
   }
 };
+
+export const deleteAsset = (asset) => (dispatch,getState) => {
+  const state = getState()
+  const assets = state.portfolio.assets
+  dispatch({
+    type: DELETE_ASSET,
+    payload: assets.filter(el =>el.id !== asset.id)
+  })
+}

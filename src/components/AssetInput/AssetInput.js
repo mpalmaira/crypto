@@ -58,6 +58,7 @@ export const AssetInput = (props) => {
   const [dateInput, setDateInput] = useState(new Date());
   const assetSearch = useSelector((state) => state.portfolio.assetSearch);
   const isLoading = useSelector((state) => state.portfolio.isLoading);
+
   const selectedAsset = useSelector(
     (state) => state.portfolio.addAssetSelection
   );
@@ -91,11 +92,13 @@ export const AssetInput = (props) => {
   };
   const handleSave = () => {
     props.handleCloseClick();
+    console.log(dateInput);
     dispatch(
       addAssetSelected({
         data: selectedAsset,
         amount: parseInt(amountInput),
         datePurchased: dayjs(dateInput).format("DD-MM-YYYY"),
+        dateUnformatted: dayjs(dateInput).format("MM-DD-YYYY"),
       })
     );
   };
@@ -164,6 +167,7 @@ export const AssetInput = (props) => {
               onChange={handleDateInputChange}
               value={dateInput}
               dayAriaLabel="Day"
+              maxDate={new Date()}
               required
             />
           </DateContainer>
