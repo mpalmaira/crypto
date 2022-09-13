@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ReactComponent as DeleteSymbol } from "../SVG/xmark-solid.svg";
 
 export const MainContainer = styled.div`
   width: 100%;
@@ -100,4 +101,9 @@ export const YourCoinContainer = styled.div`
   padding: 30px 10px;
   margin-top: 15px;
   width: 70em;
+`;
+export const StyledDelete = styled(DeleteSymbol)`
+  fill: red;
+  height: 25px;
+  cursor: pointer;
 `;

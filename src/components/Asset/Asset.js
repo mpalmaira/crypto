@@ -1,6 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
+import { deleteAsset } from "../../store/portfolio/actions";
 import {
   MainContainer,
   AssetContainer,
@@ -18,6 +19,7 @@ import {
   Styled24hChange,
   YourCoinContainer,
   StyledPriceChange,
+  StyledDelete,
 } from "./Asset.styles";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
@@ -33,6 +35,7 @@ export const Asset = (props) => {
   const selectedCurrency = useSelector(
     (state) => state.settings.selectedCurrency
   );
+  const dispatch = useDispatch();
   return (
     <MainContainer>
       <AssetContainer>
@@ -43,6 +46,7 @@ export const Asset = (props) => {
           <span>
             {props.asset.data.name}({props.asset.data.symbol})
           </span>
+          <StyledDelete onClick={() => dispatch(deleteAsset(props.asset))} />
         </ImageContainer>
         <CoinContainer>
           <span>Market Price:</span>

@@ -38,6 +38,8 @@ export const CLEAR_ASSET_FROM_RESULTS = "CLEAR_ASSET_FROM_RESULTS";
 export const ASSET_DATA_PENDING = "ASSET_DATA_PENDING";
 export const ASSET_DATA_SUCCESS = "ASSET_DATA_SUCCESS";
 export const ASSET_DATA_ERROR = "ASSET_DATA_ERROR";
+export const DELETE_ASSET = "DELETE_ASSET";
+
 
 function portfolioReducer(state = initialState, action) {
   switch (action.type) {
@@ -90,6 +92,11 @@ function portfolioReducer(state = initialState, action) {
         dataAssetLoading: false,
         dataAssetError: true,
       };
+    case DELETE_ASSET:
+      return{
+        ...state,
+        assets: action.payload
+      }
     default:
       return state;
   }
