@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 import { deleteAsset } from "../../store/portfolio/actions";
 import {
   MainContainer,
@@ -36,6 +37,8 @@ export const Asset = (props) => {
     (state) => state.settings.selectedCurrency
   );
   const dispatch = useDispatch();
+  dayjs.extend(customParseFormat);
+
   return (
     <MainContainer>
       <AssetContainer>
@@ -137,9 +140,7 @@ export const Asset = (props) => {
             </CoinData>
             <CoinData>
               <span>Purchase Date</span>
-              <StyledData>
-                {dayjs(props.asset.datePurchased).format("DD-MM-YYYY")}
-              </StyledData>
+              <StyledData>{props.asset.dateUnformatted}</StyledData>
             </CoinData>
           </YourCoinContainer>
         </CoinContainer>
