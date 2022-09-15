@@ -18,7 +18,11 @@ const PortfolioModule = (props) => {
           <StyledClose onClick={props.handleCloseClick} />
         </TopContainer>
         <MiddleContainer>
-          <AssetInput handleCloseClick={props.handleCloseClick}/>
+          <AssetInput
+            handleCloseClick={props.handleCloseClick}
+            asset={props.asset}
+            editing = {props.editing}
+          />
         </MiddleContainer>
       </ModuleContainer>
     </MainContainer>

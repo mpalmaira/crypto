@@ -13,17 +13,24 @@ import {
   StyledText,
 } from "./Portfolio.styles";
 
-export default function Portfolio() {
+export default function Portfolio(props) {
   const [openModule, setOpenModule] = useState(false);
+  const [editableAsset, setEditableAsset] = useState(null);
+  const [editing, setEditing] = useState(false);
   const dispatch = useDispatch();
   const assets = useSelector((state) => state.portfolio.assets);
-  const handleAddAssetClick = () => {
+  const handleEdit = (asset) => {
     setOpenModule(true);
+    setEditableAsset(asset);
+    setEditing(true);
   };
   const handleCloseClick = () => {
     setOpenModule(false);
     dispatch(clearAssetSearch());
     dispatch(clearAssetFromResults());
+  };
+  const handleAddAssetClick = () => {
+    setOpenModule(true);
   };
   return (
     <MainContainer>
@@ -31,10 +38,23 @@ export default function Portfolio() {
         <AddAssetButton onClick={handleAddAssetClick}>Add Asset</AddAssetButton>
       </AddAssetContainer>
       <StyledText>Your statistics</StyledText>
-      {openModule && <PortfolioModule handleCloseClick={handleCloseClick} />}
+      {openModule && (
+        <PortfolioModule
+          handleCloseClick={handleCloseClick}
+          asset={editableAsset}
+          editing={editing}
+        />
+      )}
       {assets &&
         assets.map((asset, index) => {
-          return <Asset key={index} asset={asset} />;
+          return (
+            <Asset
+              key={index}
+              asset={asset}
+              handleEdit={handleEdit}
+              editing={editing}
+            />
+          );
         })}
     </MainContainer>
   );
