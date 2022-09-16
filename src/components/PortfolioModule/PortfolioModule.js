@@ -21,7 +21,8 @@ const PortfolioModule = (props) => {
           <AssetInput
             handleCloseClick={props.handleCloseClick}
             asset={props.asset}
-            editing = {props.editing}
+            editing={props.editing}
+            toggleEditing={props.toggleEditing}
           />
         </MiddleContainer>
       </ModuleContainer>

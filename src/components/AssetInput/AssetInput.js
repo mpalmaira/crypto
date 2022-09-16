@@ -52,17 +52,16 @@ const SearchResults = (props) => {
 
 export const AssetInput = (props) => {
   const [searchTerm, setSearchTerm] = useState(
-    props.asset ? props.asset.data.name : ""
+    props.editing ? props.asset?.data?.name : ""
   );
   const [showResults, setShowResults] = useState(false);
   const [selected, setSelected] = useState(false);
   const [amountInput, setAmountInput] = useState(
-    props.asset ? props.asset.amount : ""
+    props.editing ? props.asset?.amount : ""
   );
   const [dateInput, setDateInput] = useState(
-    props.asset ? new Date(props.asset.datePurchased) : new Date()
+    props.editing ? new Date(props?.asset.datePurchased) : new Date()
   );
-
   const assetSearch = useSelector((state) => state.portfolio.assetSearch);
   const isLoading = useSelector((state) => state.portfolio.isLoading);
 
@@ -99,7 +98,6 @@ export const AssetInput = (props) => {
   };
   const handleSave = () => {
     props.handleCloseClick();
-
     if (props.editing === true) {
       dispatch(
         editAsset({
@@ -108,8 +106,8 @@ export const AssetInput = (props) => {
           amount: parseInt(amountInput),
           datePurchased: dateInput,
         })
-        
       );
+      props.toggleEditing();
     } else {
       dispatch(
         addAssetSelected({
@@ -133,19 +131,21 @@ export const AssetInput = (props) => {
       <FormContainer>
         <SelectedAssetContainer>
           <SelectedAssetImage>
-            {!props.editing && selected && <img src={selectedAsset.thumb} alt="selected asset" />}
-             {props.asset && <img src={props.asset.data.thumb} alt="selected asset" />}
+            {selected && <img src={selectedAsset.thumb} alt="selected asset" />}
+            {props.editing && (
+              <img src={props.asset.data.thumb} alt="selected asset" />
+            )}
           </SelectedAssetImage>
-          {!props.editing && selected && (
+          {selected && (
             <span>
               {selectedAsset.name}({selectedAsset.symbol})
             </span>
           )}
-          {props.asset && <span>
+          {props.editing && (
+            <span>
               {props.asset.data.name}({props.asset.data.symbol})
-            </span>}
-
-          
+            </span>
+          )}
         </SelectedAssetContainer>
         <FormDiv>
           <SearchDiv onSubmit={(e) => e.preventDefault()}>

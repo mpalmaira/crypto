@@ -19,15 +19,19 @@ export default function Portfolio(props) {
   const [editing, setEditing] = useState(false);
   const dispatch = useDispatch();
   const assets = useSelector((state) => state.portfolio.assets);
+  const toggleEditing = () => {
+    setEditing(!editing);
+  };
   const handleEdit = (asset) => {
     setOpenModule(true);
     setEditableAsset(asset);
-    setEditing(true);
+    toggleEditing();
   };
   const handleCloseClick = () => {
     setOpenModule(false);
     dispatch(clearAssetSearch());
     dispatch(clearAssetFromResults());
+    toggleEditing();
   };
   const handleAddAssetClick = () => {
     setOpenModule(true);
@@ -43,6 +47,7 @@ export default function Portfolio(props) {
           handleCloseClick={handleCloseClick}
           asset={editableAsset}
           editing={editing}
+          toggleEditing={toggleEditing}
         />
       )}
       {assets &&
