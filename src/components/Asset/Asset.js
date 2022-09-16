@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
-import { deleteAsset} from "../../store/portfolio/actions";
+import { deleteAsset } from "../../store/portfolio/actions";
 import {
   MainContainer,
   AssetContainer,
