@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as DeleteSymbol } from "../SVG/xmark-solid.svg";
+import { ReactComponent as EditSymbol } from "../SVG/edit.svg";
 
 export const MainContainer = styled.div`
   width: 100%;
@@ -106,4 +107,12 @@ export const StyledDelete = styled(DeleteSymbol)`
   fill: red;
   height: 25px;
   cursor: pointer;
+`;
+export const StyledEdit = styled(EditSymbol)`
+  height: 25px;
+  cursor: pointer;
+  margin-left: 10px;
+`;
+export const IconContainer = styled.div`
+  display: flex;
 `;

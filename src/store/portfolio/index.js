@@ -18,7 +18,6 @@ const initialState = {
         thumb: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png",
       },
       datePurchased: "11-09-2022",
-      dateUnformatted: "09-11-2022",
       marketCap: 412497810192,
       maxSupply: 21000000,
       priceChange24h: 334.66,
@@ -40,6 +39,7 @@ export const ASSET_DATA_PENDING = "ASSET_DATA_PENDING";
 export const ASSET_DATA_SUCCESS = "ASSET_DATA_SUCCESS";
 export const ASSET_DATA_ERROR = "ASSET_DATA_ERROR";
 export const DELETE_ASSET = "DELETE_ASSET";
+export const EDIT_ASSET = "EDIT_ASSET";
 
 function portfolioReducer(state = initialState, action) {
   switch (action.type) {
@@ -93,6 +93,11 @@ function portfolioReducer(state = initialState, action) {
         dataAssetError: true,
       };
     case DELETE_ASSET:
+      return {
+        ...state,
+        assets: action.payload,
+      };
+    case EDIT_ASSET:
       return {
         ...state,
         assets: action.payload,

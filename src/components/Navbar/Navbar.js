@@ -25,6 +25,7 @@ export default function Navbar(props) {
 
   useEffect(() => {
     dispatch(getData());
+    // eslint-disable-next-line
   }, []);
   return (
     <NavContainer>
@@ -34,7 +35,7 @@ export default function Navbar(props) {
           <StyledLink to="/Portfolio">Portfolio</StyledLink>
         </LeftContainer>
         <RightContainer>
-          <SearchBar/>
+          <SearchBar />
           <DropDownDiv>
             <Dropdown />
           </DropDownDiv>

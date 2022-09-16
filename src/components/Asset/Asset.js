@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
 import { deleteAsset } from "../../store/portfolio/actions";
 import {
   MainContainer,
@@ -21,6 +20,8 @@ import {
   YourCoinContainer,
   StyledPriceChange,
   StyledDelete,
+  StyledEdit,
+  IconContainer,
 } from "./Asset.styles";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
@@ -37,7 +38,9 @@ export const Asset = (props) => {
     (state) => state.settings.selectedCurrency
   );
   const dispatch = useDispatch();
-  dayjs.extend(customParseFormat);
+  const editAsset = () => {
+    props.handleEdit(props.asset);
+  };
 
   return (
     <MainContainer>
@@ -49,7 +52,10 @@ export const Asset = (props) => {
           <span>
             {props.asset.data.name}({props.asset.data.symbol})
           </span>
-          <StyledDelete onClick={() => dispatch(deleteAsset(props.asset))} />
+          <IconContainer>
+            <StyledDelete onClick={() => dispatch(deleteAsset(props.asset))} />
+            <StyledEdit onClick={editAsset} />
+          </IconContainer>
         </ImageContainer>
         <CoinContainer>
           <span>Market Price:</span>
@@ -140,7 +146,9 @@ export const Asset = (props) => {
             </CoinData>
             <CoinData>
               <span>Purchase Date</span>
-              <StyledData>{props.asset.dateUnformatted}</StyledData>
+              <StyledData>
+                {dayjs(props.asset.datePurchased).format("MM-DD-YYYY")}
+              </StyledData>
             </CoinData>
           </YourCoinContainer>
         </CoinContainer>

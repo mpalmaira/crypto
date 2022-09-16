@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import {
   GET_ASSETDATA_PENDING,
   GET_ASSETDATA_SUCCESS,
@@ -9,7 +10,8 @@ import {
   ASSET_DATA_PENDING,
   ASSET_DATA_SUCCESS,
   ASSET_DATA_ERROR,
-  DELETE_ASSET
+  DELETE_ASSET,
+  EDIT_ASSET,
 } from "./index";
 
 export const getAssetSearchData = (searchTerm) => async (
@@ -66,7 +68,9 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
         } = await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}
         `);
         const { data: purchased } = await axios(
-          `https://api.coingecko.com/api/v3/coins/${coin.data.id}/history?date=${coin.datePurchased}`
+          `https://api.coingecko.com/api/v3/coins/${
+            coin.data.id
+          }/history?date=${dayjs(coin.datePurchased).format("DD-MM-YYYY")}`
         );
         return {
           ...coin,
@@ -94,11 +98,31 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
   }
 };
 
-export const deleteAsset = (asset) => (dispatch,getState) => {
-  const state = getState()
-  const assets = state.portfolio.assets
+export const deleteAsset = (asset) => (dispatch, getState) => {
+  const state = getState();
+  const assets = state.portfolio.assets;
   dispatch({
     type: DELETE_ASSET,
-    payload: assets.filter(el =>el.id !== asset.id)
-  })
-}
+    payload: assets.filter((el) => el.id !== asset.id),
+  });
+};
+
+export const editAsset = (asset) => (dispatch, getState) => {
+  const state = getState();
+  const assets = state.portfolio.assets;
+  const newAssets = assets.map((el) => {
+    if (el.id === asset.id) {
+      console.log(asset);
+      return {
+        ...el,
+        ...asset,
+      };
+    } else {
+      return el;
+    }
+  });
+  dispatch({
+    type: EDIT_ASSET,
+    payload: newAssets,
+  });
+};

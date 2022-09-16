@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-date-picker";
-import dayjs from "dayjs";
 import {
   getAssetSearchData,
   clearAssetSearch,
   selectedAssetFromResults,
   addAssetSelected,
+  editAsset,
 } from "../../store/portfolio/actions";
 import {
   MainContainer,
@@ -51,11 +51,17 @@ const SearchResults = (props) => {
 };
 
 export const AssetInput = (props) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(
+    props.editing ? props.asset?.data?.name : ""
+  );
   const [showResults, setShowResults] = useState(false);
   const [selected, setSelected] = useState(false);
-  const [amountInput, setAmountInput] = useState("");
-  const [dateInput, setDateInput] = useState(new Date());
+  const [amountInput, setAmountInput] = useState(
+    props.editing ? props.asset?.amount : ""
+  );
+  const [dateInput, setDateInput] = useState(
+    props.editing ? new Date(props?.asset.datePurchased) : new Date()
+  );
   const assetSearch = useSelector((state) => state.portfolio.assetSearch);
   const isLoading = useSelector((state) => state.portfolio.isLoading);
 
@@ -92,15 +98,25 @@ export const AssetInput = (props) => {
   };
   const handleSave = () => {
     props.handleCloseClick();
-    console.log(dateInput);
-    dispatch(
-      addAssetSelected({
-        data: selectedAsset,
-        amount: parseInt(amountInput),
-        datePurchased: dayjs(dateInput).format("DD-MM-YYYY"),
-        dateUnformatted: dayjs(dateInput).format("MM-DD-YYYY"),
-      })
-    );
+    if (props.editing === true) {
+      dispatch(
+        editAsset({
+          ...props.asset,
+          data: props.asset.data,
+          amount: parseInt(amountInput),
+          datePurchased: dateInput,
+        })
+      );
+      props.toggleEditing();
+    } else {
+      dispatch(
+        addAssetSelected({
+          data: selectedAsset,
+          amount: parseInt(amountInput),
+          datePurchased: dateInput,
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -116,10 +132,18 @@ export const AssetInput = (props) => {
         <SelectedAssetContainer>
           <SelectedAssetImage>
             {selected && <img src={selectedAsset.thumb} alt="selected asset" />}
+            {props.editing && (
+              <img src={props.asset.data.thumb} alt="selected asset" />
+            )}
           </SelectedAssetImage>
           {selected && (
             <span>
               {selectedAsset.name}({selectedAsset.symbol})
+            </span>
+          )}
+          {props.editing && (
+            <span>
+              {props.asset.data.name}({props.asset.data.symbol})
             </span>
           )}
         </SelectedAssetContainer>
