@@ -51,7 +51,7 @@ export const NavMarketData = (props) => {
         <div>{props.marketData.market_cap_percentage.eth.toFixed(0)}%</div>
         <ProgressBarDiv>
           <ProgressBar
-            value={props.marketData.market_cap_percentage.etc}
+            value={props.marketData.market_cap_percentage.eth}
             max={100}
           />
         </ProgressBarDiv>

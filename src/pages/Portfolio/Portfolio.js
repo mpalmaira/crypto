@@ -31,7 +31,9 @@ export default function Portfolio(props) {
     setOpenModule(false);
     dispatch(clearAssetSearch());
     dispatch(clearAssetFromResults());
-    toggleEditing();
+    if(editing===true){
+      toggleEditing()
+    }
   };
   const handleAddAssetClick = () => {
     setOpenModule(true);
