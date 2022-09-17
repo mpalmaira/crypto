@@ -5,6 +5,7 @@ export const TableContainer = styled.div`
   align-items: center;
   margin: 20px 0px;
   justify-content: center;
+  width: 100%;
 `;
 
 export const StyledTable = styled.table`

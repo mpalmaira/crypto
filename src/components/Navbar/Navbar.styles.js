@@ -26,6 +26,9 @@ export const NavTopContainer = styled.div`
 `;
 export const MarketDataContainer = styled.div`
   width: 60%;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `;
 export const LeftContainer = styled.div`
   display: flex;
