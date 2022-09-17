@@ -10,7 +10,7 @@ export const TableContainer = styled.div`
 export const StyledTable = styled.table`
   table-layout: fixed;
   color: ${(props) => props.theme.mainFont};
-  width: 80%;
+  width: 100%;
   text-align: center;
   background-color: ${(props) => props.theme.secondary};
   border-radius: 20px;

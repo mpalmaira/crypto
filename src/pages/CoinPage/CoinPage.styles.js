@@ -10,17 +10,21 @@ export const MainContainer = styled.div`
   align-items: center;
   margin-top: 60px;
   flex-direction: column;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
 `;
 export const YourSummary = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   font-size: 22px;
   margin-bottom: 20px;
 `;
 export const CoinContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
   align-items: center;
 `;
 export const CoinLeft = styled.div`
@@ -177,12 +181,12 @@ export const CoinRightMiddle = styled.div`
 `;
 export const DescriptionText = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   font-size: 22px;
   margin: 20px 0px;
 `;
 export const DescriptionDiv = styled.div`
-  width: 80%;
+  width: 100%;
   background-color: ${(props) => props.theme.secondary};
   text-align: center;
   padding: 30px;
@@ -199,7 +203,7 @@ export const CoinDescription = styled.span`
 `;
 export const MainLinksDiv = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0px;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DropDownContainer = styled("div")`
   width: 136px;
-  background-color: ${(props) => props.theme.main};
+  background-color: ${(props) => props.theme.tertiary};
   height: 55px;
   border-radius: 10px;
   color: ${(props) => props.theme.mainFont};

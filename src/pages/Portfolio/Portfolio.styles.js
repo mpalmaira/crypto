@@ -7,6 +7,11 @@ export const MainContainer = styled.div`
   align-items: center;
   margin-top: 60px;
   flex-direction: column;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+  margin-top: 60px;
 `;
 export const AddAssetContainer = styled.div`
   display: flex;
@@ -27,5 +32,5 @@ export const StyledText = styled.span`
   color: ${(props) => props.theme.mainFont};
   display: flex;
   justify-content: start;
-  width: 80%;
+  width: 100%;
 `;

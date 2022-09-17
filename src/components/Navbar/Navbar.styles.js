@@ -10,6 +10,10 @@ export const NavContainer = styled.div`
   width: 100%;
   justify-content: center;
   flex: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+  border-radius: 10px;
 `;
 
 export const NavTopContainer = styled.div`
@@ -18,6 +22,7 @@ export const NavTopContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 10px;
 `;
 export const MarketDataContainer = styled.div`
   width: 50%;
@@ -31,6 +36,9 @@ export const StyledLink = styled(Link)`
   padding: 25px 50px;
   text-decoration: none;
   font-weight: 500;
+  &.active {
+    background-color: ${(props) => props.theme.tertiary};
+  }
 `;
 
 export const RightContainer = styled.div`

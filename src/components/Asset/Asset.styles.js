@@ -10,16 +10,18 @@ export const MainContainer = styled.div`
 `;
 export const AssetContainer = styled.div`
   display: flex;
+  width: 100%;
 `;
 export const ImageContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
-  height: 220px;
+  height: 200px;
   width: 180px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 20px;
 `;
 export const CoinImage = styled.div`
   background-color: ${(props) => props.theme.main};
@@ -43,7 +45,7 @@ export const CoinContainer = styled.div`
 `;
 export const MarketContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
-  width: 70em;
+  width: 100%;
   height: 20%;
   display: flex;
   align-items: center;
@@ -54,10 +56,12 @@ export const MarketContainer = styled.div`
 `;
 export const CoinData = styled.div`
   padding: 20px;
+  font-size: 15px;
 `;
 export const StyledData = styled.span`
   color: lime;
   margin-left: 10px;
+  font-size: 15px;
 `;
 export const Styled24hChange = styled.span`
   color: ${(props) => (props.value > 0 ? "lime" : "red")};
@@ -101,7 +105,7 @@ export const YourCoinContainer = styled.div`
   border-radius: 10px;
   padding: 30px 10px;
   margin-top: 15px;
-  width: 70em;
+  width: 100%;
 `;
 export const StyledDelete = styled(DeleteSymbol)`
   fill: red;
