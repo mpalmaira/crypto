@@ -4,6 +4,9 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 export const StyledCurrencyArrows = styled(CurrencyArrows)`
   fill: ${(props) => props.theme.mainFont};
@@ -15,6 +18,9 @@ export const ConverterDiv = styled.div`
   display: flex;
   align-items: center;
   justify-conter: center;
+  @media (max-width: 767px) {
+    margin: 10px 0px;
+  }
 `;
 export const Input = styled.input`
   background: none;
