@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
   color: ${(props) => props.theme.mainFont};
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-top: 60px;
   flex-direction: column;
@@ -33,4 +33,10 @@ export const StyledText = styled.span`
   display: flex;
   justify-content: start;
   width: 100%;
+  @media (max-width: 767px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
 `;

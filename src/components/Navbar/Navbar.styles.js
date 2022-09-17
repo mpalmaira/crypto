@@ -25,7 +25,7 @@ export const NavTopContainer = styled.div`
   border-radius: 10px;
 `;
 export const MarketDataContainer = styled.div`
-  width: 50%;
+  width: 60%;
 `;
 export const LeftContainer = styled.div`
   display: flex;
@@ -36,9 +36,6 @@ export const StyledLink = styled(Link)`
   padding: 25px 50px;
   text-decoration: none;
   font-weight: 500;
-  &.active {
-    background-color: ${(props) => props.theme.tertiary};
-  }
 `;
 
 export const RightContainer = styled.div`

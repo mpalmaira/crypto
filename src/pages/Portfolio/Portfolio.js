@@ -31,8 +31,8 @@ export default function Portfolio(props) {
     setOpenModule(false);
     dispatch(clearAssetSearch());
     dispatch(clearAssetFromResults());
-    if(editing){
-      toggleEditing()
+    if (editing) {
+      toggleEditing();
     }
   };
   const handleAddAssetClick = () => {
@@ -52,17 +52,20 @@ export default function Portfolio(props) {
           toggleEditing={toggleEditing}
         />
       )}
-      {assets &&
-        assets.map((asset, index) => {
-          return (
-            <Asset
-              key={index}
-              asset={asset}
-              handleEdit={handleEdit}
-              editing={editing}
-            />
-          );
-        })}
+
+      <div>
+        {assets &&
+          assets.map((asset, index) => {
+            return (
+              <Asset
+                key={index}
+                asset={asset}
+                handleEdit={handleEdit}
+                editing={editing}
+              />
+            );
+          })}
+      </div>
     </MainContainer>
   );
 }

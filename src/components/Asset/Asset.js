@@ -22,6 +22,7 @@ import {
   StyledDelete,
   StyledEdit,
   IconContainer,
+  StyledText
 } from "./Asset.styles";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
@@ -58,7 +59,7 @@ export const Asset = (props) => {
           </IconContainer>
         </ImageContainer>
         <CoinContainer>
-          <span>Market Price:</span>
+          <StyledText>Market Price:</StyledText>
           <MarketContainer>
             <CoinData>
               <span>Current Price:</span>

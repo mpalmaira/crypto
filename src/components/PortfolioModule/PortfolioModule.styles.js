@@ -1,15 +1,14 @@
 import styled from "styled-components";
 import { ReactComponent as Close } from "../SVG/xmark-solid.svg";
 
-
 export const MainContainer = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   top: 30px;
+  position: absolute;
 `;
 export const ModuleContainer = styled.div`
   background-color: ${(props) => props.theme.main};
@@ -19,7 +18,11 @@ export const ModuleContainer = styled.div`
   z-index: 10;
   display: flex;
   flex-direction: column;
-  border-radius: 10px
+  border-radius: 10px;
+  @media (max-width: 767px) {
+    width: 90%;
+    height: 80%;
+  }
 `;
 export const TopContainer = styled.div`
   display: flex;
@@ -29,6 +32,12 @@ export const TopContainer = styled.div`
   height: 10%;
   margin-left: auto;
   padding: 30px 0px;
+  @media (max-width: 767px) {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+  }
 `;
 export const MiddleContainer = styled.div`
   display: flex;
@@ -48,4 +57,5 @@ export const StyledClose = styled(Close)`
   height: 40px;
   width: 40px;
   margin-left: auto;
+  cursor: pointer;
 `;
