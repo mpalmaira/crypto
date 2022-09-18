@@ -6,6 +6,7 @@ import { createGlobalStyle } from "styled-components";
 import { darkTheme, lightTheme } from "./components/Theme/Theme";
 import { HomePage, CoinPage, Portfolio } from "./pages";
 import Navbar from "./components/Navbar";
+import NavbarMobile from "./components/NavbarMobile/NavbarMobile";
 import { switchTheme } from "./store/settings/actions";
 
 const GlobalStyle = createGlobalStyle`
@@ -28,6 +29,7 @@ export default function App() {
       <GlobalStyle />
       <Router>
         <Navbar switchTheme={() => dispatch(switchTheme())} />
+        <NavbarMobile/>
         <Switch>
           <Route exact path="/" component={(props) => <HomePage />} />
           <Route exact path="/portfolio" component={Portfolio} />

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { ReactComponent as ToggleThemeRight } from "../SVG/ToggleThemeRight.svg";
 import { ReactComponent as ToggleThemeLeft } from "../SVG/ToggleThemeLeft.svg";
 
@@ -12,9 +12,7 @@ export const NavContainer = styled.div`
   flex: 1;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 24px;
   border-radius: 10px;
-  
 `;
 
 export const NavTopContainer = styled.div`
@@ -27,7 +25,6 @@ export const NavTopContainer = styled.div`
   @media (max-width: 767px) {
     padding: 0px 10px;
   }
-  
 `;
 export const MarketDataContainer = styled.div`
   width: 60%;
@@ -38,12 +35,14 @@ export const MarketDataContainer = styled.div`
 export const LeftContainer = styled.div`
   display: flex;
 `;
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(NavLink)`
+  background-color: ${(props) => props.theme.secondary};
   color: ${(props) => props.theme.mainFont};
   font-size: 30px;
   padding: 25px 50px;
   text-decoration: none;
   font-weight: 500;
+  border-radius: 10px;
   @media (max-width: 767px) {
     display: none;
   }
@@ -57,7 +56,7 @@ export const RightContainer = styled.div`
 export const DropDownDiv = styled.div`
   margin-right: 25px;
   z-index: 1;
-  @media(max-width:767px){
+  @media (max-width: 767px) {
     margin-right: 7px;
   }
 `;
