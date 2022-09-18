@@ -47,7 +47,7 @@ export const ResultsDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 10px
+  padding: 10px;
 `;
 export const StyledLink = styled(Link)`
   display: flex;
@@ -59,23 +59,22 @@ export const StyledLink = styled(Link)`
   :hover {
     text-decoration: underline;
   }
-`
-export const ErrorMessageDiv = styled.div`
-width: 380px;
-background-color: ${(props) => props.theme.tertiary};
-border-radius: 10px;
-display: ${props => props.showResults  > 0 ? "flex" : " none"};
-align-items: center;
-justify-content: center;
-position: absolute;
-top: 66px;
-z-index: 10;
-`
-export const ErrorMessage = styled.div`
-width: 100%;
-display: flex;
-flex-direction: column;
-padding: 10px;
-color: ${(props) => props.theme.mainFont};
 `;
-
+export const ErrorMessageDiv = styled.div`
+  width: 380px;
+  background-color: ${(props) => props.theme.tertiary};
+  border-radius: 10px;
+  display: ${(props) => (props.showResults > 0 ? "flex" : " none")};
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 66px;
+  z-index: 10;
+`;
+export const ErrorMessage = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  color: ${(props) => props.theme.mainFont};
+`;

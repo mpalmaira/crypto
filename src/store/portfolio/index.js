@@ -17,7 +17,7 @@ const initialState = {
         symbol: "BTC",
         thumb: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png",
       },
-      datePurchased: "11-09-2022",
+      datePurchased: "Sat Sep 17 2022 23:47:07 GMT-0400 (Eastern Daylight Time",
       marketCap: 412497810192,
       maxSupply: 21000000,
       priceChange24h: 334.66,

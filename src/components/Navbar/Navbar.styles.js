@@ -14,6 +14,7 @@ export const NavContainer = styled.div`
   margin: 0 auto;
   padding: 0 24px;
   border-radius: 10px;
+  
 `;
 
 export const NavTopContainer = styled.div`
@@ -23,6 +24,10 @@ export const NavTopContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   border-radius: 10px;
+  @media (max-width: 767px) {
+    padding: 0px 10px;
+  }
+  
 `;
 export const MarketDataContainer = styled.div`
   width: 60%;
@@ -39,6 +44,9 @@ export const StyledLink = styled(Link)`
   padding: 25px 50px;
   text-decoration: none;
   font-weight: 500;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 
 export const RightContainer = styled.div`
@@ -49,6 +57,9 @@ export const RightContainer = styled.div`
 export const DropDownDiv = styled.div`
   margin-right: 25px;
   z-index: 1;
+  @media(max-width:767px){
+    margin-right: 7px;
+  }
 `;
 
 export const ToggleThemeLeftDiv = styled.div`
@@ -68,6 +79,10 @@ export const ToggleThemeLogo = styled.div`
   border-radius: 10px;
   margin-right: 25px;
   cursor: pointer;
+  @media (max-width: 767px) {
+    padding: 11px 8px;
+    margin-right: 0px;
+  }
 `;
 
 export const StyledToggleThemeLeft = styled(ToggleThemeLeft)`
@@ -80,5 +95,17 @@ export const StyledToggleThemeRight = styled(ToggleThemeRight)`
   fill: ${(props) => props.theme.mainFont};
   path {
     fill: ${(props) => props.theme.mainFont};
+  }
+`;
+export const SearchBarDiv = styled.div`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+export const StyledHeader = styled.h1`
+  color: ${(props) => props.theme.mainFont};
+  display: none;
+  @media (max-width: 767px) {
+    display: flex;
   }
 `;

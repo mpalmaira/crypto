@@ -13,6 +13,8 @@ export const MarketDataDiv = styled.div`
   margin: 0 auto;
   @media (max-width: 767px) {
     width: 100%;
+    background-color: ${(props) => props.theme.tertiary};
+
   }
 `;
 export const MarketDataItem = styled.div`
