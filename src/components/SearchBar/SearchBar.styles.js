@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const SearchDiv = styled.form`
   background-color: ${(props) => props.theme.tertiary};
-  width: 380px;
+  width: 400px;
   height: 40px;
   border-radius: 10px;
   display: flex;
@@ -33,7 +33,7 @@ export const SearchInput = styled.input`
   margin-left: 20px;
 `;
 export const SearchResultsDiv = styled.div`
-  width: 380px;
+  width: 400px;
   background-color: ${(props) => props.theme.tertiary};
   border-radius: 10px;
   display: flex;

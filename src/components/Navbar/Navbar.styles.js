@@ -9,10 +9,10 @@ export const NavContainer = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
-  flex: 1;
   max-width: 1300px;
   margin: 0 auto;
   border-radius: 10px;
+  padding: 0 24px;
 `;
 
 export const NavTopContainer = styled.div`

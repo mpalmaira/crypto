@@ -12,6 +12,7 @@ import {
   ASSET_DATA_ERROR,
   DELETE_ASSET,
   EDIT_ASSET,
+  LOAD_ASSETS,
 } from "./index";
 
 export const getAssetSearchData =
@@ -121,5 +122,40 @@ export const editAsset = (asset) => (dispatch, getState) => {
   dispatch({
     type: EDIT_ASSET,
     payload: newAssets,
+  });
+};
+
+export const loadAssets = () => async (dispatch, getState) => {
+  const state = getState();
+  const selectedCurrency = state.settings.selectedCurrency.value;
+  const assets = state.portfolio.assets;
+  console.log("working");
+  const loadAssets = await Promise.all(
+    assets.map(async (coin) => {
+      const { data } =
+        await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}
+    `);
+      const { data: purchased } = await axios(
+        `https://api.coingecko.com/api/v3/coins/${
+          coin.data.id
+        }/history?date=${dayjs(coin.datePurchased).format("DD-MM-YYYY")}`
+      );
+      return {
+        ...coin,
+        id: `${Math.random()}`,
+        currentPrice: data.market_data.current_price[selectedCurrency],
+        priceChange24h:
+          data.market_data.price_change_24h_in_currency[selectedCurrency],
+        totalVolume: data.market_data.total_volume[selectedCurrency],
+        marketCap: data.market_data.market_cap[selectedCurrency],
+        circulatingSupply: data.market_data.circulating_supply,
+        maxSupply: data.market_data.max_supply,
+        purchasedPrice: purchased.market_data.current_price[selectedCurrency],
+      };
+    })
+  );
+  dispatch({
+    type: LOAD_ASSETS,
+    payload: loadAssets,
   });
 };

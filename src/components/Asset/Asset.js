@@ -22,7 +22,7 @@ import {
   StyledDelete,
   StyledEdit,
   IconContainer,
-  StyledText
+  StyledText,
 } from "./Asset.styles";
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";

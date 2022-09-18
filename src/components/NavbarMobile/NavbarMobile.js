@@ -31,7 +31,7 @@ const NavbarMobile = () => {
         </IconDiv>
         <StyledText>Summary</StyledText>
       </NavItem>
-      <NavItem to="/">
+      <NavItem to="/Search">
         <IconDiv>
           <StyledSearch />
         </IconDiv>
