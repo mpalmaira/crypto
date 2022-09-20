@@ -203,3 +203,11 @@ export const StyledSave = styled.div`
   font-size: 15px;
   cursor: pointer;
 `;
+export const StyledNameandIcon = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const StyledName = styled.div`
+  margin-left: 8px;
+  `

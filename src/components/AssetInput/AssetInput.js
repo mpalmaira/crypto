@@ -27,6 +27,8 @@ import {
   StyledButtons,
   StyledClose,
   StyledSave,
+  StyledName,
+  StyledNameandIcon,
 } from "./AssetInput.styles";
 
 const SearchResults = (props) => {
@@ -39,8 +41,11 @@ const SearchResults = (props) => {
               key={result.id}
               onClick={() => props.handleSelectedCoin(result)}
             >
-              <img src={result.thumb} alt="coin thumb" />
-              <div>{result.name}</div>
+              <StyledNameandIcon>
+                <img src={result.thumb} alt="coin thumb" />
+                <StyledName>{result.name}</StyledName>
+              </StyledNameandIcon>
+
               <div>({result.symbol})</div>
             </StyledList>
           );

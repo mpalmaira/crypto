@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import { darkTheme, lightTheme } from "./components/Theme/Theme";
-import { HomePage, CoinPage, Portfolio, Search } from "./pages";
+import { HomePage, CoinPage, Portfolio } from "./pages";
 import Navbar from "./components/Navbar";
 import NavbarMobile from "./components/NavbarMobile/NavbarMobile";
 import { switchTheme } from "./store/settings/actions";
@@ -38,7 +38,6 @@ export default function App() {
             path="/coinpage/:id"
             component={(props) => <CoinPage />}
           />
-          <Route exact path="/search" component={Search} />
         </Switch>
       </Router>
     </ThemeProvider>

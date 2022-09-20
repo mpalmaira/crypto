@@ -50,7 +50,7 @@ export const BitcoinHeader = styled.p`
   font-size: 22px;
   margin: 0;
   padding: 0;
-  @media (max-width: 767px) {
+  @media (max-width: 1000px) {
     font-size: 18px;
   }
 `;
@@ -58,7 +58,7 @@ export const StyledDate = styled.p`
   font-size: 22px;
   margin: 0;
   padding: 0;
-  @media (max-width: 767px) {
+  @media (max-width: 1000px) {
     font-size: 12px;
   }
 `;
@@ -66,7 +66,7 @@ export const BitcoinNumber = styled.p`
   font-size: 44px;
   margin: 0;
   padding: 0;
-  @media (max-width: 767px) {
+  @media (max-width: 1000px) {
     font-size: 22px;
   }
 `;

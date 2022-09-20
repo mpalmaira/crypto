@@ -110,7 +110,6 @@ export const editAsset = (asset) => (dispatch, getState) => {
   const assets = state.portfolio.assets;
   const newAssets = assets.map((el) => {
     if (el.id === asset.id) {
-      console.log(asset);
       return {
         ...el,
         ...asset,
@@ -129,7 +128,6 @@ export const loadAssets = () => async (dispatch, getState) => {
   const state = getState();
   const selectedCurrency = state.settings.selectedCurrency.value;
   const assets = state.portfolio.assets;
-  console.log("working");
   const loadAssets = await Promise.all(
     assets.map(async (coin) => {
       const { data } =

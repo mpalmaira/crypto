@@ -10,6 +10,8 @@ import {
   StyledLink,
   ErrorMessage,
   ErrorMessageDiv,
+  StyledName,
+  StyledNameandIcon,
 } from "./SearchBar.styles";
 
 const SearchResults = (props) => {
@@ -23,8 +25,10 @@ const SearchResults = (props) => {
               to={`/coinpage/${result.id}`}
               onClick={() => props.handleLinkClick()}
             >
-              <img src={result.thumb} alt="coin thumb" />
-              <div>{result.name}</div>
+              <StyledNameandIcon>
+                <img src={result.thumb} alt="coin thumb" />
+                <StyledName>{result.name}</StyledName>
+              </StyledNameandIcon>
               <div>({result.symbol})</div>
             </StyledLink>
           );

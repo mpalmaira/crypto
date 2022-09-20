@@ -17,6 +17,9 @@ export const StyledTable = styled.table`
   border-radius: 20px;
   padding: 30px;
   border-collapse: collapse;
+  @media (max-width: 1000px) {
+    font-size: 13px;
+  }
 `;
 
 export const TableHeadRank = styled.th`
@@ -31,4 +34,7 @@ export const TableHeadName = styled.th`
 export const TableHead = styled.th`
   width: 5%;
   text-align: center;
+  @media(max-width: 767px){
+    width: 15%
+  }
 `;

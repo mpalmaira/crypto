@@ -23,7 +23,6 @@ export default function Portfolio(props) {
     (state) => state.settings.selectedCurrency.value
   );
   const assets = useSelector((state) => state.portfolio.assets);
-  console.log(assets);
 
   const toggleEditing = () => {
     setEditing(!editing);

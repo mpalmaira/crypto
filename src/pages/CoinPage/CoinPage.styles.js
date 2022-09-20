@@ -25,6 +25,7 @@ export const YourSummary = styled.div`
   margin-bottom: 20px;
   @media (max-width: 767px) {
     flex-direction: column;
+    align-items: center;
   }
 `;
 export const CoinContainer = styled.div`
