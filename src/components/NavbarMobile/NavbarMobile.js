@@ -2,6 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSearchData, clearSearch } from "../../store/search/actions";
 import {
+  MainContainer,
+  NavItem,
+  StyledText,
+  StyledOverview,
+  StyledPortfolio,
+  StyledSummary,
+  StyledSearch,
+  IconDiv,
+  SearchNavDiv,
+  SearchMobileDiv,
+  SearchMobileContainer,
   SearchDiv,
   SearchInput,
   StyledSearchIcon,
@@ -12,8 +23,11 @@ import {
   ErrorMessageDiv,
   StyledName,
   StyledNameandIcon,
-} from "./SearchBar.styles";
-
+  StyledClose,
+  StyledTop,
+  CloseDiv,
+  StyledSpan,
+} from "./NavbarMobile.styles";
 const SearchResults = (props) => {
   return (
     <SearchResultsDiv>
@@ -38,7 +52,7 @@ const SearchResults = (props) => {
   );
 };
 
-export const SearchBar = () => {
+const SearchBar = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showResults, setShowResults] = useState("false");
   const searchData = useSelector((state) => state.search.searchData);
@@ -57,10 +71,10 @@ export const SearchBar = () => {
       dispatch(clearSearch());
     }
   };
-
   const handleLinkClick = () => {
     setSearchTerm("");
     setShowResults(false);
+    props.CloseMobileSearch();
   };
 
   useEffect(() => {
@@ -103,3 +117,62 @@ export const SearchBar = () => {
     </SearchDiv>
   );
 };
+
+const SearchMobile = (props) => {
+  return (
+    <SearchMobileContainer>
+      <SearchMobileDiv>
+        <StyledTop>
+          <CloseDiv>
+            <StyledClose onClick={props.CloseMobileSearch} />
+          </CloseDiv>
+          <StyledSpan>Close</StyledSpan>
+        </StyledTop>
+        <SearchBar CloseMobileSearch={props.CloseMobileSearch} />
+      </SearchMobileDiv>
+    </SearchMobileContainer>
+  );
+};
+
+const NavbarMobile = () => {
+  const [searchOpen, setSearchOpen] = useState(false);
+  const toggleMobileSearch = () => {
+    setSearchOpen(!searchOpen);
+  };
+  const CloseMobileSearch = () => {
+    setSearchOpen(false);
+  };
+  return (
+    <>
+      {searchOpen && <SearchMobile CloseMobileSearch={CloseMobileSearch} />}
+      <MainContainer>
+        <NavItem to="/" onClick={CloseMobileSearch}>
+          <IconDiv>
+            <StyledOverview />
+          </IconDiv>
+          <StyledText>Overview</StyledText>
+        </NavItem>
+        <NavItem to="/Portfolio" onClick={CloseMobileSearch}>
+          <IconDiv>
+            <StyledPortfolio />
+          </IconDiv>
+          <StyledText>Portfolio</StyledText>
+        </NavItem>
+        <NavItem to="/" onClick={CloseMobileSearch}>
+          <IconDiv>
+            <StyledSummary />
+          </IconDiv>
+          <StyledText>Summary</StyledText>
+        </NavItem>
+        <SearchNavDiv onClick={toggleMobileSearch}>
+          <IconDiv>
+            <StyledSearch />
+          </IconDiv>
+          <StyledText>Search</StyledText>
+        </SearchNavDiv>
+      </MainContainer>
+    </>
+  );
+};
+
+export default NavbarMobile;

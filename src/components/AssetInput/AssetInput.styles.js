@@ -8,6 +8,12 @@ export const MainContainer = styled.div`
 `;
 export const FormContainer = styled.div`
   display: flex;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -100px;
+  }
 `;
 
 export const FormDiv = styled.div`
@@ -146,6 +152,9 @@ export const SelectedAssetContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  @media (max-width: 767px) {
+    margin-bottom: 10px;
+  }
 `;
 export const SelectedAssetImage = styled.div`
   background-color: ${(props) => props.theme.main};
@@ -160,6 +169,12 @@ export const StyledButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -100px;
+  }
 `;
 export const StyledClose = styled.div`
   color: ${(props) => props.theme.saveButtonFont};
@@ -172,6 +187,9 @@ export const StyledClose = styled.div`
   border-radius: 10px;
   font-size: 15px;
   cursor: pointer;
+  @media (max-width: 767px) {
+    margin-bottom: 10px;
+  }
 `;
 export const StyledSave = styled.div`
   color: ${(props) => props.theme.mainFont};
@@ -185,3 +203,11 @@ export const StyledSave = styled.div`
   font-size: 15px;
   cursor: pointer;
 `;
+export const StyledNameandIcon = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const StyledName = styled.div`
+  margin-left: 8px;
+  `

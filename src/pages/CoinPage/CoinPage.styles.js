@@ -10,18 +10,32 @@ export const MainContainer = styled.div`
   align-items: center;
   margin-top: 60px;
   flex-direction: column;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 export const YourSummary = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   font-size: 22px;
   margin-bottom: 20px;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const CoinContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
   align-items: center;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 export const CoinLeft = styled.div`
   display: flex;
@@ -56,6 +70,9 @@ export const CoinLinkDiv = styled.div`
   background-color: ${(props) => props.theme.secondary};
   border-radius: 10px;
   padding: 20px;
+  @media (max-width: 767px) {
+    margin-bottom: 10px;
+  }
 `;
 export const StyledNewTab = styled(NewTab)`
   fill: ${(props) => props.theme.mainFont};
@@ -79,12 +96,16 @@ export const CoinLink = styled.a`
 export const CoinMiddle = styled.div`
   background-color: ${(props) => props.theme.secondary};
   height: 380px;
-  width: 464px;
+  width: 400px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
 `;
 export const CoinPrice = styled.span`
   font-size: 44px;
@@ -100,6 +121,9 @@ export const CoinTop = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 export const Profit = styled.div`
   font-size: 18px;
@@ -177,16 +201,19 @@ export const CoinRightMiddle = styled.div`
 `;
 export const DescriptionText = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   font-size: 22px;
   margin: 20px 0px;
 `;
 export const DescriptionDiv = styled.div`
-  width: 80%;
+  width: 100%;
   background-color: ${(props) => props.theme.secondary};
   text-align: center;
   padding: 30px;
   border-radius: 10px;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 export const CoinDescription = styled.span`
   font-size: 19px;
@@ -199,10 +226,13 @@ export const CoinDescription = styled.span`
 `;
 export const MainLinksDiv = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0px;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 export const LinkDiv = styled.div`
@@ -213,6 +243,9 @@ export const LinkDiv = styled.div`
   justify-content: space-between;
   padding: 10px;
   border-radius: 10px;
+  @media (max-width: 767px) {
+    margin-bottom: 10px;
+  }
 `;
 
 export const StyledCopyLink = styled(CopyLink)`

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PortfolioModule from "../../components/PortfolioModule/PortfolioModule";
 import { Asset } from "../../components/Asset/Asset";
 import {
   clearAssetSearch,
   clearAssetFromResults,
+  loadAssets,
 } from "../../store/portfolio/actions";
 import {
   MainContainer,
@@ -18,7 +19,11 @@ export default function Portfolio(props) {
   const [editableAsset, setEditableAsset] = useState(null);
   const [editing, setEditing] = useState(false);
   const dispatch = useDispatch();
+  const selectedCurrency = useSelector(
+    (state) => state.settings.selectedCurrency.value
+  );
   const assets = useSelector((state) => state.portfolio.assets);
+
   const toggleEditing = () => {
     setEditing(!editing);
   };
@@ -31,13 +36,19 @@ export default function Portfolio(props) {
     setOpenModule(false);
     dispatch(clearAssetSearch());
     dispatch(clearAssetFromResults());
-    if(editing){
-      toggleEditing()
+    if (editing) {
+      toggleEditing();
     }
   };
   const handleAddAssetClick = () => {
     setOpenModule(true);
   };
+
+  useEffect(() => {
+    dispatch(loadAssets());
+    //eslint-disable-next-line
+  }, [selectedCurrency]);
+
   return (
     <MainContainer>
       <AddAssetContainer>
@@ -52,17 +63,20 @@ export default function Portfolio(props) {
           toggleEditing={toggleEditing}
         />
       )}
-      {assets &&
-        assets.map((asset, index) => {
-          return (
-            <Asset
-              key={index}
-              asset={asset}
-              handleEdit={handleEdit}
-              editing={editing}
-            />
-          );
-        })}
+
+      <div>
+        {assets &&
+          assets.map((asset, index) => {
+            return (
+              <Asset
+                key={index}
+                asset={asset}
+                handleEdit={handleEdit}
+                editing={editing}
+              />
+            );
+          })}
+      </div>
     </MainContainer>
   );
 }

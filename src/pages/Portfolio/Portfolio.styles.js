@@ -3,10 +3,15 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
   color: ${(props) => props.theme.mainFont};
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-top: 60px;
   flex-direction: column;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+  margin-top: 60px;
 `;
 export const AddAssetContainer = styled.div`
   display: flex;
@@ -27,5 +32,11 @@ export const StyledText = styled.span`
   color: ${(props) => props.theme.mainFont};
   display: flex;
   justify-content: start;
-  width: 80%;
+  width: 100%;
+  @media (max-width: 767px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
 `;

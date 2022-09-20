@@ -12,28 +12,27 @@ import {
   ASSET_DATA_ERROR,
   DELETE_ASSET,
   EDIT_ASSET,
+  LOAD_ASSETS,
 } from "./index";
 
-export const getAssetSearchData = (searchTerm) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({ type: GET_ASSETDATA_PENDING });
-    const { data } = await axios(
-      `https://crypto-app-server.herokuapp.com/coins/${searchTerm}`
-    );
-    dispatch({
-      type: GET_ASSETDATA_SUCCESS,
-      payload: data,
-    });
-  } catch (err) {
-    dispatch({
-      type: GET_ASSETDATA_ERROR,
-      payload: err,
-    });
-  }
-};
+export const getAssetSearchData =
+  (searchTerm) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: GET_ASSETDATA_PENDING });
+      const { data } = await axios(
+        `https://crypto-app-server.herokuapp.com/coins/${searchTerm}`
+      );
+      dispatch({
+        type: GET_ASSETDATA_SUCCESS,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({
+        type: GET_ASSETDATA_ERROR,
+        payload: err,
+      });
+    }
+  };
 export const clearAssetSearch = () => (dispatch, getState) => {
   dispatch({
     type: CLEAR_ASSETDATA_RESULTS,
@@ -63,9 +62,8 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
     dispatch({ type: ASSET_DATA_PENDING });
     const assetData = await Promise.all(
       addedAsset.map(async (coin) => {
-        const {
-          data,
-        } = await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}
+        const { data } =
+          await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}
         `);
         const { data: purchased } = await axios(
           `https://api.coingecko.com/api/v3/coins/${
@@ -112,7 +110,6 @@ export const editAsset = (asset) => (dispatch, getState) => {
   const assets = state.portfolio.assets;
   const newAssets = assets.map((el) => {
     if (el.id === asset.id) {
-      console.log(asset);
       return {
         ...el,
         ...asset,
@@ -124,5 +121,39 @@ export const editAsset = (asset) => (dispatch, getState) => {
   dispatch({
     type: EDIT_ASSET,
     payload: newAssets,
+  });
+};
+
+export const loadAssets = () => async (dispatch, getState) => {
+  const state = getState();
+  const selectedCurrency = state.settings.selectedCurrency.value;
+  const assets = state.portfolio.assets;
+  const loadAssets = await Promise.all(
+    assets.map(async (coin) => {
+      const { data } =
+        await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}
+    `);
+      const { data: purchased } = await axios(
+        `https://api.coingecko.com/api/v3/coins/${
+          coin.data.id
+        }/history?date=${dayjs(coin.datePurchased).format("DD-MM-YYYY")}`
+      );
+      return {
+        ...coin,
+        id: `${Math.random()}`,
+        currentPrice: data.market_data.current_price[selectedCurrency],
+        priceChange24h:
+          data.market_data.price_change_24h_in_currency[selectedCurrency],
+        totalVolume: data.market_data.total_volume[selectedCurrency],
+        marketCap: data.market_data.market_cap[selectedCurrency],
+        circulatingSupply: data.market_data.circulating_supply,
+        maxSupply: data.market_data.max_supply,
+        purchasedPrice: purchased.market_data.current_price[selectedCurrency],
+      };
+    })
+  );
+  dispatch({
+    type: LOAD_ASSETS,
+    payload: loadAssets,
   });
 };

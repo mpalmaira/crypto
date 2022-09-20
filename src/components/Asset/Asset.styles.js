@@ -7,19 +7,31 @@ export const MainContainer = styled.div`
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 export const AssetContainer = styled.div`
   display: flex;
+  width: 100%;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 export const ImageContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
-  height: 220px;
+  height: 200px;
   width: 180px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 20px;
 `;
 export const CoinImage = styled.div`
   background-color: ${(props) => props.theme.main};
@@ -39,11 +51,15 @@ export const CoinContainer = styled.div`
   margin-left: 20px;
   display: flex;
   flex-direction: column;
-  height: 30px;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+  }
 `;
 export const MarketContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
-  width: 70em;
+  width: 100%;
   height: 20%;
   display: flex;
   align-items: center;
@@ -51,13 +67,32 @@ export const MarketContainer = styled.div`
   border-radius: 10px;
   padding: 30px 10px;
   margin: 15px 0px;
+  @media (max-width: 767px) {
+    background-color: transparent;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 export const CoinData = styled.div`
-  padding: 20px;
+  padding: 0px 20px;
+  font-size: 15px;
+  @media (max-width: 767px) {
+    background-color: ${(props) => props.theme.secondary};
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 10px 0px;
+    text-align: center;
+  }
 `;
 export const StyledData = styled.span`
   color: lime;
   margin-left: 10px;
+  font-size: 15px;
 `;
 export const Styled24hChange = styled.span`
   color: ${(props) => (props.value > 0 ? "lime" : "red")};
@@ -71,6 +106,15 @@ export const ProgressBarData = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 767px) {
+    background-color: ${(props) => props.theme.secondary};
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 10px 0px;
+  }
 `;
 export const OutsideBar = styled.div`
   display: flex;
@@ -101,7 +145,14 @@ export const YourCoinContainer = styled.div`
   border-radius: 10px;
   padding: 30px 10px;
   margin-top: 15px;
-  width: 70em;
+  width: 100%;
+  @media (max-width: 767px) {
+    background-color: transparent;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 export const StyledDelete = styled(DeleteSymbol)`
   fill: red;
@@ -116,3 +167,16 @@ export const StyledEdit = styled(EditSymbol)`
 export const IconContainer = styled.div`
   display: flex;
 `;
+export const StyledText = styled.span`
+  font-size: 18px;
+  color: ${(props) => props.theme.mainFont};
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  @media (max-width: 767px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+`

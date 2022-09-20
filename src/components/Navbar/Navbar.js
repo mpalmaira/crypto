@@ -15,6 +15,8 @@ import {
   ToggleThemeLogo,
   StyledToggleThemeLeft,
   StyledToggleThemeRight,
+  SearchBarDiv,
+  StyledHeader,
 } from "./Navbar.styles";
 import { NavMarketData } from "../NavBarMarketData/NavBarMaketData";
 import { getData } from "../../store/marketData/action";
@@ -31,11 +33,14 @@ export default function Navbar(props) {
     <NavContainer>
       <NavTopContainer>
         <LeftContainer>
+          <StyledHeader>Overview</StyledHeader>
           <StyledLink to="/">Coins</StyledLink>
           <StyledLink to="/Portfolio">Portfolio</StyledLink>
         </LeftContainer>
         <RightContainer>
-          <SearchBar />
+          <SearchBarDiv>
+            <SearchBar />
+          </SearchBarDiv>
           <DropDownDiv>
             <Dropdown />
           </DropDownDiv>
