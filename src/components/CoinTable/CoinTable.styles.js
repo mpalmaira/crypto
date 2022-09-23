@@ -15,7 +15,6 @@ export const StyledTable = styled.table`
   text-align: center;
   background-color: ${(props) => props.theme.secondary};
   border-radius: 20px;
-  padding: 30px;
   border-collapse: collapse;
   @media (max-width: 1000px) {
     font-size: 13px;
@@ -32,9 +31,9 @@ export const TableHeadName = styled.th`
   width: 8%;
 `;
 export const TableHead = styled.th`
-  width: 5%;
+  min-width: 5%;
   text-align: center;
-  @media(max-width: 767px){
-    width: 15%
+  @media (max-width: 767px) {
+    width: 15%;
   }
 `;

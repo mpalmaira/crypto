@@ -9,10 +9,7 @@ export const NavContainer = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
-  max-width: 1300px;
   margin: 0 auto;
-  border-radius: 10px;
-  padding: 0 24px;
 `;
 
 export const NavTopContainer = styled.div`
@@ -21,28 +18,36 @@ export const NavTopContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 10px;
+  padding: 0 24px;
   @media (max-width: 767px) {
     padding: 0px 10px;
   }
 `;
 export const MarketDataContainer = styled.div`
-  width: 60%;
+  width: 906px;
   @media (max-width: 767px) {
     width: 100%;
   }
 `;
 export const LeftContainer = styled.div`
   display: flex;
+  margin-left: 95px;
+  @media (max-width: 767px) {
+    margin: 0;
+  }
 `;
 export const StyledLink = styled(NavLink)`
   background-color: ${(props) => props.theme.secondary};
   color: ${(props) => props.theme.mainFont};
-  font-size: 30px;
-  padding: 25px 50px;
+  font-size: 22px;
   text-decoration: none;
   font-weight: 500;
+  padding: 19px 51px;
   border-radius: 10px;
+  &.${(props) => props.activeClassName} {
+    background-color: ${(props) => props.theme.tertiary};
+  }
+
   @media (max-width: 767px) {
     display: none;
   }
