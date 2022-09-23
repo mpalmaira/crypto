@@ -5,6 +5,9 @@ export const MainContainer = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   height: 100%;
+  @media (max-width: 767px) {
+  margin-top: 70px
+  }
 `;
 export const FormContainer = styled.div`
   display: flex;
@@ -168,12 +171,13 @@ export const StyledButtons = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  margin-top: 15px;
   @media (max-width: 767px) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: -100px;
+    margin-top: -90px;
   }
 `;
 export const StyledClose = styled.div`
@@ -187,8 +191,10 @@ export const StyledClose = styled.div`
   border-radius: 10px;
   font-size: 15px;
   cursor: pointer;
+  margin-right: 10px;
   @media (max-width: 767px) {
     margin-bottom: 10px;
+    margin-right: 0px;
   }
 `;
 export const StyledSave = styled.div`
@@ -210,4 +216,4 @@ export const StyledNameandIcon = styled.div`
 
 export const StyledName = styled.div`
   margin-left: 8px;
-  `
+`;

@@ -49,5 +49,5 @@ export const StyledName = styled.div`
   font-weight: bold;
 `;
 export const Symbol = styled.span`
-  padding: 0px 8px;
+  padding: 0px 5px;
 `;

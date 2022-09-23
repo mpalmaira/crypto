@@ -34,10 +34,10 @@ export default function Navbar(props) {
       <NavTopContainer>
         <LeftContainer>
           <StyledHeader>Overview</StyledHeader>
-          <StyledLink to="/" activeClassName="active">
+          <StyledLink to="/" exact={true} activeClassName="active">
             Coins
           </StyledLink>
-          <StyledLink to="/Portfolio" activeClassName="active">
+          <StyledLink to="/portfolio" activeClassName="active">
             Portfolio
           </StyledLink>
         </LeftContainer>

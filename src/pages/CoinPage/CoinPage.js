@@ -43,6 +43,7 @@ import {
   StyledCopyLink,
   ToolTip,
   CurrencyConverterDiv,
+  ChartContainer,
 } from "./CoinPage.styles";
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../../components/SVG/ArrowDownRed.svg";
@@ -266,7 +267,9 @@ export default function CoinPage(props) {
                 </CoinRightNum>
                 <CoinRightNum>
                   <Plus>+</Plus>Max Supply:{" "}
-                  {coinData.market_data.max_supply ? coinData.market_data.max_supply.toLocaleString() : 0}{" "}
+                  {coinData.market_data.max_supply
+                    ? coinData.market_data.max_supply.toLocaleString()
+                    : 0}{" "}
                   {coinData.symbol.toUpperCase()}
                 </CoinRightNum>
               </CoinRightMiddle>
@@ -336,9 +339,11 @@ export default function CoinPage(props) {
             />
           </CurrencyConverterDiv>
           <RangeSelector handleRangeChange={handleRangeChange} />
-          <IndividualChart chart={chartData} />
         </MainContainer>
       )}
+      <ChartContainer>
+        <IndividualChart chart={chartData} />
+      </ChartContainer>
     </>
   );
 }

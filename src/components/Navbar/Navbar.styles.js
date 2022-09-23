@@ -18,7 +18,7 @@ export const NavTopContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 19px 24px;
   @media (max-width: 767px) {
     padding: 0px 10px;
   }

@@ -20,4 +20,7 @@ export const StyledHeading = styled.span`
   justify-content: flex-start;
   color: ${(props) => props.theme.mainFont};
   font-size: 22px;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;

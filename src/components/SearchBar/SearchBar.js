@@ -52,6 +52,9 @@ export const SearchBar = () => {
       setTimeout(() => {
         dispatch(getSearchData(e.target.value));
       }, 1000);
+    } else if (searchTerm === "") {
+      setShowResults(false);
+      dispatch(clearSearch());
     } else {
       setShowResults(false);
       dispatch(clearSearch());

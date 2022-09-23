@@ -5,7 +5,7 @@ export const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 74px;
   flex-direction: column;
   width: 100%;
   max-width: 1300px;
@@ -28,10 +28,12 @@ export const AddAssetButton = styled.button`
   cursor: pointer;
 `;
 export const StyledText = styled.span`
-  font-size: 18px;
+  font-size: 22px;
   color: ${(props) => props.theme.mainFont};
   display: flex;
   justify-content: start;
+  margin-top: 41px;
+  margin-bottom: 20px;
   width: 100%;
   @media (max-width: 767px) {
     display: flex;

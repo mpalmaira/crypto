@@ -30,9 +30,6 @@ export const NavItem = styled(NavLink)`
   align-items: center;
   padding: 10px;
   text-decoration: none;
-  &.${(props) => props.activeClassName} {
-    background-color: lime;
-  }
 `;
 export const StyledText = styled.span`
   color: ${(props) => props.theme.mainFont};

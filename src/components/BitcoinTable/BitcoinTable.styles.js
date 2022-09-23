@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { ReactComponent as NextArrow } from "../SVG/arrow-next.svg";
+import { ReactComponent as BackArrow } from "../SVG/arrow-back.svg";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -79,7 +81,18 @@ export const MobileContainer = styled.div`
   @media (max-width: 767px) {
     display: flex;
     .slick-slider {
-      width: 350px;
+      width: 390px;
+    }
+    .slick-prev,
+    .slick-next {
+      z-index: 2;
+      top: 10%;
+    }
+    .slick-prev {
+      left: 250px;
+    }
+    .slick-next {
+      right: 30px;
     }
   }
 `;
@@ -103,3 +116,6 @@ export const BarContainerMobile = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const StyledNextArrow = styled(NextArrow)``;
+export const StyledBackArrow = styled(BackArrow)``;
