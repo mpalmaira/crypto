@@ -265,5 +265,7 @@ export const CurrencyConverterDiv = styled.div`
   width: 50%;
 `;
 export const ChartContainer = styled.div`
-  padding-bottom: 70px;
+  @media (max-width: 767px) {
+    padding-bottom: 70px;
+  }
 `;

@@ -341,9 +341,11 @@ export default function CoinPage(props) {
           <RangeSelector handleRangeChange={handleRangeChange} />
         </MainContainer>
       )}
-      <ChartContainer>
-        <IndividualChart chart={chartData} />
-      </ChartContainer>
+      {coinData && (
+        <ChartContainer>
+          <IndividualChart chart={chartData} />
+        </ChartContainer>
+      )}
     </>
   );
 }
