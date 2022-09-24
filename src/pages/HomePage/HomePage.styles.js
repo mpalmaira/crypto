@@ -5,9 +5,9 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1900px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 110px;
   @media (max-width: 767px) {
     padding: 0px 24px;
   }

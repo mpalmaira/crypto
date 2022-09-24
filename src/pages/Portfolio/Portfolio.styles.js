@@ -8,9 +8,9 @@ export const MainContainer = styled.div`
   margin-top: 74px;
   flex-direction: column;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1900px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 130px;
   margin-top: 60px;
 `;
 export const AddAssetContainer = styled.div`
