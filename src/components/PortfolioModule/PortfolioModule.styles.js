@@ -21,7 +21,7 @@ export const ModuleContainer = styled.div`
   border-radius: 10px;
   @media (max-width: 767px) {
     width: 90%;
-    height: 80%;
+    height: 70%;
   }
 `;
 export const TopContainer = styled.div`
@@ -31,6 +31,7 @@ export const TopContainer = styled.div`
   width: 57%;
   height: 10%;
   margin-left: auto;
+  margin-right: 10px;
   padding: 30px 0px;
   @media (max-width: 767px) {
     display: flex;
@@ -48,7 +49,7 @@ export const MiddleContainer = styled.div`
 `;
 export const StyledText = styled.span`
   color: ${(props) => props.theme.mainFont};
-  font-size: 23px;
+  font-size: 28px;
   width: 100;
   font-weight: bold;
 `;
@@ -58,4 +59,5 @@ export const StyledClose = styled(Close)`
   width: 40px;
   margin-left: auto;
   cursor: pointer;
+  margin-right: 20px;
 `;

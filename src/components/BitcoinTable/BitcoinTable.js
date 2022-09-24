@@ -16,9 +16,21 @@ import {
   MobileContainer,
   LineContainerMobile,
   BarContainerMobile,
+  StyledNextArrow,
+  StyledBackArrow,
 } from "./BitcoinTable.styles";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../store/bitcoinCharts/actions";
+
+function SampleNextArrow(props) {
+  const { className, onClick } = props;
+  return <StyledNextArrow className={className} onClick={onClick} />;
+}
+
+function SamplePrevArrow(props) {
+  const { className, onClick } = props;
+  return <StyledBackArrow className={className} onClick={onClick} />;
+}
 
 export default function BitcoinTable(props) {
   const dispatch = useDispatch();
@@ -36,6 +48,8 @@ export default function BitcoinTable(props) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
   const getDate = () => {

@@ -30,7 +30,7 @@ export const SearchInput = styled.input`
   ::placeholder {
     color: ${(props) => props.theme.mainFont};
   }
-  margin-left: 20px;
+  margin-left: 15px;
 `;
 export const SearchResultsDiv = styled.div`
   width: 400px;

@@ -5,7 +5,22 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1900px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 110px;
+  @media (max-width: 767px) {
+    padding: 0px 24px;
+  }
+`;
+export const StyledHeading = styled.span`
+  margin-top: 31px;
+  margin-bottom: 37px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  color: ${(props) => props.theme.mainFont};
+  font-size: 22px;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;

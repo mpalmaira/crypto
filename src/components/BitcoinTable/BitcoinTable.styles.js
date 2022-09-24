@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { ReactComponent as NextArrow } from "../SVG/arrow-next.svg";
+import { ReactComponent as BackArrow } from "../SVG/arrow-back.svg";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -6,9 +8,7 @@ export const MainContainer = styled.div`
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 24px;
   justify-content: space-between;
-  padding: 60px 0px;
   @media (max-width: 767px) {
     padding: 0px;
     justify-content: center;
@@ -17,11 +17,13 @@ export const MainContainer = styled.div`
 export const LineContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
   border-radius: 15px;
-  padding: 20px 30px;
+  width: 833px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 21px;
+  margin-right: 46px;
   @media (max-width: 767px) {
     display: none;
   }
@@ -36,7 +38,9 @@ export const MainTextContainer = styled.div`
 export const BarContainer = styled.div`
   background-color: ${(props) => props.theme.secondary};
   border-radius: 15px;
-  padding: 20px 30px;
+  margin-left: 46px;
+  width: 833px;
+  padding: 21px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +81,18 @@ export const MobileContainer = styled.div`
   @media (max-width: 767px) {
     display: flex;
     .slick-slider {
-      width: 350px;
+      width: 390px;
+    }
+    .slick-prev,
+    .slick-next {
+      z-index: 2;
+      top: 10%;
+    }
+    .slick-prev {
+      left: 250px;
+    }
+    .slick-next {
+      right: 30px;
     }
   }
 `;
@@ -101,3 +116,6 @@ export const BarContainerMobile = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const StyledNextArrow = styled(NextArrow)``;
+export const StyledBackArrow = styled(BackArrow)``;

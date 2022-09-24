@@ -8,21 +8,21 @@ export const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 60px;
   flex-direction: column;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1900px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 150px;
   @media (max-width: 767px) {
     flex-direction: column;
   }
 `;
 export const YourSummary = styled.div`
   display: flex;
+  margin-top: 50px;
+  margin-bottom: 51px;
   width: 100%;
   font-size: 22px;
-  margin-bottom: 20px;
   @media (max-width: 767px) {
     flex-direction: column;
     align-items: center;
@@ -203,7 +203,7 @@ export const DescriptionText = styled.div`
   display: flex;
   width: 100%;
   font-size: 22px;
-  margin: 20px 0px;
+  margin: 57px 0px;
 `;
 export const DescriptionDiv = styled.div`
   width: 100%;
@@ -263,4 +263,9 @@ export const ToolTip = styled.span`
 `;
 export const CurrencyConverterDiv = styled.div`
   width: 50%;
+`;
+export const ChartContainer = styled.div`
+  @media (max-width: 767px) {
+    padding-bottom: 70px;
+  }
 `;

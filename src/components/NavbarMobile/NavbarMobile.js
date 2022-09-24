@@ -126,7 +126,7 @@ const SearchMobile = (props) => {
           <CloseDiv>
             <StyledClose onClick={props.CloseMobileSearch} />
           </CloseDiv>
-          <StyledSpan>Close</StyledSpan>
+          <StyledSpan onClick={props.CloseMobileSearch}>Close</StyledSpan>
         </StyledTop>
         <SearchBar CloseMobileSearch={props.CloseMobileSearch} />
       </SearchMobileDiv>

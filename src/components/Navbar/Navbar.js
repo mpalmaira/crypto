@@ -34,8 +34,12 @@ export default function Navbar(props) {
       <NavTopContainer>
         <LeftContainer>
           <StyledHeader>Overview</StyledHeader>
-          <StyledLink to="/">Coins</StyledLink>
-          <StyledLink to="/Portfolio">Portfolio</StyledLink>
+          <StyledLink to="/" exact={true} activeClassName="active">
+            Coins
+          </StyledLink>
+          <StyledLink to="/portfolio" activeClassName="active">
+            Portfolio
+          </StyledLink>
         </LeftContainer>
         <RightContainer>
           <SearchBarDiv>

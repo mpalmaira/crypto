@@ -18,11 +18,9 @@ export const CoinIcon = styled.img`
 
 export const TableItem = styled.td`
   text-align: center;
-  padding: 40px 0px;
 `;
 export const TableRow = styled.tr`
   border-bottom: 0.5px solid ${(props) => props.theme.mainTableBorder};
-  padding: 20px;
 `;
 export const CoinSymbol = styled.td`
   text-align: center;

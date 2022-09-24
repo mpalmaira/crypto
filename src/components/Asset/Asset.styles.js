@@ -9,6 +9,7 @@ export const MainContainer = styled.div`
   justify-content: center;
   @media (max-width: 767px) {
     flex-direction: column;
+    padding-bottom: 50px;
   }
 `;
 export const AssetContainer = styled.div`
@@ -179,4 +180,4 @@ export const StyledText = styled.span`
     justify-content: center;
     margin-top: 10px;
   }
-`
+`;
