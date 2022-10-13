@@ -21,7 +21,17 @@ ChartJS.register(
   Legend
 );
 
-export default function CoinChart(props) {
+interface Coins {
+  sparkline_in_7d: any;
+  price_change_percentage_7d_in_currency: number;
+  id: string;
+
+}
+interface Props{
+  coins: Coins;
+}
+
+const CoinChart = (props:Props) => {
   const data = {
     labels: props.coins.sparkline_in_7d.price,
     datasets: [
@@ -72,4 +82,5 @@ export default function CoinChart(props) {
       <Line options={options} data={data} />
     </ChartContainer>
   );
-}
+};
+export default CoinChart;

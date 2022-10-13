@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "./BitcoinBar.styles";
+import { Container } from "./BitcoinBar.styles.js";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,7 +19,14 @@ ChartJS.register(
   Legend
 );
 
-export default function BitcoinBar(props) {
+interface Bitcoin {
+  total_volumes: number[][];
+}
+interface Props {
+  bitcoin: Bitcoin;
+}
+
+const BitcoinBar = (props: Props) => {
   const bitcoinVolumeData = props.bitcoin.total_volumes.map((values) => ({
     x: values[0],
     y: values[1],
@@ -74,4 +81,5 @@ export default function BitcoinBar(props) {
       <Bar options={options} data={data} />
     </Container>
   );
-}
+};
+export default BitcoinBar;

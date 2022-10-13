@@ -11,7 +11,8 @@ import {
 } from "./CoinTable.styles";
 import CoinItem from "../CoinItem/CoinItem";
 
-export default function CoinTable(props) {
+
+const CoinTable = () => {
   const dispatch = useDispatch();
   const coins = useSelector((state) => state.coins.coins);
   const selectedCurrency = useSelector(
@@ -62,4 +63,5 @@ export default function CoinTable(props) {
       )}
     </TableContainer>
   );
-}
+};
+export default CoinTable;
