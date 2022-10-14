@@ -9,7 +9,22 @@ import {
   StyledClose,
 } from "./PortfolioModule.styles";
 
-const PortfolioModule = (props) => {
+interface Props {
+  handleCloseClick: () => void;
+  asset: {
+    data: {
+      name: string;
+      thumb: string;
+      symbol: string;
+    };
+    amount: number | string;
+    datePurchased: string | Date;
+  };
+  editing: boolean;
+  toggleEditing: () => void;
+}
+
+const PortfolioModule = (props: Props) => {
   return (
     <MainContainer>
       <ModuleContainer>

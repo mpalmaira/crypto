@@ -22,17 +22,22 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../store/bitcoinCharts/actions";
 
-function SampleNextArrow(props) {
+interface Arrow {
+  className: any;
+  onClick: any;
+}
+
+function SampleNextArrow(props: Arrow) {
   const { className, onClick } = props;
   return <StyledNextArrow className={className} onClick={onClick} />;
 }
 
-function SamplePrevArrow(props) {
+function SamplePrevArrow(props: Arrow) {
   const { className, onClick } = props;
   return <StyledBackArrow className={className} onClick={onClick} />;
 }
 
-export default function BitcoinTable(props) {
+export default function BitcoinTable() {
   const dispatch = useDispatch();
   const selectedCurrency = useSelector(
     (state) => state.settings.selectedCurrency
@@ -84,7 +89,7 @@ export default function BitcoinTable(props) {
                     <BitcoinHeader>BTC Price</BitcoinHeader>
                     <BitcoinNumber>
                       {selectedCurrency.symbol}
-                      {Object.values(bitcoinCurrent)[0].toLocaleString()}
+                      {Object.values(bitcoinCurrent)[0]}
                     </BitcoinNumber>
                     <StyledDate>{getDate()}</StyledDate>
                   </MainTextContainer>
@@ -113,7 +118,7 @@ export default function BitcoinTable(props) {
               <BitcoinHeader>BTC Price</BitcoinHeader>
               <BitcoinNumber>
                 {selectedCurrency.symbol}
-                {Object.values(bitcoinCurrent)[0].toLocaleString()}
+                {Object.values(bitcoinCurrent)[0]}
               </BitcoinNumber>
               <StyledDate>{getDate()}</StyledDate>
             </MainTextContainer>

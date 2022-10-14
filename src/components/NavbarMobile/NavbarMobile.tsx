@@ -52,14 +52,16 @@ const SearchResults = (props) => {
   );
 };
 
-const SearchBar = (props) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showResults, setShowResults] = useState("false");
+const SearchBar = (props: { CloseMobileSearch: () => void }) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [showResults, setShowResults] = useState<boolean>(false);
   const searchData = useSelector((state) => state.search.searchData);
   const isLoading = useSelector((state) => state.search.isLoading);
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
+  const handleChange = (e: {
+    target: { value: string | React.SetStateAction<string> };
+  }) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length % 3) {
       setShowResults(true);
@@ -85,7 +87,7 @@ const SearchBar = (props) => {
   }, [searchData]);
 
   return (
-    <SearchDiv onSubmit={(e) => e.preventDefault()}>
+    <SearchDiv onSubmit={(e: { preventDefault: () => any; }) => e.preventDefault()}>
       <StyledSearchIcon />
       <SearchInput
         type="text"
@@ -118,7 +120,7 @@ const SearchBar = (props) => {
   );
 };
 
-const SearchMobile = (props) => {
+const SearchMobile = (props: { CloseMobileSearch: () => void; }) => {
   return (
     <SearchMobileContainer>
       <SearchMobileDiv>
@@ -135,7 +137,7 @@ const SearchMobile = (props) => {
 };
 
 const NavbarMobile = () => {
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
   const toggleMobileSearch = () => {
     setSearchOpen(!searchOpen);
   };

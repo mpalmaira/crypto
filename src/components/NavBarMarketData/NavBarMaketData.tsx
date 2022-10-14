@@ -9,7 +9,18 @@ import {
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { convertedNumber } from "../util/ConvertedNumber";
 
-export const NavMarketData = (props) => {
+interface MarketData {
+  active_cryptocurrencies: number;
+  markets: number;
+  total_market_cap: { usd: number };
+  total_volume: { usd: number };
+  market_cap_percentage: { btc: number; eth: number };
+}
+interface Props {
+  marketData: MarketData;
+}
+
+export const NavMarketData = (props: Props) => {
   return (
     <MarketDataDiv>
       <MarketDataItem>

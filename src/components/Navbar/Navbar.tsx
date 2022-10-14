@@ -21,7 +21,7 @@ import {
 import { NavMarketData } from "../NavBarMarketData/NavBarMaketData";
 import { getData } from "../../store/marketData/action";
 
-export default function Navbar(props) {
+export default function Navbar(props: { switchTheme: any; }) {
   const dispatch = useDispatch();
   const marketData = useSelector((state) => state.marketData.marketData);
 

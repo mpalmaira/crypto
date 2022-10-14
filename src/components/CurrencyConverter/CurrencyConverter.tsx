@@ -10,17 +10,21 @@ import {
 } from "./CurrencyConverter.styles";
 
 interface Props {
-  currentPrice: number;
+  currentPrice: string;
   cryptoName: string;
-  selectedCurrency: any;
+  selectedCurrency: {
+    value: string;
+    symbol: string;
+  };
 }
 
 const CurrencyConverter = (props: Props) => {
-  const [crypto, setCrypto] = useState(1);
-  const [currency, setCurrency] = useState(props.currentPrice);
+  const [crypto, setCrypto] = useState<number | string>(1);
+  const [currency, setCurrency] = useState<number| string>(props.currentPrice);
 
   const currentPrice = props.currentPrice;
-  const handleCryptoChange = (e: { target: { value: any } }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleCryptoChange = (e: { target: { value: string } }) => {
     const value = e.target.value;
     setCrypto(value);
     setCurrency((parseInt(value) * parseInt(currentPrice)).toLocaleString());

@@ -27,14 +27,37 @@ import {
 import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
 
-const ProgressBar = (props) => {
+const ProgressBar = (props: { value: number; max: number }) => {
   return (
     <OutsideBar>
       <InsideBar width={(props.value / props.max) * 100} />
     </OutsideBar>
   );
 };
-export const Asset = (props) => {
+
+interface AssetInterface {
+  data: {
+    large: string;
+    name: string;
+    symbol: string;
+  };
+  currentPrice: number;
+  priceChange24h: number;
+  totalVolume: number;
+  marketCap: number;
+  circulatingSupply: number;
+  maxSupply: number;
+  amount: number;
+  purchasedPrice: number;
+  datePurchased: string;
+  handleEdit: (arg0: any) => void;
+}
+interface Props {
+  handleEdit: any;
+  asset: AssetInterface;
+}
+
+export const Asset = (props: Props) => {
   const selectedCurrency = useSelector(
     (state) => state.settings.selectedCurrency
   );

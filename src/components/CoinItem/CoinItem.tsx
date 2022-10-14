@@ -34,6 +34,7 @@ interface Coins {
   market_cap: number;
   circulating_supply: number;
   total_supply: number;
+  sparkline_in_7d: { prices: number[] };
 }
 interface Props {
   coins: Coins;
