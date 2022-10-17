@@ -14,10 +14,10 @@ import {
   StyledText,
 } from "./Portfolio.styles";
 
-export default function Portfolio(props) {
-  const [openModule, setOpenModule] = useState(false);
-  const [editableAsset, setEditableAsset] = useState(null);
-  const [editing, setEditing] = useState(false);
+const Portfolio = () => {
+  const [openModule, setOpenModule] = useState<Boolean>(false);
+  const [editableAsset, setEditableAsset] = useState<null>(null);
+  const [editing, setEditing] = useState<Boolean>(false);
   const dispatch = useDispatch();
   const selectedCurrency = useSelector(
     (state) => state.settings.selectedCurrency.value
@@ -27,7 +27,7 @@ export default function Portfolio(props) {
   const toggleEditing = () => {
     setEditing(!editing);
   };
-  const handleEdit = (asset) => {
+  const handleEdit = (asset: any) => {
     setOpenModule(true);
     setEditableAsset(asset);
     toggleEditing();
@@ -66,7 +66,7 @@ export default function Portfolio(props) {
 
       <div>
         {assets &&
-          assets.map((asset, index) => {
+          assets.map((asset, index: React.Key | null | undefined) => {
             return (
               <Asset
                 key={index}
@@ -79,4 +79,5 @@ export default function Portfolio(props) {
       </div>
     </MainContainer>
   );
-}
+};
+export default Portfolio;

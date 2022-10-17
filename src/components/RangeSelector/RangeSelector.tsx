@@ -28,30 +28,47 @@ const range = {
   },
 };
 const buttons = Object.values(range);
-const RangeButton = (props) => {
-  return buttons.map((button) => {
-    return (
-      <ButtonContainer>
-        <Button
-          id={button.value}
-          onClick={props.handleClick}
-          selected={props.active === button.range}
-        ></Button>
-        <div>{button.value}</div>
-      </ButtonContainer>
-    );
-  });
+
+interface ButtonInterface {
+  handleClick: any;
+  active: string | number | undefined;
+}
+
+const RangeButton = (props: ButtonInterface) => {
+  return (
+    <>
+      {buttons.map((button) => {
+        return (
+          <ButtonContainer>
+            <Button
+              id={button.value}
+              onClick={props.handleClick}
+              selected={props.active === button.range}
+            ></Button>
+            <div>{button.value}</div>
+          </ButtonContainer>
+        );
+      })}
+      ;
+    </>
+  );
 };
 
-export default function RangeSelector(props) {
-  const [activeRange, setActiveRange] = useState(1);
+interface SelectorInterface {
+  handleRangeChange: (arg0:any) => void;
+}
 
-  const handleClick = (e) => {
+export default function RangeSelector(props: SelectorInterface) {
+  const [activeRange, setActiveRange] = useState<number | string | undefined>(
+    1
+  );
+
+  const handleClick = (e: { target: { id: string } }) => {
     const newActive = buttons.find(
       (element) => `${element.value}` === e.target.id
     );
-    setActiveRange(newActive.range);
-    props.handleRangeChange(newActive.range);
+    setActiveRange(newActive?.range);
+    props.handleRangeChange(newActive?.range);
   };
   return (
     <Container>

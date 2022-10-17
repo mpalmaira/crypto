@@ -1,4 +1,4 @@
 export {
     default
 }
-from './CoinTable'
+from './CoinTable.tsx'

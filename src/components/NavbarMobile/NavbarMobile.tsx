@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSearchData, clearSearch } from "../../store/search/actions";
+import { SearchData } from "../SearchBar/SearchBar";
 import {
   MainContainer,
   NavItem,
@@ -28,7 +29,13 @@ import {
   CloseDiv,
   StyledSpan,
 } from "./NavbarMobile.styles";
-const SearchResults = (props) => {
+
+interface Props {
+  searchData: SearchData[];
+  handleLinkClick: () => void;
+}
+
+const SearchResults = (props: Props) => {
   return (
     <SearchResultsDiv>
       <ResultsDiv>
@@ -87,7 +94,9 @@ const SearchBar = (props: { CloseMobileSearch: () => void }) => {
   }, [searchData]);
 
   return (
-    <SearchDiv onSubmit={(e: { preventDefault: () => any; }) => e.preventDefault()}>
+    <SearchDiv
+      onSubmit={(e: { preventDefault: () => any }) => e.preventDefault()}
+    >
       <StyledSearchIcon />
       <SearchInput
         type="text"
@@ -120,7 +129,7 @@ const SearchBar = (props: { CloseMobileSearch: () => void }) => {
   );
 };
 
-const SearchMobile = (props: { CloseMobileSearch: () => void; }) => {
+const SearchMobile = (props: { CloseMobileSearch: () => void }) => {
   return (
     <SearchMobileContainer>
       <SearchMobileDiv>
