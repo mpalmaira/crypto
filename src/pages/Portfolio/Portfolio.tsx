@@ -15,9 +15,9 @@ import {
 } from "./Portfolio.styles";
 
 const Portfolio = () => {
-  const [openModule, setOpenModule] = useState<Boolean>(false);
-  const [editableAsset, setEditableAsset] = useState<null>(null);
-  const [editing, setEditing] = useState<Boolean>(false);
+  const [openModule, setOpenModule] = useState<boolean>(false);
+  const [editableAsset, setEditableAsset] = useState<any>(null);
+  const [editing, setEditing] = useState<boolean>(false);
   const dispatch = useDispatch();
   const selectedCurrency = useSelector(
     (state) => state.settings.selectedCurrency.value
@@ -66,14 +66,9 @@ const Portfolio = () => {
 
       <div>
         {assets &&
-          assets.map((asset, index: React.Key | null | undefined) => {
+          assets.map((asset: any) => {
             return (
-              <Asset
-                key={index}
-                asset={asset}
-                handleEdit={handleEdit}
-                editing={editing}
-              />
+              <Asset key={asset.id} asset={asset} handleEdit={handleEdit} />
             );
           })}
       </div>

@@ -51,6 +51,7 @@ interface AssetInterface {
   purchasedPrice: number;
   datePurchased: string;
   handleEdit: (arg0: any) => void;
+  editing: boolean;
 }
 interface Props {
   handleEdit: any;
