@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-date-picker";
 import {
@@ -31,7 +31,12 @@ import {
   StyledNameandIcon,
 } from "./AssetInput.styles";
 
-const SearchResults = (props) => {
+interface Results {
+  assetSearch: any[];
+  handleSelectedCoin: (arg0: any) => any;
+}
+
+const SearchResults = (props: Results) => {
   return (
     <SearchResultsDiv>
       <ResultsDiv>
@@ -55,13 +60,28 @@ const SearchResults = (props) => {
   );
 };
 
-export const AssetInput = (props) => {
+interface Input {
+  editing: boolean;
+  asset: {
+    data: {
+      name: string;
+      thumb: string;
+      symbol: string;
+    };
+    amount: number | string;
+    datePurchased: string | number | Date;
+  };
+  handleCloseClick: () => void;
+  toggleEditing: () => void;
+}
+
+export const AssetInput = (props: Input) => {
   const [searchTerm, setSearchTerm] = useState(
     props.editing ? props.asset?.data?.name : ""
   );
   const [showResults, setShowResults] = useState(false);
   const [selected, setSelected] = useState(false);
-  const [amountInput, setAmountInput] = useState(
+  const [amountInput, setAmountInput] = useState<any>(
     props.editing ? props.asset?.amount : ""
   );
   const [dateInput, setDateInput] = useState(
@@ -75,7 +95,7 @@ export const AssetInput = (props) => {
   );
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length % 3) {
       setShowResults(true);
@@ -88,17 +108,21 @@ export const AssetInput = (props) => {
     }
   };
 
-  const handleSelectedCoin = (result) => {
+  const handleSelectedCoin = (result: {
+    name: React.SetStateAction<string>;
+  }) => {
     setSearchTerm(result.name);
     setShowResults(false);
     dispatch(selectedAssetFromResults(result));
     setSelected(true);
   };
-  const handleAmountInputChange = (e) => {
+  const handleAmountInputChange = (e: {
+    target: { value: React.SetStateAction<string | number> };
+  }) => {
     setAmountInput(e.target.value);
   };
 
-  const handleDateInputChange = (value) => {
+  const handleDateInputChange = (value: React.SetStateAction<Date>) => {
     setDateInput(value);
   };
   const handleSave = () => {
@@ -153,7 +177,9 @@ export const AssetInput = (props) => {
           )}
         </SelectedAssetContainer>
         <FormDiv>
-          <SearchDiv onSubmit={(e) => e.preventDefault()}>
+          <SearchDiv
+            onSubmit={(e: { preventDefault: () => any }) => e.preventDefault()}
+          >
             <SearchInput
               type="text"
               placeholder="Search Coins"

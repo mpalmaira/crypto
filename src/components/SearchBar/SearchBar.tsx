@@ -14,7 +14,18 @@ import {
   StyledNameandIcon,
 } from "./SearchBar.styles";
 
-const SearchResults = (props) => {
+export interface SearchData {
+  id: string;
+  thumb: string;
+  name: string;
+  symbol: string;
+}
+interface Props {
+  handleLinkClick: () => void;
+  searchData: SearchData[];
+}
+
+const SearchResults = (props: Props) => {
   return (
     <SearchResultsDiv>
       <ResultsDiv>
@@ -39,13 +50,15 @@ const SearchResults = (props) => {
 };
 
 export const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showResults, setShowResults] = useState("false");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [showResults, setShowResults] = useState<Boolean>(false);
   const searchData = useSelector((state) => state.search.searchData);
   const isLoading = useSelector((state) => state.search.isLoading);
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
+  const handleChange = (e: {
+    target: { value: string | React.SetStateAction<string> };
+  }) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length % 3) {
       setShowResults(true);
@@ -74,7 +87,9 @@ export const SearchBar = () => {
   }, [searchData]);
 
   return (
-    <SearchDiv onSubmit={(e) => e.preventDefault()}>
+    <SearchDiv
+      onSubmit={(e: { preventDefault: () => any }) => e.preventDefault()}
+    >
       <StyledSearchIcon />
       <SearchInput
         type="text"

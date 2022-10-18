@@ -9,12 +9,22 @@ import {
   Symbol,
 } from "./CurrencyConverter.styles";
 
-export default function CurrencyConverter(props) {
-  const [crypto, setCrypto] = useState(1);
-  const [currency, setCurrency] = useState(props.currentPrice);
+interface Props {
+  currentPrice: string;
+  cryptoName: string;
+  selectedCurrency: {
+    value: string;
+    symbol: string;
+  };
+}
+
+const CurrencyConverter = (props: Props) => {
+  const [crypto, setCrypto] = useState<number | string>(1);
+  const [currency, setCurrency] = useState<number | string>(props.currentPrice);
 
   const currentPrice = props.currentPrice;
-  const handleCryptoChange = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleCryptoChange = (e: { target: { value: string } }) => {
     const value = e.target.value;
     setCrypto(value);
     setCurrency((parseInt(value) * parseInt(currentPrice)).toLocaleString());
@@ -23,7 +33,7 @@ export default function CurrencyConverter(props) {
       setCurrency("");
     }
   };
-  const handleCurrencyChange = (e) => {
+  const handleCurrencyChange = (e: { target: { value: any } }) => {
     const value = e.target.value;
     setCurrency(value);
     setCrypto((parseInt(value) / parseInt(currentPrice)).toFixed(5));
@@ -65,4 +75,5 @@ export default function CurrencyConverter(props) {
       </ConverterDiv>
     </Container>
   );
-}
+};
+export default CurrencyConverter;

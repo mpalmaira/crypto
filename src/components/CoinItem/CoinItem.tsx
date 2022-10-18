@@ -13,6 +13,7 @@ import {
   ProgressBarContainer,
   StyledLink,
 } from "./CoinItem.styles";
+import { Coin } from "../CoinTable/CoinTable";
 import CoinChart from "../CoinChart/CoinChart";
 import { convertedNumber } from "../util/ConvertedNumber";
 import ProgressBar from "../ProgressBar/ProgressBar";
@@ -20,7 +21,11 @@ import { ReactComponent as ArrowUp } from "../SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../SVG/ArrowDownRed.svg";
 import { useSelector } from "react-redux";
 
-const CoinItem = (props) => {
+interface Props {
+  coins: Coin;
+}
+
+const CoinItem = (props: Props) => {
   const selectedCurrency = useSelector(
     (state) => state.settings.selectedCurrency
   );

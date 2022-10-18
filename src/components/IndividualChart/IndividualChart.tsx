@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "./BitcoinLine.styles";
+import { Container } from "./IndividualChart.styles.d";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,7 +9,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 ChartJS.register(
@@ -19,29 +18,28 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
-  Filler
+  Legend
 );
 
-export default function BitcoinLine(props) {
-  const bitcoinPriceData = props.bitcoin.prices.map((values) => ({
+const IndividualChart = (props: { chart: any[] }) => {
+  const chartData = props.chart.map((values) => ({
     x: values[0],
     y: values[1],
   }));
   const data = {
-    labels: bitcoinPriceData.map((val) => {
-      const date = new Date(val.x);
-      return date.getDate();
+    labels: chartData.map((val) => {
+      const date = new Date(val.x).toLocaleDateString();
+      return date;
     }),
     datasets: [
       {
-        data: bitcoinPriceData.map((val) => val.y),
-        borderColor: "#0CF864",
-        backgroundColor: (context) => {
+        data: props.chart,
+        borderColor: "rgba(44, 47, 54, 1)",
+        backgroundColor: (context: { chart: { ctx: any } }) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-          gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
-          gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+          const gradient = ctx.createLinearGradient(0, 0, 0, 210);
+          gradient.addColorStop(0, "rgba(0, 0, 0, 0.0)");
+          gradient.addColorStop(1, "rgba(44, 47, 54, .5)");
           return gradient;
         },
         pointRadius: 0,
@@ -60,6 +58,7 @@ export default function BitcoinLine(props) {
         display: false,
         text: "Chart.js Line Chart",
       },
+      maintainAspectRatio: false,
     },
     scales: {
       y: {
@@ -70,13 +69,10 @@ export default function BitcoinLine(props) {
         },
       },
       x: {
-        display: true,
+        display: false,
         grid: {
           display: false,
           drawBorder: false,
-        },
-        ticks: {
-          maxRotation: 0
         },
       },
     },
@@ -84,7 +80,8 @@ export default function BitcoinLine(props) {
   };
   return (
     <Container>
-      <Line options={options} data={data} />
+      <Line options={options} data={data} height={70} />
     </Container>
   );
-}
+};
+export default IndividualChart;

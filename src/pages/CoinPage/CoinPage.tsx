@@ -48,7 +48,7 @@ import {
 import { ReactComponent as ArrowUp } from "../../components/SVG/ArrowUp.svg";
 import { ReactComponent as ArrowDown } from "../../components/SVG/ArrowDownRed.svg";
 
-function usePrevious(value) {
+function usePrevious(value: any) {
   const prevRef = useRef();
   useEffect(() => {
     prevRef.current = value;
@@ -56,7 +56,7 @@ function usePrevious(value) {
   return prevRef.current;
 }
 
-export default function CoinPage(props) {
+export default function CoinPage() {
   const dispatch = useDispatch();
   const selectedCurrency = useSelector(
     (state) => state.settings.selectedCurrency
@@ -68,9 +68,9 @@ export default function CoinPage(props) {
   const prevId = usePrevious(id);
   const prevDays = usePrevious(days);
 
-  const getProfit = (priceChange24, CurrentPrice) => {
+  const getProfit = (priceChange24: number, CurrentPrice: number) => {
     const profit = ((priceChange24 * CurrentPrice) / 100).toFixed(5);
-    return profit > 0 ? (
+    return parseInt(profit) > 0 ? (
       <ProfitGain>
         {selectedCurrency.symbol}
         {profit}
@@ -82,7 +82,7 @@ export default function CoinPage(props) {
       </ProfitLoss>
     );
   };
-  const getDate = (date) => {
+  const getDate = (date: Date) => {
     const formatDate = new Date(date);
     const hours = formatDate.getHours();
     const minutes = formatDate.getMinutes();
@@ -95,13 +95,13 @@ export default function CoinPage(props) {
     ${hours < 12 ? "AM" : "PM"}`;
   };
 
-  const openNewTab = (url) => {
+  const openNewTab = (url: string | URL | undefined) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
-  const copyLink = async (url) => {
+  const copyLink = async (url: string) => {
     await navigator.clipboard.writeText(url);
   };
-  const handleRangeChange = (range) => {
+  const handleRangeChange = (range: React.SetStateAction<number>) => {
     setDays(range);
   };
   useEffect(() => {

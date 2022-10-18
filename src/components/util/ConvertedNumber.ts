@@ -1,4 +1,4 @@
-export function convertedNumber(value) {
+export function convertedNumber(value: any) {
   let newValue = value;
   const suffixes = ["", "K", "M", "B", "T"];
   let suffixNum = 0;
