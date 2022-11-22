@@ -5,7 +5,9 @@ import {
   GOT_BITCOIN_SUCCESS,
 } from "./index";
 
-export const getData = () => async (dispatch, getState) => {
+import { RootState, AppDispatch } from '../index'
+
+export const getData = () => async (dispatch:AppDispatch, getState:RootState) => {
   const state = getState();
   const selectedCurrency = state.settings.selectedCurrency;
   try {

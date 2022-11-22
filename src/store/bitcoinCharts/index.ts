@@ -1,4 +1,28 @@
-const initialState = {
+
+interface BitcoinState {
+  isLoading: boolean;
+  bitcoin: null | {
+    prices: number[][]
+  };
+  hasError: boolean;
+  bitcoinHourly: null | {
+    prices: number[][]
+  };
+  bitcoinCurrent: null | {
+    bitcoin:{
+      usd: number;
+      usd_24h_vol: number;
+    }
+  };
+}
+
+interface Action<Payload>{
+  type: string;
+  payload?: Payload
+}
+
+const initialState: BitcoinState
+ = {
   isLoading: false,
   bitcoin: null,
   hasError: false,
@@ -9,7 +33,7 @@ const initialState = {
 export const GOT_BITCOIN_SUCCESS = "GOT_BITCOIN_SUCCESS";
 export const GOT_BITCOIN_PENDING = "GOT_BITCOIN_PENDING";
 export const GOT_BITCOIN_ERROR = "GOT_BITCOIN_ERROR";
-function bitcoinReducer(state = initialState, action) {
+function bitcoinReducer(state = initialState, action:Action) {
   switch (action.type) {
     case GOT_BITCOIN_PENDING:
       return {

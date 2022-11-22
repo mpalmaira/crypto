@@ -37,24 +37,44 @@ function SamplePrevArrow(props: Arrow) {
   return <StyledBackArrow className={className} onClick={onClick} />;
 }
 
+interface RootState {
+  settings: {
+    selectedCurrency: {
+      value: string;
+      symbol: string;
+    };
+  };
+  bitcoin: {
+    isLoading: boolean;
+    bitcoin: [];
+    hasError: boolean;
+    bitcoinHourly: [];
+    bitcoinCurrent: [];
+  };
+}
+
 export default function BitcoinTable() {
   const dispatch = useDispatch();
   const selectedCurrency = useSelector(
-    (state) => state.settings.selectedCurrency
+    (state: RootState) => state.settings.selectedCurrency
   );
-  const bitcoin = useSelector((state) => state.bitcoin.bitcoin);
-  const isLoading = useSelector((state) => state.bitcoin.isLoading);
-  const hasError = useSelector((state) => state.bitcoin.hasError);
-  const bitcoinCurrent = useSelector((state) => state.bitcoin.bitcoinCurrent);
-  const bitcoinHourly = useSelector((state) => state.bitcoin.bitcoinHourly);
+  const bitcoin = useSelector((state: RootState) => state.bitcoin.bitcoin);
+  const isLoading = useSelector((state: RootState) => state.bitcoin.isLoading);
+  const hasError = useSelector((state: RootState) => state.bitcoin.hasError);
+  const bitcoinCurrent = useSelector(
+    (state: RootState) => state.bitcoin.bitcoinCurrent
+  );
+  const bitcoinHourly = useSelector(
+    (state: RootState) => state.bitcoin.bitcoinHourly
+  );
 
   const settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    nextArrow: <SampleNextArrow className={undefined} onClick={undefined} />,
+    prevArrow: <SamplePrevArrow className={undefined} onClick={undefined} />,
   };
 
   const getDate = () => {

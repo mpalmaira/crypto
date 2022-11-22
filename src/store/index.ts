@@ -9,6 +9,8 @@ import marketDataReducer from "./marketData";
 import coinPageReducer from "./coinPage";
 import searchReducer from "./search";
 import portfolioReducer from "./portfolio";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
 
 const assetsPersistConfig = {
   key: "assets",
@@ -29,6 +31,11 @@ const persistConfig = {
   storage,
   whitelist: ["settings"],
 };
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

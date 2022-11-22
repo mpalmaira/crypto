@@ -74,7 +74,17 @@ interface Input {
   handleCloseClick: () => void;
   toggleEditing: () => void;
 }
-
+interface RootState {
+  portfolio: {
+    assetSearch: any;
+    isLoading: boolean;
+    addAssetSelection: {
+      thumb: string;
+      name: string;
+      symbol: string;
+    };
+  };
+}
 export const AssetInput = (props: Input) => {
   const [searchTerm, setSearchTerm] = useState(
     props.editing ? props.asset?.data?.name : ""
@@ -87,11 +97,15 @@ export const AssetInput = (props: Input) => {
   const [dateInput, setDateInput] = useState(
     props.editing ? new Date(props?.asset.datePurchased) : new Date()
   );
-  const assetSearch = useSelector((state) => state.portfolio.assetSearch);
-  const isLoading = useSelector((state) => state.portfolio.isLoading);
+  const assetSearch = useSelector(
+    (state: RootState) => state.portfolio.assetSearch
+  );
+  const isLoading = useSelector(
+    (state: RootState) => state.portfolio.isLoading
+  );
 
   const selectedAsset = useSelector(
-    (state) => state.portfolio.addAssetSelection
+    (state: RootState) => state.portfolio.addAssetSelection
   );
   const dispatch = useDispatch();
 

@@ -57,10 +57,18 @@ interface Props {
   handleEdit: any;
   asset: AssetInterface;
 }
+interface RootState {
+  settings: {
+    selectedCurrency: {
+      value: string;
+      symbol: string;
+    };
+  };
+}
 
 export const Asset = (props: Props) => {
   const selectedCurrency = useSelector(
-    (state) => state.settings.selectedCurrency
+    (state: RootState) => state.settings.selectedCurrency
   );
   const dispatch = useDispatch();
   const editAsset = () => {
