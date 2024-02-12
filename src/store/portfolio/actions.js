@@ -20,7 +20,7 @@ export const getAssetSearchData =
     try {
       dispatch({ type: GET_ASSETDATA_PENDING });
       const { data } = await axios(
-        `https://crypto-app-server.herokuapp.com/coins/${searchTerm}`
+        `https://crypto-app-server.herokuapp.com/coins/${searchTerm}&x_cg_demo_api_key=${process.env.REACT_APP_API_KEY}`
       );
       dispatch({
         type: GET_ASSETDATA_SUCCESS,
@@ -63,7 +63,7 @@ export const addAssetSelected = (asset) => async (dispatch, getState) => {
     const assetData = await Promise.all(
       addedAsset.map(async (coin) => {
         const { data } =
-          await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}
+          await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}&x_cg_demo_api_key=${process.env.REACT_APP_API_KEY}
         `);
         const { data: purchased } = await axios(
           `https://api.coingecko.com/api/v3/coins/${
@@ -131,12 +131,14 @@ export const loadAssets = () => async (dispatch, getState) => {
   const loadAssets = await Promise.all(
     assets.map(async (coin) => {
       const { data } =
-        await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}
+        await axios(`https://api.coingecko.com/api/v3/coins/${coin.data.id}&x_cg_demo_api_key=${process.env.REACT_APP_API_KEY}
     `);
       const { data: purchased } = await axios(
         `https://api.coingecko.com/api/v3/coins/${
           coin.data.id
-        }/history?date=${dayjs(coin.datePurchased).format("DD-MM-YYYY")}`
+        }/history?date=${dayjs(coin.datePurchased).format(
+          "DD-MM-YYYY"
+        )}&x_cg_demo_api_key=${process.env.REACT_APP_API_KEY}`
       );
       return {
         ...coin,

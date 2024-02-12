@@ -27,7 +27,7 @@ export default function BitcoinBar(props) {
   const data = {
     labels: bitcoinVolumeData.map((val) => {
       const date = new Date(val.x);
-      return date.getHours();
+      return date.getDate();
     }),
     datasets: [
       {

@@ -11,13 +11,13 @@ export const getData = () => async (dispatch, getState) => {
   try {
     dispatch({ type: GOT_BITCOIN_PENDING });
     const { data } = await axios(
-      `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${selectedCurrency.value}&days=30&interval=daily`
+      `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${selectedCurrency.value}&days=30&interval=daily&x_cg_demo_api_key=${process.env.REACT_APP_API_KEY}`
     );
     const { data: dataHourly } = await axios(
-      `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${selectedCurrency.value}&days=1&interval=hourly`
+      `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${selectedCurrency.value}&days=7&interval=daily&x_cg_demo_api_key=${process.env.REACT_APP_API_KEY}`
     );
     const { data: dataCurrent } = await axios(
-      `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${selectedCurrency.value}&include_24hr_vol=true`
+      `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${selectedCurrency.value}&include_24hr_vol=true&x_cg_demo_api_key=${process.env.REACT_APP_API_KEY}`
     );
     dispatch({
       type: GOT_BITCOIN_SUCCESS,

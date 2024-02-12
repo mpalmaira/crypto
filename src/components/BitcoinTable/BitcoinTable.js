@@ -95,7 +95,7 @@ export default function BitcoinTable(props) {
                 <div>
                   <BarContainerMobile>
                     <MainTextContainer>
-                      <BitcoinHeader>BTC Volume 24h</BitcoinHeader>
+                      <BitcoinHeader>BTC Volume 7 Days</BitcoinHeader>
                       <BitcoinNumber>
                         {selectedCurrency.symbol}
                         {convertedNumber(Object.values(bitcoinCurrent)[1])}
@@ -121,7 +121,7 @@ export default function BitcoinTable(props) {
           </LineContainer>
           <BarContainer>
             <MainTextContainer>
-              <BitcoinHeader>BTC Volume 24h</BitcoinHeader>
+              <BitcoinHeader>BTC Volume 7 Days</BitcoinHeader>
               <BitcoinNumber>
                 {selectedCurrency.symbol}
                 {convertedNumber(Object.values(bitcoinCurrent)[1])}
